@@ -22,30 +22,102 @@
             body {
                 background-color: lightgray;
             }
+            input {
+                font-size:18px;
+                padding:10px 10px 10px 5px;
+                display:block;
+                width:300px;
+                border:none;
+                border-bottom:1px solid #757575;
+                box-sizing: border-box;
+            }
+            input:focus{ 
+                outline:none; 
+            }
+            .group{ 
+                position:relative; 
+                margin-top: 20px;
+                margin-bottom:20px; 
+            }
+            label{
+                color:#999; 
+                font-size:18px;
+                font-weight:normal;
+                position:absolute;
+                pointer-events:none;
+                left:5px;
+                top:10px;
+                transition:0.2s ease all; 
+                -moz-transition:0.2s ease all; 
+                -webkit-transition:0.2s ease all;
+            }
+            input:focus ~ label, input:valid ~ label   {
+                top:-20px;
+                font-size:14px;
+                color:#5264AE;
+            }
+            .bar{ 
+                position:relative; 
+                display:block; 
+                width:300px; 
+            }
+            .bar:before, .bar:after  {
+                content:'';
+                height:2px; 
+                width:0;
+                bottom:1px; 
+                position:absolute;
+                background:#5264AE; 
+                transition:0.2s ease all; 
+                -moz-transition:0.2s ease all; 
+                -webkit-transition:0.2s ease all;
+            }
+            .bar:before {
+                left:50%;
+            }
+            .bar:after {
+                right:50%; 
+            }
+            input:focus ~ .bar:before, input:focus ~ .bar:after {
+                width:50%;
+            }
         </style>
     </head>
     <body>
         <br><br><br><br><br><br><br><br>
         <div class='container-fluid'>
             <div class='row'>
-                <div class='col-sm-5 col-md-5 col-lg-5 col-xl-5'></div>
-                <div class='col-sm-3 col-md-3 col-lg-3 col-xl-3'>
-                    <div class='container'>
+                <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'></div>
+                <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'>
+                    <div class='container-fluid'>
                         <div style='text-align:center'><img src='images/amazon.jpg' style='height:5cm; width:6cm;'></div>
                     </div>
-                    <div class='container-fluid'>
+                    <div class='container-fluid text-center'>
                         <form method='post' action='Login' >
-                        <br>Username&nbsp; : <input type='text' style='width:6.4cm' name='userName' required><br><hr>
-                        Password &nbsp; : <input type='password' style='width:6.4cm' name='password'><br>
-                        <div class='container text-center'>
-                            <br><input type='submit'>
-                        </div>
-                        <div class='text-center'>
-                            <br><h6 style='color:red;'>${message}</h6>
-                        </div>
+                            <hr width='50%'>
+                            <div style='position:relative; left:140px'>
+                                <div>
+                                    <div class='group'>
+                                        <input type='text' style='width:8cm' name='userName' required>
+                                        <span class='bar'></span>
+                                        <label>Username</label>
+                                    </div>
+                                </div>
+                                <div class='group'>
+                                    <input type='password' style='width:8cm' name='password' required>
+                                    <span class='bar'></span>
+                                    <label>Password</label>
+                                </div>
+                            </div>
+                            <div class='container' style='position:relative; left:138px'>
+                                <input type='submit' style='width: 50%;'>
+                            </div>
+                            <div class='text-center'>
+                                <br><h6 style='color:red;'>${message}</h6>
+                            </div>
                         </form>
                         <div class="container-fluid">
-                             Click here to register  <a href="Register.jsp">Register</a>
+                            Click here to register  <a href="Register.jsp">Register</a>
                         </div>
                     </div>
                 </div>
