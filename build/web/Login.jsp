@@ -19,6 +19,10 @@
         <link rel='stylesheet' href='bootstrap/js/bootstrap.min.js'>
         <link rel='stylesheet' href='bootstrap/css/bootstrap-grid.min.css'>-->
         <style>
+            .login{
+                position:relative;
+                top:17em;
+            }
             body {
                 background-color: lightgray;
             }
@@ -84,8 +88,7 @@
         </style>
     </head>
     <body>
-        <br><br><br><br><br><br><br><br>
-        <div class='container-fluid'>
+        <div class='container-fluid login'>
             <div class='row'>
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'></div>
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'>
@@ -116,9 +119,9 @@
                                 <br><h6 style='color:red;'>${message}</h6>
                             </div>
                         </form>
-                        <div class="container-fluid">
+<!--                        <div class="container-fluid">
                             Click here to register  <a href="Register.jsp">Register</a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'></div>

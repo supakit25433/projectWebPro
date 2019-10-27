@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/web/Login.jsp</file>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/web/WEB-INF/view/index.jsp</file>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/web/Register.jsp</file>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/src/java/Servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/src/java/Model/UserDao.java</file>
-            <file>file:/C:/Users/nar-u/Documents/NetBeansProjects/INT303/WebProject303/web/WEB-INF/view/PageHeader.jsp</file>
+            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Servlet/LoginServlet.java</file>
+            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/User.java</file>
+            <file>file:/D:/ProjectWebPro/projectWebPro/web/Login.jsp</file>
+            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/UserDao.java</file>
         </group>
     </open-files>
 </project-private>
