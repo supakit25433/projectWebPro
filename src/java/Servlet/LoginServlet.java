@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,8 +44,9 @@ public class LoginServlet extends HttpServlet {
             if(!password.equals(user.getPassword())){
                 message="Invalid Username or Password!!";
             }else{
-                request.getSession().setAttribute("user", user);
-                getServletContext().getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                 return;
             }
         }
