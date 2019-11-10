@@ -20,10 +20,10 @@
         <link rel='stylesheet' href='bootstrap/js/bootstrap.min.js'>
         <link rel='stylesheet' href='bootstrap/css/bootstrap-grid.min.css'>-->
 
-        <title>Quiz Ant</title>
+        <title>Welcome ${user.username} to Quiz Ant</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/view/PageHeader.jsp?title=Home Page"/>
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Home Page"/>
         <br />
         <div class="container-fluid">
             <div class="text-center">
