@@ -7,23 +7,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="index.jsp">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Subjects</a>
+                    <a class="nav-link" href="Subjects.jsp">Subjects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Enrolled</a>
+                    <a class="nav-link" href="Enroll.jsp">Enrolled</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">History</a>
+                    <a class="nav-link" href="History.jsp">History</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Feedback/Report</a>
+                    <a class="nav-link" href="Feedback.jsp">Feedback/Report</a>
                 </li>
             </ul>
         </div>
-        <div>${user.username}</div>
+        <div><span style="font-weight: bold;">Current page</span> : ${param.page} &nbsp; &nbsp; <span style="font-weight: bold;">Username</span> : ${user.username}</div>
     </nav>
 </header>
