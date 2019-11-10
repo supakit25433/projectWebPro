@@ -23,6 +23,19 @@
         <title>Quiz Ant</title>
     </head>
     <body>
-            <jsp:include page="/WEB-INF/view/PageHeader.jsp?title=Home Page"/>
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?title=Home Page"/>
+        <br />
+        <div class="container-fluid">
+            <div class="text-center">
+                <img height="150px" width="1000px">
+            </div>
+        </div>
+        <br />
+        <div class="container-fluid">
+            Each Subject will be show in here.
+            <%--<c:forEach>--%>
+                <!-- ใช้การวนลูป list ออกมาจากข้อมูลที่ได้ อาจจะใช้รูปแบบเดียวกันกับที่สอบรายบุคคล -->
+            <%--</c:forEach>--%>
+        </div>
     </body>
 </html>
