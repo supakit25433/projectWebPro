@@ -62,7 +62,7 @@
         <br>
 
         <div class="container-fluid">
-            Each Subject will be show in here.
+            <div class="div-text">New Quiz!</div>
             <%--<c:forEach>--%>
             <!-- ใช้การวนลูป list ออกมาจากข้อมูลที่ได้ อาจจะใช้รูปแบบเดียวกันกับที่สอบรายบุคคล -->
             <%--</c:forEach>--%>
