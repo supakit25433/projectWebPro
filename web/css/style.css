@@ -9,10 +9,10 @@ body{
   overflow: hidden;
 }
 .middle{
-  position: absolute;
-  top: 50%;
+  /*position: absolute;*/
+/*  top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);*/
 }
 .navigation{
   position: absolute;
@@ -41,7 +41,7 @@ input[name="r"]{
 .slides{
   width: 500%;
   height: 100%;
-  display: flex;
+  /*display: flex;*/
 }
 
 .slide{

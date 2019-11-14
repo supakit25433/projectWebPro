@@ -21,19 +21,19 @@
         <link rel='stylesheet' href='bootstrap/css/bootstrap-grid.min.css'>-->
 
         <title>Welcome ${user.username} to Quiz Ant</title>
-        
+
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Home Page"/>
         <br />
-        
+
         <div class="container-fluid">
             <div class="text-center">
                 <img height="150px" width="1000px">
             </div>
         </div>
-        
+
         <div class="slidershow middle">
             <div class="slides">
                 <input type="radio" name="r" id="r1" checked>
@@ -66,13 +66,23 @@
                 <label for="r5" class="bar"></label>
             </div>
         </div>
-        
+
         <br />
         <div class="container-fluid">
             Each Subject will be show in here.
             <%--<c:forEach>--%>
             <!-- ใช้การวนลูป list ออกมาจากข้อมูลที่ได้ อาจจะใช้รูปแบบเดียวกันกับที่สอบรายบุคคล -->
             <%--</c:forEach>--%>
+            <table>
+                <tr>
+                    <c:forEach items="" var="q" varStatus="s">
+                        <td></td>
+                        <c:if test="s%4==0">
+                            <tr>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+            </table>
         </div>
     </body>
 </html>
