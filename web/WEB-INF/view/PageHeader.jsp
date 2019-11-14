@@ -24,6 +24,10 @@
                 </li>
             </ul>
         </div>
-        <div><span style="font-weight: bold;">Current page</span> : ${param.page} &nbsp; &nbsp; <span style="font-weight: bold;">Username</span> : ${user.username}</div>
+        <div>
+            <span style="font-weight: bold;">Current page</span> : ${param.page} &nbsp; &nbsp; 
+            <span style="font-weight: bold;">Username</span> : ${user.username} &nbsp; &nbsp;
+            <a href="Logout" style="color:black; font-weight: bold;">Logout</a>
+        </div>
     </nav>
 </header>
