@@ -71,7 +71,7 @@
                     <tr>
                     <div class="card-deck">
                         <c:forEach items="${quizes}" var="q" varStatus="s">
-                            <div class="card" style="width:400px">
+                            <div class="card" style="max-width:21.9%">
                                 <a href="/Quiz.jsp">
                                     <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                     <div class="card-body">
