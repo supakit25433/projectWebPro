@@ -80,6 +80,8 @@
                                         <h6 class="card-text">Teacher</h6>
                                         <p class="card-text">Amount of question</p>
                                     </div>
+                                    <div class="overlay"></div>
+                                    <div class="text">Start Quiz</div>
                                 </a>
                             </div>
                             <c:if test="${(s.index+1)%4==0}">
