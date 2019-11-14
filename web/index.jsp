@@ -18,16 +18,9 @@
         <!--<link rel='stylesheet' href='bootstrap/css/bootstrap.min.css'>
         <link rel='stylesheet' href='bootstrap/js/bootstrap.min.js'>
         <link rel='stylesheet' href='bootstrap/css/bootstrap-grid.min.css'>-->
+        <link rel="stylesheet" href="./css/style.css">
 
         <title>Welcome ${user.username} to Quiz Ant</title>
-        <style>
-            .div-center {
-                margin: 10%;
-                padding: 5%;
-                background-color: #f4f6f8;
-                border-radius: 1%;
-            }
-        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Home Page"/>
@@ -77,25 +70,27 @@
                 <table>
                     <tr>
                     <div class="card-deck">
-                        <c:forEach items="${quizs}" var="q" varStatus="s">
-
+                        <c:forEach items="${quizes}" var="q" varStatus="s">
                             <div class="card" style="width:400px">
-                                <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
-                                <div class="card-body">
-                                    <h4 class="card-title">John Doe ${q}</h4>
-                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                                    <a href="#" class="btn btn-primary">See Profile</a>
-                                </div>
+                                <a href="/Quiz.jsp">
+                                    <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Quiz's name ${q}</h4>
+                                        <h5 class="card-text">Subject</h5>
+                                        <h6 class="card-text">Teacher</h6>
+                                        <p class="card-text">Amount of question</p>
+                                    </div>
+                                </a>
                             </div>
                             <c:if test="${(s.index+1)%4==0}">
-                                </div>
-                                </tr>
-                                <br>
-                                <tr>
-                                <div class="card-deck">
+                            </div>
+                            </tr>
+                            <br>
+                            <tr>
+                            <div class="card-deck">
                             </c:if>
                         </c:forEach>
-                        </div>
+                    </div>
                     </tr>
                 </table>
             </div>
