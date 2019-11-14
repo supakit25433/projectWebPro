@@ -20,7 +20,14 @@
         <link rel='stylesheet' href='bootstrap/css/bootstrap-grid.min.css'>-->
 
         <title>Welcome ${user.username} to Quiz Ant</title>
-
+        <style>
+            .div-center {
+                margin: 10%;
+                padding: 5%;
+                background-color: #f4f6f8;
+                border-radius: 1%;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Home Page"/>
@@ -59,24 +66,39 @@
             </div>
         </div>
 
+        <br>
 
-
-        <br />
         <div class="container-fluid">
             Each Subject will be show in here.
             <%--<c:forEach>--%>
             <!-- ใช้การวนลูป list ออกมาจากข้อมูลที่ได้ อาจจะใช้รูปแบบเดียวกันกับที่สอบรายบุคคล -->
             <%--</c:forEach>--%>
-            <table>
-                <tr>
-                    <c:forEach items="" var="q" varStatus="s">
-                        <td></td>
-                        <c:if test="s%4==0">
-                        <tr>
-                        </tr>
-                    </c:if>
-                </c:forEach>
-            </table>
+            <div class="div-center">
+                <table>
+                    <tr>
+                    <div class="card-deck">
+                        <c:forEach items="${quizs}" var="q" varStatus="s">
+
+                            <div class="card" style="width:400px">
+                                <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">John Doe ${q}</h4>
+                                    <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                                    <a href="#" class="btn btn-primary">See Profile</a>
+                                </div>
+                            </div>
+                            <c:if test="${(s.index+1)%4==0}">
+                                </div>
+                                </tr>
+                                <br>
+                                <tr>
+                                <div class="card-deck">
+                            </c:if>
+                        </c:forEach>
+                        </div>
+                    </tr>
+                </table>
+            </div>
         </div>
     </body>
 </html>
