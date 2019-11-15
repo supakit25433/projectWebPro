@@ -11,11 +11,19 @@ package Model;
  */
 public class User {
 
+    private int userid;
     private String username;
     private String password;
-    private String TeacherID;
-    private String StudentID;
+    private String type;
     private String fullname;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
 
     public String getUsername() {
         return username;
@@ -33,20 +41,12 @@ public class User {
         this.password = password;
     }
 
-    public String getTeacherID() {
-        return TeacherID;
+    public String getType() {
+        return type;
     }
 
-    public void setTeacherID(String TeacherID) {
-        this.TeacherID = TeacherID;
-    }
-
-    public String getStudentID() {
-        return StudentID;
-    }
-
-    public void setStudentID(String StudentID) {
-        this.StudentID = StudentID;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getFullname() {
@@ -57,12 +57,22 @@ public class User {
         this.fullname = fullname;
     }
 
+    public User() {
+    }
+
+    public User(int userid) {
+        this.userid = userid;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public User() {
+    public User(int userid, String username, String password) {
+        this.userid = userid;
+        this.username = username;
+        this.password = password;
     }
-
+    
 }
