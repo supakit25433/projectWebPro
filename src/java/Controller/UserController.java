@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
 import DB.BuildConnection;
+import Model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author nar-u
  */
-public class UserDao {
+public class UserController {
 
     private final static String FIND
             = "select * from userpassword where username = ?";
@@ -37,7 +38,7 @@ public class UserDao {
             rs.close();
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return u;
     }
@@ -50,7 +51,7 @@ public class UserDao {
             pstm.setString(2, password);
             ResultSet rs = pstm.executeQuery();
         } catch(SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
