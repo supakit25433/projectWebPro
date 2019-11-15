@@ -61,7 +61,7 @@ public class User {
     }
 
     public User(int userid) {
-        this.userid = userid;
+        this.userID = userid;
     }
 
     public User(String username, String password) {
@@ -70,7 +70,7 @@ public class User {
     }
 
     public User(int userid, String username, String password) {
-        this.userid = userid;
+        this.userID = userid;
         this.username = username;
         this.password = password;
     }
