@@ -10,12 +10,28 @@ package Model;
  * @author nar-u
  */
 public class User {
-
+    private int userID;
     private String username;
     private String password;
-    private String TeacherID;
-    private String StudentID;
+    private String typeName;
     private String fullname;
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+        
 
     public String getUsername() {
         return username;
@@ -24,7 +40,7 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    
     public String getPassword() {
         return password;
     }
@@ -32,23 +48,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getTeacherID() {
-        return TeacherID;
-    }
-
-    public void setTeacherID(String TeacherID) {
-        this.TeacherID = TeacherID;
-    }
-
-    public String getStudentID() {
-        return StudentID;
-    }
-
-    public void setStudentID(String StudentID) {
-        this.StudentID = StudentID;
-    }
-
+ 
     public String getFullname() {
         return fullname;
     }
