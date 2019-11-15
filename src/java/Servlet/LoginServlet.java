@@ -6,7 +6,7 @@
 package Servlet;
 
 import Model.User;
-import Model.UserDao;
+import Controller.UserController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String userName = request.getParameter("userName");
-        UserDao udao = new UserDao(); 
+        UserController udao = new UserController(); 
         User user = udao.find(String.valueOf(userName));
         String message = null;
         if(user==null){
