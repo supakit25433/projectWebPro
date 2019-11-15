@@ -57,12 +57,22 @@ public class User {
         this.fullname = fullname;
     }
 
+    public User() {
+    }
+
+    public User(int userid) {
+        this.userid = userid;
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public User() {
+    public User(int userid, String username, String password) {
+        this.userid = userid;
+        this.username = username;
+        this.password = password;
     }
-
+    
 }
