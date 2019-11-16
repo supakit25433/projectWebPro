@@ -18,5 +18,33 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=History"/>
+        <br>
+        <div class="container">
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
+            <div class=" bg-light p-5 rounded">
+                <div class="row">
+                    <c:forEach items="${quizrecord}" var="qr">
+                        <div class="col-3 mb-4">
+                            <div class="card-deAck">
+                                <div class="card">
+                                    <a href="/Quiz.jsp">
+                                        <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                        <div class="card-body">
+                                            <h4 class="card-title">${qr.getQuizId().getQuizid()}</h4>
+                                            <h5 class="card-text">${qr.getQuizId()getSubjectsSubjectid()}</h5>
+                                            <h6 class="card-text">Teacher</h6>
+                                            <p class="card-text">Description</p>
+                                            <p class="card-text">Amount of question</p>
+                                        </div>
+                                        <div class="overlay"></div>
+                                        <div class="text">Start Quiz</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach> 
+                </div>
+            </div>
+        </div>
     </body>
 </html>

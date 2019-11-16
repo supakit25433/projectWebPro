@@ -75,6 +75,7 @@
                                                 <h4 class="card-title">Quiz's name ${q}</h4>
                                                 <h5 class="card-text">Subject</h5>
                                                 <h6 class="card-text">Teacher</h6>
+                                                <p class="card-text">Description</p>
                                                 <p class="card-text">Amount of question</p>
                                             </div>
                                             <div class="overlay"></div>
