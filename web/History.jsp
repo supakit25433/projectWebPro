@@ -30,11 +30,11 @@
                                     <a href="/Quiz.jsp">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
-                                            <h4 class="card-title">${qr.getQuizId().getQuizid()}</h4>
-                                            <h5 class="card-text">${qr.getQuizId()getSubjectsSubjectid()}</h5>
-                                            <h6 class="card-text">Teacher</h6>
-                                            <p class="card-text">Description</p>
-                                            <p class="card-text">Amount of question</p>
+                                            <h4 class="card-title">${qr.getQuizId().getQuizid().getQuizName()}</h4>
+                                            <h5 class="card-text">${qr.getQuizId().getSubjectsSubjectid().getSubjectname()}</h5>
+                                            <h6 class="card-text">${qr.getQuizId().getSubjectsSubjectid().getUsersUserid()}</h6>
+                                            <p class="card-text">${qr.getQuizId().getSubjectsSubjectid().getDesctiption()}</p>
+                                            <h6 class="card-text">Amount of question</h6>
                                         </div>
                                         <div class="overlay"></div>
                                         <div class="text">Start Quiz</div>

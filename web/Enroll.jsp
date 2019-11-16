@@ -30,12 +30,12 @@
                                     <a href="/Quiz.jsp">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
-                                            <h4 class="card-title">${e.getSubjectid().getSubjectName()}</h4>
-                                            <h5 class="card-text">${e.getUserid()}</h5>
-                                            <p class="card-text">${e.getSubjectid().getDescription()}</p>
+                                            <h4 class="card-title">${e.getSubjectsSubjectid().getSubjectName()}</h4>
+                                            <h5 class="card-text">${e.getUsersUserid()}</h5>
+                                            <p class="card-text">${e.getSubjectsSubjectid().getDescription()}</p>
                                         </div>
                                         <div class="overlay"></div>
-                                        <div class="text">${e.getSubjectid().getSubjectName()}</div>
+                                        <div class="text">${e.getSubjectsSubjectid().getSubjectName()}</div>
                                     </a>
                                 </div>
                             </div>
