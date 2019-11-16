@@ -102,7 +102,7 @@
                             <div style='position:relative; left:140px'>
                                 <div>
                                     <div class='group'>
-                                        <input type='text' style='width:8cm' name='userName' required>
+                                        <input type='text' style='width:8cm' name='username' required>
                                         <span class='bar'></span>
                                         <label>Username</label>
                                     </div>

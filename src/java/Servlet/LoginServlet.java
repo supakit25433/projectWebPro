@@ -5,21 +5,31 @@
  */
 package Servlet;
 
-import Model.User;
-import Controller.UserController;
+
+import Model.controller.UserController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
+import jpaClasses.Users;
 
 /**
  *
  * @author nar-u
  */
 public class LoginServlet extends HttpServlet {
+    @PersistenceUnit(unitName="WebProjectInt303PU")
+    EntityManagerFactory emf;
+    
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,27 +42,29 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String userName = request.getParameter("userName");
-        UserController udao = new UserController(); 
-        User user = udao.find(String.valueOf(userName));
-        String message = null;
-        if(user==null){
-            message = "Invalid Username or Password!!";
+        if (request.getParameter("username") == null || request.getParameter("username").isEmpty()
+                || request.getParameter("password") == null || request.getParameter("password").isEmpty()) {
+            request.setAttribute("message", "invalid input");
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         } else {
-            String password = request.getParameter("password");
-            if(!password.equals(user.getPassword())){
-                message="Invalid Username or Password!!";
-            }else{
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-//                getServletContext().getRequestDispatcher("/Index").forward(request, response);
-                response.sendRedirect("Index");
-                return;
+            UserController uc = new UserController(emf, utx);
+            Users user = uc.findByUserName(request.getParameter("username"));
+            if (user == null) {
+                request.setAttribute("massage", "user not found");
+                request.getRequestDispatcher("/Login.jsp").forward(request, response);
+            } else {
+                if (user.getUsername().equals(request.getParameter("username"))
+                        && user.getPassword().equals(request.getParameter("password"))) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    response.sendRedirect("Index");
+                }
+                else{
+                    request.setAttribute("message", "incorrect password");
+                    request.getRequestDispatcher("/Login.jsp").forward(request, response);  
+                }
             }
         }
-        request.setAttribute("message", message);
-        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
 
     }
 
