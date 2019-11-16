@@ -4,6 +4,7 @@
     Author     : nar-u
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,5 +19,16 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
+        <br>
+        <div class="container">
+            <div class=" bg-light p-5 rounded">
+                <c:forEach items="${questions}" var="qu" varStatus="index">
+                    <h5 class="font-weight-bold">${index.index+1}.${qu.getQuestion()}</h5>
+                    <c:forEach items="${choices}" var="c">
+                        <p class="font-weight-normal"></p>
+                    </c:forEach>
+                </c:forEach>
+            </div>
+        </div>
     </body>
 </html>
