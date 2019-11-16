@@ -3,37 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/src/java/Model/User.java</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/surface/Documents/NetBeansProjects/projectWebPro/src/java/Controller/UserController.java</file>
-            <file>file:/C:/Users/surface/Documents/NetBeansProjects/projectWebPro/src/java/Servlet/LogoutServlet.java</file>
-=======
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Servlet/LoginServlet.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Register.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Subjects.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Quiz.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/StudentsAnswer.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/DB/BuildConnection.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/WEB-INF/web.xml</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/index.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/History.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/Choices.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/QuizRecord.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/LongAnswer.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/StudentsChoice.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/WEB-INF/view/PageHeader.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/User.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Login.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Controller/UserController.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/UsersSubscription.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Enroll.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/css/style.css</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Filter/Authentication.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/web/Feedback.jsp</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Model/Subject.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Servlet/LogoutServlet.java</file>
-            <file>file:/D:/ProjectWebPro/projectWebPro/src/java/Servlet/IndexServlet.java</file>
->>>>>>> develop
+            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/src/java/Model/controller/UserController.java</file>
+            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/src/java/Servlet/LoginServlet.java</file>
+            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/web/Login.jsp</file>
+            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/src/java/jpaClasses/Users.java</file>
+            <file>file:/C:/Users/Gamer/Desktop/2ndYearT1/projectWebPro/src/java/jpa/UsersJpaController.java</file>
         </group>
     </open-files>
 </project-private>
