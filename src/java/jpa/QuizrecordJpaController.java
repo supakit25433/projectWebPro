@@ -5,20 +5,17 @@
  */
 package jpa;
 
+import jpaClasses.Quizrecord;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Quizes;
-import Entities.Quizrecord;
-import Entities.Users;
-import java.util.ArrayList;
+import jpaClasses.Users;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
-import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
@@ -40,40 +37,17 @@ public class QuizrecordJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Quizrecord quizrecord) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
-        List<String> illegalOrphanMessages = null;
-        Quizes quizesQuizidOrphanCheck = quizrecord.getQuizesQuizid();
-        if (quizesQuizidOrphanCheck != null) {
-            Quizrecord oldQuizrecordOfQuizesQuizid = quizesQuizidOrphanCheck.getQuizrecord();
-            if (oldQuizrecordOfQuizesQuizid != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("The Quizes " + quizesQuizidOrphanCheck + " already has an item of type Quizrecord whose quizesQuizid column cannot be null. Please make another selection for the quizesQuizid field.");
-            }
-        }
-        if (illegalOrphanMessages != null) {
-            throw new IllegalOrphanException(illegalOrphanMessages);
-        }
+    public void create(Quizrecord quizrecord) throws PreexistingEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Quizes quizesQuizid = quizrecord.getQuizesQuizid();
-            if (quizesQuizid != null) {
-                quizesQuizid = em.getReference(quizesQuizid.getClass(), quizesQuizid.getQuizid());
-                quizrecord.setQuizesQuizid(quizesQuizid);
-            }
             Users usersUserid = quizrecord.getUsersUserid();
             if (usersUserid != null) {
                 usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
                 quizrecord.setUsersUserid(usersUserid);
             }
             em.persist(quizrecord);
-            if (quizesQuizid != null) {
-                quizesQuizid.setQuizrecord(quizrecord);
-                quizesQuizid = em.merge(quizesQuizid);
-            }
             if (usersUserid != null) {
                 usersUserid.getQuizrecordList().add(quizrecord);
                 usersUserid = em.merge(usersUserid);
@@ -96,46 +70,19 @@ public class QuizrecordJpaController implements Serializable {
         }
     }
 
-    public void edit(Quizrecord quizrecord) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Quizrecord quizrecord) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
             Quizrecord persistentQuizrecord = em.find(Quizrecord.class, quizrecord.getQuizrecordid());
-            Quizes quizesQuizidOld = persistentQuizrecord.getQuizesQuizid();
-            Quizes quizesQuizidNew = quizrecord.getQuizesQuizid();
             Users usersUseridOld = persistentQuizrecord.getUsersUserid();
             Users usersUseridNew = quizrecord.getUsersUserid();
-            List<String> illegalOrphanMessages = null;
-            if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
-                Quizrecord oldQuizrecordOfQuizesQuizid = quizesQuizidNew.getQuizrecord();
-                if (oldQuizrecordOfQuizesQuizid != null) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("The Quizes " + quizesQuizidNew + " already has an item of type Quizrecord whose quizesQuizid column cannot be null. Please make another selection for the quizesQuizid field.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            if (quizesQuizidNew != null) {
-                quizesQuizidNew = em.getReference(quizesQuizidNew.getClass(), quizesQuizidNew.getQuizid());
-                quizrecord.setQuizesQuizid(quizesQuizidNew);
-            }
             if (usersUseridNew != null) {
                 usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
                 quizrecord.setUsersUserid(usersUseridNew);
             }
             quizrecord = em.merge(quizrecord);
-            if (quizesQuizidOld != null && !quizesQuizidOld.equals(quizesQuizidNew)) {
-                quizesQuizidOld.setQuizrecord(null);
-                quizesQuizidOld = em.merge(quizesQuizidOld);
-            }
-            if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
-                quizesQuizidNew.setQuizrecord(quizrecord);
-                quizesQuizidNew = em.merge(quizesQuizidNew);
-            }
             if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
                 usersUseridOld.getQuizrecordList().remove(quizrecord);
                 usersUseridOld = em.merge(usersUseridOld);
@@ -177,11 +124,6 @@ public class QuizrecordJpaController implements Serializable {
                 quizrecord.getQuizrecordid();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The quizrecord with id " + id + " no longer exists.", enfe);
-            }
-            Quizes quizesQuizid = quizrecord.getQuizesQuizid();
-            if (quizesQuizid != null) {
-                quizesQuizid.setQuizrecord(null);
-                quizesQuizid = em.merge(quizesQuizid);
             }
             Users usersUserid = quizrecord.getUsersUserid();
             if (usersUserid != null) {

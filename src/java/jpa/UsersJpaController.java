@@ -10,21 +10,21 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Subjects;
+import jpaClasses.Subjects;
 import java.util.ArrayList;
 import java.util.List;
-import Entities.Quizrecord;
-import Entities.StudentsAnswer;
-import Entities.UsersSubscription;
-import Entities.StudentsChoice;
-import Entities.Users;
+import jpaClasses.Quizrecord;
+import jpaClasses.StudentsAnswer;
+import jpaClasses.UsersSubscription;
+import jpaClasses.StudentsChoice;
+import jpaClasses.Users;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
 
 /**
  *
@@ -441,6 +441,16 @@ public class UsersJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public Users findUserByUsername(String username) {
+        List<Users> userList = this.findUsersEntities();
+        for (int i=0;i<userList.size();i++) {
+            if(userList.get(i).getUsername().equals(username)){
+                return userList.get(i);
+            }
+        }
+        return null;
     }
     
 }

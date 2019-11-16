@@ -5,14 +5,14 @@
  */
 package jpa;
 
-import Entities.Longanswer;
+import jpaClasses.Longanswer;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Entities.Questions;
-import Entities.StudentsAnswer;
+import jpaClasses.Questions;
+import jpaClasses.StudentsAnswer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;

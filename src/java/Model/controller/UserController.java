@@ -8,6 +8,7 @@ package Model.controller;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.UsersJpaController;
+import jpaClasses.Users;
 
 /**
  *
@@ -20,6 +21,8 @@ public class UserController {
         this.ujc = new UsersJpaController(utx, emf);
     }
     
-    
+    public Users findByUserName(String username){
+        return ujc.findUserByUsername(username);
+    }
     
 }

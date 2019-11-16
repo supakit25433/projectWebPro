@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package jpaClasses;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,47 +24,47 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Gamer
  */
 @Entity
-@Table(name = "USERS_SUBSCRIPTION")
+@Table(name = "STUDENTS_CHOICE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "UsersSubscription.findAll", query = "SELECT u FROM UsersSubscription u")
-    , @NamedQuery(name = "UsersSubscription.findBySubscriptionid", query = "SELECT u FROM UsersSubscription u WHERE u.subscriptionid = :subscriptionid")})
-public class UsersSubscription implements Serializable {
+    @NamedQuery(name = "StudentsChoice.findAll", query = "SELECT s FROM StudentsChoice s")
+    , @NamedQuery(name = "StudentsChoice.findByStudentchoiceid", query = "SELECT s FROM StudentsChoice s WHERE s.studentchoiceid = :studentchoiceid")})
+public class StudentsChoice implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SUBSCRIPTIONID")
-    private Integer subscriptionid;
-    @JoinColumn(name = "SUBJECTS_SUBJECTID", referencedColumnName = "SUBJECTID")
-    @ManyToOne(optional = false)
-    private Subjects subjectsSubjectid;
+    @Column(name = "STUDENTCHOICEID")
+    private Integer studentchoiceid;
+    @JoinColumn(name = "CHOICES_CHOICEID", referencedColumnName = "CHOICEID")
+    @OneToOne(optional = false)
+    private Choices choicesChoiceid;
     @JoinColumn(name = "USERS_USERID", referencedColumnName = "USERID")
     @ManyToOne(optional = false)
     private Users usersUserid;
 
-    public UsersSubscription() {
+    public StudentsChoice() {
     }
 
-    public UsersSubscription(Integer subscriptionid) {
-        this.subscriptionid = subscriptionid;
+    public StudentsChoice(Integer studentchoiceid) {
+        this.studentchoiceid = studentchoiceid;
     }
 
-    public Integer getSubscriptionid() {
-        return subscriptionid;
+    public Integer getStudentchoiceid() {
+        return studentchoiceid;
     }
 
-    public void setSubscriptionid(Integer subscriptionid) {
-        this.subscriptionid = subscriptionid;
+    public void setStudentchoiceid(Integer studentchoiceid) {
+        this.studentchoiceid = studentchoiceid;
     }
 
-    public Subjects getSubjectsSubjectid() {
-        return subjectsSubjectid;
+    public Choices getChoicesChoiceid() {
+        return choicesChoiceid;
     }
 
-    public void setSubjectsSubjectid(Subjects subjectsSubjectid) {
-        this.subjectsSubjectid = subjectsSubjectid;
+    public void setChoicesChoiceid(Choices choicesChoiceid) {
+        this.choicesChoiceid = choicesChoiceid;
     }
 
     public Users getUsersUserid() {
@@ -77,18 +78,18 @@ public class UsersSubscription implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (subscriptionid != null ? subscriptionid.hashCode() : 0);
+        hash += (studentchoiceid != null ? studentchoiceid.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsersSubscription)) {
+        if (!(object instanceof StudentsChoice)) {
             return false;
         }
-        UsersSubscription other = (UsersSubscription) object;
-        if ((this.subscriptionid == null && other.subscriptionid != null) || (this.subscriptionid != null && !this.subscriptionid.equals(other.subscriptionid))) {
+        StudentsChoice other = (StudentsChoice) object;
+        if ((this.studentchoiceid == null && other.studentchoiceid != null) || (this.studentchoiceid != null && !this.studentchoiceid.equals(other.studentchoiceid))) {
             return false;
         }
         return true;
@@ -96,7 +97,7 @@ public class UsersSubscription implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.UsersSubscription[ subscriptionid=" + subscriptionid + " ]";
+        return "Entities.StudentsChoice[ studentchoiceid=" + studentchoiceid + " ]";
     }
     
 }

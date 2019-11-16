@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entities;
+package jpaClasses;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,13 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Quizes.findAll", query = "SELECT q FROM Quizes q")
     , @NamedQuery(name = "Quizes.findByQuizid", query = "SELECT q FROM Quizes q WHERE q.quizid = :quizid")
-    , @NamedQuery(name = "Quizes.findByDescription", query = "SELECT q FROM Quizes q WHERE q.description = :description")})
+    , @NamedQuery(name = "Quizes.findByDescription", query = "SELECT q FROM Quizes q WHERE q.description = :description")
+    , @NamedQuery(name = "Quizes.findByQuizname", query = "SELECT q FROM Quizes q WHERE q.quizname = :quizname")})
 public class Quizes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +42,9 @@ public class Quizes implements Serializable {
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "quizesQuizid")
-    private List<Questions> questionsList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "quizesQuizid")
-    private Quizrecord quizrecord;
+    @Size(max = 50)
+    @Column(name = "QUIZNAME")
+    private String quizname;
     @JoinColumn(name = "SUBJECTS_SUBJECTID", referencedColumnName = "SUBJECTID")
     @ManyToOne(optional = false)
     private Subjects subjectsSubjectid;
@@ -77,21 +72,12 @@ public class Quizes implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public List<Questions> getQuestionsList() {
-        return questionsList;
+    public String getQuizname() {
+        return quizname;
     }
 
-    public void setQuestionsList(List<Questions> questionsList) {
-        this.questionsList = questionsList;
-    }
-
-    public Quizrecord getQuizrecord() {
-        return quizrecord;
-    }
-
-    public void setQuizrecord(Quizrecord quizrecord) {
-        this.quizrecord = quizrecord;
+    public void setQuizname(String quizname) {
+        this.quizname = quizname;
     }
 
     public Subjects getSubjectsSubjectid() {
