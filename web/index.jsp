@@ -65,9 +65,9 @@
                 <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
                 <div class=" bg-light p-5 rounded">
                     <div class="row">
-                        <c:forEach items="${quizes}" var="q" varStatus="s">
+                        <c:forEach items="${quizes}" var="q">
                             <div class="col-3 mb-4">
-                                <div class="card-deck">
+                                <div class="card-deAck">
                                     <div class="card">
                                         <a href="/Quiz.jsp">
                                             <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
