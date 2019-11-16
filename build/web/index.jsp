@@ -61,41 +61,32 @@
 
         <br>
 
-        <div class="container-fluid">
-            <div class="div-text">New Quiz!</div>
-            <%--<c:forEach>--%>
-            <!-- ใช้การวนลูป list ออกมาจากข้อมูลที่ได้ อาจจะใช้รูปแบบเดียวกันกับที่สอบรายบุคคล -->
-            <%--</c:forEach>--%>
-            <div class="div-center">
-                <table>
-                    <tr>
-                    <div class="card-deck">
-                        <c:forEach items="${quizes}" var="q" varStatus="s">
-                            <div class="card" style="max-width:21.9%">
-                                <a href="/Quiz.jsp">
-                                    <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Quiz's name ${q}</h4>
-                                        <h5 class="card-text">Subject</h5>
-                                        <h6 class="card-text">Teacher</h6>
-                                        <p class="card-text">Amount of question</p>
+            <div class="container">
+                <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
+                <div class=" bg-light p-5 rounded">
+                    <div class="row">
+                        <c:forEach items="${quizes}" var="q">
+                            <div class="col-3 mb-4">
+                                <div class="card-deAck">
+                                    <div class="card">
+                                        <a href="/Quiz.jsp">
+                                            <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                            <div class="card-body">
+                                                <h4 class="card-title">Quiz's name ${q}</h4>
+                                                <h5 class="card-text">Subject</h5>
+                                                <h6 class="card-text">Teacher</h6>
+                                                <p class="card-text">Description</p>
+                                                <h6 class="card-text">Amount of question</h6>
+                                            </div>
+                                            <div class="overlay"></div>
+                                            <div class="text">Start Quiz</div>
+                                        </a>
                                     </div>
-                                    <div class="overlay"></div>
-                                    <div class="text">Start Quiz</div>
-                                </a>
+                                </div>
                             </div>
-                            <c:if test="${(s.index+1)%4==0}">
-                            </div>
-                            </tr>
-                            <br>
-                            <tr>
-                            <div class="card-deck">
-                            </c:if>
-                        </c:forEach>
+                        </c:forEach> 
                     </div>
-                    </tr>
-                </table>
+                </div>
             </div>
-        </div>
     </body>
 </html>

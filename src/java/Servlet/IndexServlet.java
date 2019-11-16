@@ -40,7 +40,7 @@ public class IndexServlet extends HttpServlet {
         user.add("FFF");
         user.add("GGG");
         user.add("HHH");
-        request.setAttribute("quizs", user);
+        request.setAttribute("quizes", user);
         System.out.println(user);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
