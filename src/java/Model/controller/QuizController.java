@@ -9,6 +9,6 @@ package Model.controller;
  *
  * @author Gamer
  */
-public class Quizes {
+public class QuizController {
     
 }
