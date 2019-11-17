@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.QuizesJpaController;
 import jpa.SubjectsJpaController;
 import jpa.UsersJpaController;
 import jpa.UsersSubscriptionJpaController;
@@ -25,11 +26,13 @@ public class UserController {
     private final UsersJpaController ujc;
     private final SubjectsJpaController sjc;
     private final UsersSubscriptionJpaController usjc;
+    private final QuizesJpaController qjc;
 
     public UserController(EntityManagerFactory emf,UserTransaction utx) {
         this.ujc = new UsersJpaController(utx, emf);
         this.sjc = new SubjectsJpaController(utx, emf);
         this.usjc = new UsersSubscriptionJpaController(utx, emf);
+        this.qjc = new QuizesJpaController(utx, emf);
     }
     
     public Users findByUserName(String username){
@@ -37,7 +40,7 @@ public class UserController {
     }
     
     public List<Subjects> getUserSubjectSubscription(Users user){
-        //use in enrolled servlet
+        //return all subject that this user enrolled
         List<Subjects> subjectList = sjc.findSubjectsEntities();
         List<UsersSubscription> subscription = usjc.findUsersSubscriptionEntities();
         ArrayList<Subjects> userSubscriotion = new ArrayList<>();
@@ -52,7 +55,17 @@ public class UserController {
         } 
         return userSubscriotion;
     }
-    
-    
-    
+    /*
+    public List<Quizes> getAllUserQuiz(Users user){
+        List<Quizes> quizList = qjc.findQuizesEntities();
+        ArrayList<Quizes> userQuizes = new ArrayList<>();
+        UserController uc = new UserController(emf, utx);
+        for (int i = 0; i < 10; i++) {
+            
+        }
+        
+        
+        return userQuizes;
+    }
+    */
 }
