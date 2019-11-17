@@ -34,8 +34,8 @@ public class QuizController {
         List<Quizes> quizList = qjc.findQuizesEntities();
         ArrayList<Quizes> quizInSubjectList = new ArrayList<>();
         for (int i = 0; i < quizList.size(); i++) {
-            if () {
-                
+            if (s.getSubjectid().equals(quizList.get(i).getSubjectsSubjectid())) {
+                quizInSubjectList.add(quizList.get(i));
             }
         }
         
