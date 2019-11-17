@@ -4,6 +4,7 @@
     Author     : nar-u
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,26 +24,27 @@
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Subjects</h5></div>
             <div class=" bg-light p-5 rounded">
                 <div class="row">
-                    <c:foreach items="${enrolled}" var="e">
+                    <c:forEach items="${enrolled}" var="e">
                         <div class="col-3 mb-4">
                             <div class="card-deAck">
                                 <div class="card">
-                                    <a href="/Quiz.jsp">
+                                    <a href="/Quiz">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
-                                            <h4 class="card-title">${e.getSubjectsSubjectid().getSubjectName()}</h4>
-                                            <h5 class="card-text">${e.getUsersUserid()}</h5>
-                                            <p class="card-text">${e.getSubjectsSubjectid().getDescription()}</p>
+                                            <h4 class="card-title">${e.subjectname}</h4>
+                                            <h5 class="card-text">${e.desctiption}</h5>
+                                            <!--<p class="card-text"></p>-->
                                         </div>
                                         <div class="overlay"></div>
-                                        <div class="text">${e.getSubjectsSubjectid().getSubjectName()}</div>
+                                        <!--<div class="text"></div>-->
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    </c:foreach> 
+                    </c:forEach>
                 </div>
             </div>
+            ${message}
         </div>
     </body>
 </html>
