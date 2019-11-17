@@ -5,10 +5,17 @@
  */
 package Model.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.SubjectsJpaController;
 import jpa.UsersJpaController;
+import jpa.UsersSubscriptionJpaController;
+import jpaClasses.Quizes;
+import jpaClasses.Subjects;
 import jpaClasses.Users;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -16,13 +23,36 @@ import jpaClasses.Users;
  */
 public class UserController {
     private final UsersJpaController ujc;
+    private final SubjectsJpaController sjc;
+    private final UsersSubscriptionJpaController usjc;
 
     public UserController(EntityManagerFactory emf,UserTransaction utx) {
         this.ujc = new UsersJpaController(utx, emf);
+        this.sjc = new SubjectsJpaController(utx, emf);
+        this.usjc = new UsersSubscriptionJpaController(utx, emf);
     }
     
     public Users findByUserName(String username){
         return ujc.findUserByUsername(username);
     }
+    
+    public List<Subjects> getUserSubjectSubscription(Users user){
+        //use in enrolled servlet
+        List<Subjects> subjectList = sjc.findSubjectsEntities();
+        List<UsersSubscription> subscription = usjc.findUsersSubscriptionEntities();
+        ArrayList<Subjects> userSubscriotion = new ArrayList<>();
+        for (int i = 0; i < subscription.size(); i++) {
+            if(user.getUserid().equals(subscription.get(i).getUsersUserid())){
+                for (int j = 0; j < subjectList.size(); j++) {
+                    if (subscription.get(i).getSubjectsSubjectid().equals(subjectList.get(j).getSubjectid())) {
+                        userSubscriotion.add(subjectList.get(j));
+                    }
+                }
+            }
+        } 
+        return userSubscriotion;
+    }
+    
+    
     
 }
