@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "USERS_SUBSCRIPTION")
@@ -96,7 +96,7 @@ public class UsersSubscription implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.UsersSubscription[ subscriptionid=" + subscriptionid + " ]";
+        return "jpaClasses.UsersSubscription[ subscriptionid=" + subscriptionid + " ]";
     }
     
 }

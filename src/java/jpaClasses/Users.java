@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "USERS")
@@ -196,7 +196,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Users[ userid=" + userid + " ]";
+        return "jpaClasses.Users[ userid=" + userid + " ]";
     }
     
 }

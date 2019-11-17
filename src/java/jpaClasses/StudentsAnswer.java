@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "STUDENTS_ANSWER")
@@ -110,7 +110,7 @@ public class StudentsAnswer implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.StudentsAnswer[ studentanswerid=" + studentanswerid + " ]";
+        return "jpaClasses.StudentsAnswer[ studentanswerid=" + studentanswerid + " ]";
     }
     
 }

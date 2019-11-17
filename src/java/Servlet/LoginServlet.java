@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
                         && user.getPassword().equals(request.getParameter("password"))) {
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
+//                    request.getRequestDispatcher("/index.jsp").forward(request, response);
                     response.sendRedirect("Index");
                 }
                 else{

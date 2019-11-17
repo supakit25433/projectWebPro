@@ -26,6 +26,10 @@ public class QuizController {
         this.qjc = new QuizesJpaController(utx, emf);
     }
     
+    public List<Quizes> findAllQuizes(){
+        return qjc.findQuizesEntities();
+    }
+        
     public Quizes findByID(int id){
         return qjc.findQuizes(id);
     }

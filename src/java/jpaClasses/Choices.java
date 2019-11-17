@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "CHOICES")
@@ -131,7 +131,7 @@ public class Choices implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Choices[ choiceid=" + choiceid + " ]";
+        return "jpaClasses.Choices[ choiceid=" + choiceid + " ]";
     }
     
 }

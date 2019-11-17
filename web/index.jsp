@@ -69,13 +69,13 @@
                             <div class="col-3 mb-4">
                                 <div class="card-deAck">
                                     <div class="card">
-                                        <a href="/Quiz.jsp">
+                                        <a href="Quiz?id=${q.quizid}">
                                             <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                             <div class="card-body">
-                                                <h4 class="card-title">${s.subjectname}</h4>
-                                                <h5 class="card-text">Subject</h5>
-                                                <h6 class="card-text">Teacher</h6>
-                                                <p class="card-text">Description</p>
+                                                <h4 class="card-title">${q.quizname}</h4>
+                                                <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>
+                                                <h6 class="card-text">${q.subjectsSubjectid.usersUserid.fullname}</h6>
+                                                <p class="card-text">${q.description}</p>
                                                 <h6 class="card-text">Amount of question</h6>
                                             </div>
                                             <div class="overlay"></div>

@@ -5,11 +5,11 @@
  */
 package Servlet;
 
+import Model.controller.QuestionController;
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 
@@ -26,14 +27,14 @@ import jpaClasses.Subjects;
  *
  * @author surface
  */
-public class IndexServlet extends HttpServlet {
-    
-    @PersistenceUnit(unitName="WebProjectInt303PU")
+public class QuizServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
-  
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,10 +48,11 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        QuizController qc = new QuizController(emf, utx);
-        List<Quizes> quizesList = qc.findAllQuizes();
-        request.setAttribute("quizzes", quizesList);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        QuestionController qtc = new QuestionController(emf, utx);
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Quizes> questionsList = (List<Quizes>) qtc.findByID(id);
+        request.setAttribute("questions", questionsList);
+        getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -91,5 +93,5 @@ public class IndexServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

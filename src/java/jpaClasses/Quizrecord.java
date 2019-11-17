@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "QUIZRECORD")
@@ -108,7 +108,7 @@ public class Quizrecord implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Quizrecord[ quizrecordid=" + quizrecordid + " ]";
+        return "jpaClasses.Quizrecord[ quizrecordid=" + quizrecordid + " ]";
     }
     
 }

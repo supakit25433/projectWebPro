@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Gamer
+ * @author surface
  */
 @Entity
 @Table(name = "QUESTIONS")
@@ -158,7 +158,7 @@ public class Questions implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Questions[ questionid=" + questionid + " ]";
+        return "jpaClasses.Questions[ questionid=" + questionid + " ]";
     }
     
 }
