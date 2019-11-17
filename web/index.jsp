@@ -61,32 +61,32 @@
 
         <br>
 
-            <div class="container">
-                <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
-                <div class=" bg-light p-5 rounded">
-                    <div class="row">
-                        <c:forEach items="${quizzes}" var="q">
-                            <div class="col-3 mb-4">
-                                <div class="card-deAck">
-                                    <div class="card">
-                                        <a href="Quiz?id=${q.quizid}">
-                                            <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
-                                            <div class="card-body">
-                                                <h4 class="card-title">${q.quizname}</h4>
-                                                <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>
-                                                <h6 class="card-text">${q.subjectsSubjectid.usersUserid.fullname}</h6>
-                                                <p class="card-text">${q.description}</p>
-                                                <h6 class="card-text">Amount of question</h6>
-                                            </div>
-                                            <div class="overlay"></div>
-                                            <div class="text">Start Quiz</div>
-                                        </a>
-                                    </div>
+        <div class="container">
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
+            <div class=" bg-light p-5 rounded">
+                <div class="row">
+                    <c:forEach items="${quizzes}" var="q">
+                        <div class="col-3 mb-4">
+                            <div class="card-deAck">
+                                <div class="card">
+                                    <a href="Quiz?id=${q.quizid}">
+                                        <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                        <div class="card-body">
+                                            <h4 class="card-title">${q.quizname}</h4>
+                                            <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>
+                                            <h6 class="card-text">${q.subjectsSubjectid.usersUserid.fullname}</h6>
+                                            <p class="card-text">${q.description}</p>
+                                            <h6 class="card-text">${amount}</h6>
+                                        </div>
+                                        <div class="overlay"></div>
+                                        <div class="text">Start Quiz</div>
+                                    </a>
                                 </div>
                             </div>
-                        </c:forEach> 
-                    </div>
+                        </div>
+                    </c:forEach> 
                 </div>
             </div>
+        </div>
     </body>
 </html>

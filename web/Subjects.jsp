@@ -31,13 +31,13 @@
                         <div class="col-3 mb-4">
                             <div class="card-deAck">
                                 <div class="card">
-                                    <a href="/Quiz.jsp">
+                                    <a href="Subject?id=${s.subjectid}">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
                                             <h4 class="card-title">${s.subjectname}</h4>
                                             <h5 class="card-text">${s.usersUserid.fullname}</h5>
                                             <p class="card-text">${s.desctiption}</p>
-                                            <h6 class="card-text">s</h6>
+                                            <h6 class="card-text">enroll?</h6>
                                         </div>
                                         <div class="overlay"></div>
                                         <div class="text">${s.subjectname}</div>
