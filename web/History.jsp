@@ -33,7 +33,7 @@
                                             <h4 class="card-title">${qr.getQuizId().getQuizid().getQuizName()}</h4>
                                             <h5 class="card-text">${qr.getQuizId().getSubjectsSubjectid().getSubjectname()}</h5>
                                             <h6 class="card-text">${qr.getQuizId().getSubjectsSubjectid().getUsersUserid()}</h6>
-                                            <p class="card-text">${qr.getQuizId().getSubjectsSubjectid().getDesctiption()}</p>
+                                            <p class="card-text">${qr.getQuizId().getDesctiption()}</p>
                                             <h6 class="card-text">Amount of question</h6>
                                         </div>
                                         <div class="overlay"></div>
