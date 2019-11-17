@@ -11,16 +11,16 @@
                     <a class="nav-link" href="Index">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Subjects.jsp">Subjects</a>
+                    <a class="nav-link" href="Subjects">Subjects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Enroll.jsp">Enrolled</a>
+                    <a class="nav-link" href="Enroll">Enrolled</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="History.jsp">History</a>
+                    <a class="nav-link" href="History">History</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Feedback.jsp">Feedback/Report</a>
+                    <a class="nav-link" href="Feedback">Feedback/Report</a>
                 </li>
             </ul>
         </div>
