@@ -28,11 +28,11 @@
                         <div class="col-3 mb-4">
                             <div class="card-deAck">
                                 <div class="card">
-                                    <a href="/Quiz">
+                                    <a href="Quiz">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
-                                            <h4 class="card-title">${e.subjectname}</h4>
-                                            <h5 class="card-text">${e.desctiption}</h5>
+                                            <h4 class="card-title">${e.quizname}</h4>
+                                            <h5 class="card-text">${e.description}</h5>
                                             <!--<p class="card-text"></p>-->
                                         </div>
                                         <div class="overlay"></div>

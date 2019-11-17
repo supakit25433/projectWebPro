@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import Model.controller.UserController;
 import java.io.IOException;
@@ -20,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import jpa.QuizesJpaController;
+import jpa.UsersSubscriptionJpaController;
+import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 import jpaClasses.Users;
 
@@ -48,17 +52,21 @@ public class EnrollServlet extends HttpServlet {
             throws ServletException, IOException {
         UserController uc = new UserController(emf, utx);
         SubjectController sc = new SubjectController(emf,utx);
+        QuizController qc = new QuizController(emf, utx);
+        QuizesJpaController qjc = new QuizesJpaController(utx,emf);
+        UsersSubscriptionJpaController ujc = new UsersSubscriptionJpaController(utx,emf);
         HttpSession session = request.getSession(false);
         Users user = (Users) session.getAttribute("user");
-        if(user == null){
-            request.setAttribute("message", "user null");
+//        if(user == null){
+//            request.setAttribute("message", "user null");
+//            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
+//        } else {
+            Subjects s = sc.findByID(1);
+            List<Quizes> quizes = qjc.findQuizesEntities();
+            request.setAttribute("enrolled", quizes);
+            System.out.println(quizes);
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
-        } else {
-            List<Subjects> subjects = uc.getUserSubjectSubscription(user);
-            request.setAttribute("enrolled", subjects);
-            System.out.println(subjects);
-            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
-        }
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
