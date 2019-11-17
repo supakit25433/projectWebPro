@@ -31,7 +31,7 @@
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
                                             <h4 class="card-title">${s.getSubjectname()}</h4>
-                                            <h5 class="card-text">${s.getUsersUserid()}</h5>
+                                            <h5 class="card-text">${s.getUsersUserid().getFullname()}</h5>
                                             <p class="card-text">${s.getDesctiption()}</p>
                                             <h6 class="card-text">${userssubscription.getSubjectsSubjectid()==s.getSubjectid()?Enrolled:Enroll}</h6>
                                         </div>
