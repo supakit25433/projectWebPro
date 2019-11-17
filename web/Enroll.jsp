@@ -23,7 +23,7 @@
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Subjects</h5></div>
             <div class=" bg-light p-5 rounded">
                 <div class="row">
-                    <c:foreach items="enrolled" var="e">
+                    <c:foreach items="${enrolled}" var="e">
                         <div class="col-3 mb-4">
                             <div class="card-deAck">
                                 <div class="card">
