@@ -5,12 +5,19 @@
  */
 package Servlet;
 
+import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import jpaClasses.Subjects;
 
 /**
  *
@@ -18,6 +25,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SubjectsServlet extends HttpServlet {
 
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,7 +42,9 @@ public class SubjectsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        SubjectController sc = new SubjectController(emf, utx);
+        List<Subjects> subjectsList = sc.findAllSubjects();
+        request.setAttribute("subjects", subjectsList);
         getServletContext().getRequestDispatcher("/Subjects.jsp").forward(request, response);
     }
 

@@ -9,6 +9,7 @@ import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -42,11 +43,9 @@ public class IndexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SubjectController sc = new SubjectController(emf, utx);
-        Subjects s = sc.findByID(1);
-           
-        
-        
-        
+        List<Subjects> subjectsList = sc.findAllSubjects();
+        request.setAttribute("quizzes", subjectsList);
+        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

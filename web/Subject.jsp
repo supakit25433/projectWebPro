@@ -1,10 +1,9 @@
 <%-- 
-    Document   : Subjects
-    Created on : Nov 10, 2019, 3:12:54 PM
-    Author     : nar-u
+    Document   : Subject
+    Created on : Nov 18, 2019, 12:27:30 AM
+    Author     : surface
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,29 +17,31 @@
         
         <link rel="stylesheet" href="./css/style.css">
         
-        <title>Subjects of ${user.username}</title>
+        <title>Quizzes of ${subject.subjectname}</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
+        <br>
+        
         <br>
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Subjects</h5></div>
             <div class=" bg-light p-5 rounded">
                 <div class="row">
-                    <c:forEach items="${subjects}" var="s">
+                    <c:forEach items="${quizzes}" var="q">
                         <div class="col-3 mb-4">
                             <div class="card-deAck">
                                 <div class="card">
                                     <a href="/Quiz.jsp">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
-                                            <h4 class="card-title">${s.subjectname}</h4>
-                                            <h5 class="card-text">${s.usersUserid.fullname}</h5>
-                                            <p class="card-text">${s.desctiption}</p>
-                                            <h6 class="card-text">s</h6>
+                                            <h4 class="card-title">${q.quizname}</h4>
+                                            <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>
+                                            <h6 class="card-text">${q.subjectsSubjectid.usersUserid.fullname}</h6>
+                                            <p class="card-text">${q.description}</p>
                                         </div>
                                         <div class="overlay"></div>
-                                        <div class="text">${s.subjectname}</div>
+                                        <div class="text">${q.quizname}</div>
                                     </a>
                                 </div>
                             </div>
