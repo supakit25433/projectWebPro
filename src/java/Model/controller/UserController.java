@@ -55,17 +55,5 @@ public class UserController {
         } 
         return userSubscriotion;
     }
-    /*
-    public List<Quizes> getAllUserQuiz(Users user){
-        List<Quizes> quizList = qjc.findQuizesEntities();
-        ArrayList<Quizes> userQuizes = new ArrayList<>();
-        UserController uc = new UserController(emf, utx);
-        for (int i = 0; i < 10; i++) {
-            
-        }
-        
-        
-        return userQuizes;
-    }
-    */
+
 }
