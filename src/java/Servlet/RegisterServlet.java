@@ -49,9 +49,28 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmpassword");
         String fullname = request.getParameter("fullname");
-        String type = request.getParameter("type");
-        String message = null;
+        if (password.trim().isEmpty()
+                || confirmpassword.trim().isEmpty()
+                || username.trim().isEmpty()
+                || fullname.trim().isEmpty()) {
+            request.setAttribute("message", "Please fill in every form");
+            getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+        } else {
+            UserController uc = new UserController(emf, utx);
+            if (uc.findByUserName(username)!=null) {
+                request.setAttribute("message", "username is not available");
+                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+            } else {
+                Users user = new Users(Integer.SIZE, username, password, fullname);
+                uc.createUser(user);
+                request.setAttribute("message", "register successfully");
+                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+            }
+        }
 
+
+
+        /*
         if (password.isEmpty()
                 || confirmpassword.isEmpty()
                 || username.isEmpty()
@@ -76,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
                     getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
                 }
 
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
