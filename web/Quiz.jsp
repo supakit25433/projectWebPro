@@ -20,29 +20,35 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
         <br>
+        <c:forEach items="${test}" var="t">
+            ${t}
+        </c:forEach>
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>${quiz.quizname}</h5><br><h6>${quiz.description}</h6></div>
-                    <c:forEach items="${questions}" var="qu" varStatus="questionIndex">
-                <div class="container-fluid">
-                    <div class=" bg-light p-5 mb-4 rounded">
-                        <div class="mb-4">
-                            <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
-                        </div>
-                        <c:if test="${qu.typename=='multiple choices'}">
-                            <c:forEach items="${choices.get(questionIndex.index)}" var="c">
-                                <div class="ml-4">
-                                    <p class="font-weight-normal">${c.choice}</p>
-                                </div>                              
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${qu.typename=='answer'}">
-                            <div class="ml-4">
-                                asd
+            <form action="Quiz" method="post">
+                <c:forEach items="${questions}" var="qu" varStatus="questionIndex">
+                    <div class="container-fluid">
+                        <div class=" bg-light p-5 mb-4 rounded">
+                            <div class="mb-4">
+                                <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
                             </div>
-                        </c:if>
+                            <c:if test="${qu.typename=='multiple choices'}">
+                                <c:forEach items="${choices.get(questionIndex.index)}" var="c">
+                                    <div class="ml-4">
+                                        <p class="font-weight-normal"><input type="radio" name="id" value="${c.choiceid}"> ${c.choice}</p>
+                                    </div>                              
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${qu.typename=='answer'}">
+                                <div class="ml-4">
+                                    asd
+                                </div>
+                            </c:if>
+                        </div>
                     </div>
-                </div>
-            </c:forEach>
+                </c:forEach>
+            <input type="submit" value="Submit the answers!">
+            </form>
         </div>
     </body>
 </html>
