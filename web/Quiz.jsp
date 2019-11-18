@@ -29,10 +29,10 @@
                             <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
                         </div>
                         <c:if test="${qu.typename=='multiple choices'}">
-                            <c:forEach items="${choices}" var="c" varStatus="choiceIndex">
-                                <div class="ml-4">
-                                    <p class="font-weight-normal">${c.choice}</p>
-                                </div>
+                            <c:forEach items="${choices}" var="c">
+                                    <div class="ml-4">
+                                        <p class="font-weight-normal">${c.choice}</p>
+                                    </div>                              
                             </c:forEach>
                         </c:if>
                         <c:if test="${qu.typename=='answer'}">

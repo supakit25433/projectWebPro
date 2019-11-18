@@ -22,7 +22,7 @@ public class ChoiceController {
         this.cjc = new ChoicesJpaController(utx, emf);
     }
     
-    public List<Choices> findAllQuestions(){
+    public List<Choices> findAllChoices(){
         return cjc.findChoicesEntities();
     }
     
