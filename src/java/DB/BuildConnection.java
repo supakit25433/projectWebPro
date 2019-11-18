@@ -23,9 +23,9 @@ public class BuildConnection {
 
     private static DataSource ds = null;
     private static final String DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    private static final String URL = "jdbc:derby://localhost:1527/web";
-    private static final String USERNAME = "webadmin";
-    private static final String PASSWORD = "1234";
+    private static final String URL = "jdbc:derby://localhost:1527/QuizAnt";
+    private static final String USERNAME = "web";
+    private static final String PASSWORD = "web";
     private static boolean isLoad = false;
 
     public static Connection getConnection() {

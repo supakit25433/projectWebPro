@@ -120,9 +120,9 @@
                                 <br><h6 style='color:red;'>${message}</h6>
                             </div>
                         </form>
-<!--                        <div class="container-fluid">
+                        <div class="container-fluid">
                             Click here to register  <a href="Register.jsp">Register</a>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'></div>
