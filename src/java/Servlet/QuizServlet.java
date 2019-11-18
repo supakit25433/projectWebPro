@@ -58,7 +58,7 @@ public class QuizServlet extends HttpServlet {
         Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
 
-        ArrayList<Choices> allChoices = new ArrayList<>();
+        /*ArrayList<Choices> allChoices = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
             QuestionController qtc = new QuestionController(emf, utx);
             int questionID = questionsList.get(i).getQuestionid();
@@ -70,7 +70,20 @@ public class QuizServlet extends HttpServlet {
                     allChoices.add(choicesList.get(j));                         //addชอยส์ทั้งหมดของคำถามนี้ไปเก็บในallChoices
                 }
             }
+        }*/
+        
+        ArrayList<List<Choices>> allChoices = new ArrayList<>();
+        for (int i = 0; i < questionsList.size(); i++) {
+            QuestionController qtc = new QuestionController(emf, utx);
+            int questionID = questionsList.get(i).getQuestionid();
+            Questions qt = qtc.findByID(questionID);
+            List<Choices> choicesList = qt.getChoicesList();                    //ชอยส์ทั้งหมดของคำถามนั้นๆ
+            allChoices.add(choicesList);
+            /*for (int j = 0; j < choicesList.size(); j++) {                      
+                allChoices.add(choicesList.get(j));
+            }*/
         }
+        
 
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
