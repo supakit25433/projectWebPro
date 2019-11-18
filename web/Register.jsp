@@ -18,8 +18,8 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-4 col-md-4"></div>
-                <div class="col-sm-4 col-md-4">
+                <div class="col-sm-5 col-md-5"></div>
+                <div class="col-sm-3 col-md-3">
                     <form method="post" action="Register">
                         <table>
                             <tr>
@@ -48,7 +48,11 @@
                             </tr>
                         </table>
                     </form>
-                    <span style="color:red;">${message}</span>
+                    <div class="row">
+                        <div style="padding-left: 30px">
+                            <span style="color:red;">${message}</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4 col-md-4"></div>
             </div>
