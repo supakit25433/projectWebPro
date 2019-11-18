@@ -45,10 +45,11 @@ public class UserController {
         List<UsersSubscription> subscription = usjc.findUsersSubscriptionEntities();
         ArrayList<Subjects> userSubscriotion = new ArrayList<>();
         for (int i = 0; i < subscription.size(); i++) {
-            if(user.getUserid().equals(subscription.get(i).getUsersUserid())){
+            if(user.getUserid().toString().equals(subscription.get(i).getUsersUserid().toString())){
                 for (int j = 0; j < subjectList.size(); j++) {
-                    if (subscription.get(i).getSubjectsSubjectid().equals(subjectList.get(j).getSubjectid())) {
-                        userSubscriotion.add(subjectList.get(j));
+                    if (subscription.get(i).getSubjectsSubjectid().toString().
+                            equals(subjectList.get(j).getSubjectid().toString())) {
+                        userSubscriotion.add(subjectList.get(j));                                                  
                     }
                 }
             }
