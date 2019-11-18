@@ -5,8 +5,10 @@
  */
 package Servlet;
 
+import Model.controller.UserController;
 import Register.RegisterController;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import jpa.UsersJpaController;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Users;
 
@@ -59,11 +60,13 @@ public class RegisterServlet extends HttpServlet {
             message = "May be some input is null";
             request.setAttribute("message", message);
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-        } else {
+        } else {            
+            //UserController uc = new UserController(emf, utx);
+            //List<Users> userList = uc
             RegisterController rc = new RegisterController();
-//            if (username != ) {
+
                 if (password.equals(confirmpassword)) {
-                    rc.register(username, password, fullname, type);
+                    rc.register(username, password, fullname);
                     message = "Register Successfull";
                     request.setAttribute("message", message);
                     getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
@@ -72,11 +75,7 @@ public class RegisterServlet extends HttpServlet {
                     request.setAttribute("message", message);
                     getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
                 }
-//            } else {
-//                message = "Username have same username in database";
-//                request.setAttribute("message", message);
-//                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-//            }
+
         }
     }
 

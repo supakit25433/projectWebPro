@@ -22,14 +22,13 @@ public class RegisterController {
     private final static String REGISTER = 
             "INSERT INTO WEB.USERS (USERNAME,PASSWORD,FULLNAME,TYPENAME) VALUES (?,?,?,?)";
     
-    public void register(String username, String password, String fullname, String type){
+    public void register(String username, String password, String fullname){
         Connection conn = BuildConnection.getConnection();
         try {
             PreparedStatement pstm = conn.prepareStatement(REGISTER);
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, fullname);
-            pstm.setString(4, type);
             pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
