@@ -56,8 +56,8 @@ public class QuizServlet extends HttpServlet {
         Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
 
+        ArrayList<Choices> allChoices = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
-            ArrayList<Choices> allChoices = new ArrayList<>();
             QuestionController qtc = new QuestionController(emf, utx);
             int questionID = questionsList.get(i).getQuestionid();
             Questions qt = qtc.findByID(questionID);
@@ -65,12 +65,11 @@ public class QuizServlet extends HttpServlet {
             for (int j = 0; j < choicesList.size(); j++) {
                 allChoices.add(choicesList.get(j));
             }
-            request.setAttribute("choices", allChoices);
         }
 
-//        int questionID = Integer.parseInt(request.getParameter("questionid"));
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
+        request.setAttribute("choices", allChoices);
         getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
     }
 

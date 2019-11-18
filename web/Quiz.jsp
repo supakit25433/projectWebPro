@@ -22,13 +22,24 @@
         <br>
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>${quiz.quizname}</h5><br><h6>${quiz.description}</h6></div>
-            <c:forEach items="${questions}" var="qu" varStatus="questionIndex">
-                <div class="container">
+                    <c:forEach items="${questions}" var="qu" varStatus="questionIndex">
+                <div class="container-fluid">
                     <div class=" bg-light p-5 mb-4 rounded">
-                        <h5 class="font-weight-bold">${questionIndex.index+1}.${qu.question}</h5>
-                        <c:forEach items="${choices}" var="c" varStatus="choiceIndex">
-                            <p class="font-weight-normal">${choiceIndex.index+1}.${c.choice}</p>
-                        </c:forEach>
+                        <div class="mb-4">
+                            <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
+                        </div>
+                        <c:if test="${qu.typename=='multiple choices'}">
+                            <c:forEach items="${choices}" var="c" varStatus="choiceIndex">
+                                <div class="ml-4">
+                                    <p class="font-weight-normal">${c.choice}</p>
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                        <c:if test="${qu.typename=='answer'}">
+                            <div class="ml-4">
+                                asd
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </c:forEach>

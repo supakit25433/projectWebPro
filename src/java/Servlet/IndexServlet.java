@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.controller.QuestionController;
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 import jpa.QuestionsJpaController;
+import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 
@@ -28,13 +30,13 @@ import jpaClasses.Subjects;
  * @author surface
  */
 public class IndexServlet extends HttpServlet {
-    
-    @PersistenceUnit(unitName="WebProjectInt303PU")
+
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
-  
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,15 +49,19 @@ public class IndexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         QuizController qc = new QuizController(emf, utx);
         List<Quizes> quizesList = qc.findAllQuizes();
         request.setAttribute("quizzes", quizesList);
-        
-        QuestionsJpaController qjc = new QuestionsJpaController(utx, emf);
-        int amount = qjc.getQuestionsCount();
-        request.setAttribute("amount", amount);
-                
+
+        for (int i = 0; i < quizesList.size(); i++) {
+            QuestionController qtc = new QuestionController(emf, utx);
+            Quizes q = qc.findByID(quizesList.get(i).getQuizid());
+            List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
+            int amount = questionsList.size();
+            request.setAttribute("amount", amount);
+        }
+
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
@@ -97,5 +103,5 @@ public class IndexServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }
