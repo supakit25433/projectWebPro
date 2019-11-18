@@ -21,14 +21,17 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
         <br>
         <div class="container">
-            <div class=" bg-light p-5 rounded">
-                <c:forEach items="${questions}" var="qu" varStatus="index">
-                    <h5 class="font-weight-bold">${index.index+1}.${qu.getQuestion()}</h5>
-                    <c:forEach items="${choices}" var="c">
-                        <p class="font-weight-normal"></p>
-                    </c:forEach>
-                </c:forEach>
-            </div>
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>${quiz.quizname}</h5><br><h6>${quiz.description}</h6></div>
+            <c:forEach items="${questions}" var="qu" varStatus="questionIndex">
+                <div class="container">
+                    <div class=" bg-light p-5 mb-4 rounded">
+                        <h5 class="font-weight-bold">${questionIndex.index+1}.${qu.question}</h5>
+                        <c:forEach items="${choices}" var="c" varStatus="choiceIndex">
+                            <p class="font-weight-normal">${choiceIndex.index+1}.${c.choice}</p>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </body>
 </html>

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.ChoicesJpaController;
 import jpa.QuestionsJpaController;
+import jpaClasses.Choices;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
 
@@ -19,9 +21,11 @@ import jpaClasses.Quizes;
  */
 public class QuestionController {
     private final QuestionsJpaController qtjc;
+    private final ChoicesJpaController cjc;
 
     public QuestionController(EntityManagerFactory emf,UserTransaction utx) {
         this.qtjc = new QuestionsJpaController(utx, emf);
+        this.cjc = new ChoicesJpaController(utx, emf);
     }
     
     public List<Questions> findAllQuestions(){
@@ -32,14 +36,17 @@ public class QuestionController {
         return qtjc.findQuestions(id);
     }
     
-    public List<Questions> findAllQuestionsInQuizes(Quizes q){
-        List<Questions> questionList = qtjc.findQuestionsEntities();
-        ArrayList<Questions> questionSubList = new ArrayList<>();
-        for (int i = 0; i < questionList.size(); i++) {
-            if (q.getQuizid().equals(questionList.get(i).getQuizesQuizid())) {
-                questionSubList.add(questionList.get(i));
+    public List<Choices> findAllChoicesInQuestion(Questions qt) {
+        List<Choices> choicesList = cjc.findChoicesEntities();
+        ArrayList<Choices> choicesSubList = new ArrayList<>();
+        for (int i = 0; i < choicesList.size(); i++) {
+            if (choicesList.get(i).getQuestionsQuestionid() != null) {
+                if (choicesList.get(i).getQuestionsQuestionid().toString().equals(qt.toString())) {
+                    choicesSubList.add(choicesList.get(i));
+                }
             }
         }
-        return questionSubList;               
+        return choicesSubList;
     }
+    
 }

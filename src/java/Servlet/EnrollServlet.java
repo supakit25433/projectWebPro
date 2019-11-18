@@ -50,6 +50,7 @@ public class EnrollServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
         UserController uc = new UserController(emf, utx);
         SubjectController sc = new SubjectController(emf,utx);
         QuizController qc = new QuizController(emf, utx);
@@ -66,7 +67,20 @@ public class EnrollServlet extends HttpServlet {
             request.setAttribute("enrolled", quizes);
             System.out.println(quizes);
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
-//        }
+//        }*/
+        UserController uc = new UserController(emf, utx);
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.setAttribute("message", "user not found");
+            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
+        } else {
+            List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
+            request.setAttribute("enrolled", userSubList);
+            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
+        }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

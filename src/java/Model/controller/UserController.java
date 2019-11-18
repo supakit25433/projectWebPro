@@ -39,16 +39,17 @@ public class UserController {
         return ujc.findUserByUsername(username);
     }
     
-    public List<Subjects> getUserSubjectSubscription(Users user){
+    public List<Subjects> findUserSubjectSubscription(Users user){
         //return all subject that this user enrolled
         List<Subjects> subjectList = sjc.findSubjectsEntities();
         List<UsersSubscription> subscription = usjc.findUsersSubscriptionEntities();
         ArrayList<Subjects> userSubscriotion = new ArrayList<>();
         for (int i = 0; i < subscription.size(); i++) {
-            if(user.getUserid().equals(subscription.get(i).getUsersUserid())){
+            if(user.toString().equals(subscription.get(i).getUsersUserid().toString())){
                 for (int j = 0; j < subjectList.size(); j++) {
-                    if (subscription.get(i).getSubjectsSubjectid().equals(subjectList.get(j).getSubjectid())) {
-                        userSubscriotion.add(subjectList.get(j));
+                    if (subscription.get(i).getSubjectsSubjectid().toString().
+                            equals(subjectList.get(j).toString())) {
+                        userSubscriotion.add(subjectList.get(j));                                                  
                     }
                 }
             }
