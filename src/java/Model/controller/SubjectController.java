@@ -39,8 +39,13 @@ public class SubjectController {
         List<Quizes> quizList = qjc.findQuizesEntities();
         ArrayList<Quizes> quizSubList = new ArrayList<>();
         for (int i = 0; i < quizList.size(); i++) {
-            if (s.getSubjectid().equals(quizList.get(i).getSubjectsSubjectid())) {
+            /*if (s.getSubjectid().equals(quizList.get(i).getSubjectsSubjectid())) {
                 quizSubList.add(quizList.get(i));
+            }*/
+        if (quizList.get(i).getSubjectsSubjectid() != null) {
+                if (quizList.get(i).getSubjectsSubjectid().toString().equals(s.toString())) {
+                    quizSubList.add(quizList.get(i));
+                }
             }
         }
         return quizSubList;               

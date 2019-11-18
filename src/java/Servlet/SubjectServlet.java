@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import jpa.QuestionsJpaController;
+import jpa.QuizesJpaController;
+import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 
@@ -27,14 +28,14 @@ import jpaClasses.Subjects;
  *
  * @author surface
  */
-public class IndexServlet extends HttpServlet {
-    
+public class SubjectServlet extends HttpServlet {
+
     @PersistenceUnit(unitName="WebProjectInt303PU")
     EntityManagerFactory emf;
     
     @Resource
     UserTransaction utx;
-  
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,14 +50,14 @@ public class IndexServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         QuizController qc = new QuizController(emf, utx);
-        List<Quizes> quizesList = qc.findAllQuizes();
-        request.setAttribute("quizzes", quizesList);
+        int id = Integer.parseInt(request.getParameter("id"));
+        SubjectController sc = new SubjectController(emf, utx);
+        Subjects s = sc.findByID(id);
+        List<Quizes> quizesList = sc.findAllQuizesInSubject(s);
         
-        QuestionsJpaController qjc = new QuestionsJpaController(utx, emf);
-        int amount = qjc.getQuestionsCount();
-        request.setAttribute("amount", amount);
-                
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        request.setAttribute("subject", s.getSubjectname());
+        request.setAttribute("quizzes", quizesList);
+        getServletContext().getRequestDispatcher("/Subject.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -97,5 +98,5 @@ public class IndexServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }
