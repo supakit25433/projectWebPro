@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author surface
+ * @author Gamer
  */
 @Entity
 @Table(name = "QUIZES")
@@ -34,22 +36,24 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Quizes.findAll", query = "SELECT q FROM Quizes q")
     , @NamedQuery(name = "Quizes.findByQuizid", query = "SELECT q FROM Quizes q WHERE q.quizid = :quizid")
-    , @NamedQuery(name = "Quizes.findByDescription", query = "SELECT q FROM Quizes q WHERE q.description = :description")
-    , @NamedQuery(name = "Quizes.findByQuizname", query = "SELECT q FROM Quizes q WHERE q.quizname = :quizname")})
+    , @NamedQuery(name = "Quizes.findByQuizname", query = "SELECT q FROM Quizes q WHERE q.quizname = :quizname")
+    , @NamedQuery(name = "Quizes.findByDescription", query = "SELECT q FROM Quizes q WHERE q.description = :description")})
 public class Quizes implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "QUIZID")
     private Integer quizid;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "QUIZNAME")
+    private String quizname;
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
-    @Size(max = 50)
-    @Column(name = "QUIZNAME")
-    private String quizname;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "quizesQuizid")
     private List<Questions> questionsList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "quizesQuizid")
@@ -65,6 +69,11 @@ public class Quizes implements Serializable {
         this.quizid = quizid;
     }
 
+    public Quizes(Integer quizid, String quizname) {
+        this.quizid = quizid;
+        this.quizname = quizname;
+    }
+
     public Integer getQuizid() {
         return quizid;
     }
@@ -73,20 +82,20 @@ public class Quizes implements Serializable {
         this.quizid = quizid;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getQuizname() {
         return quizname;
     }
 
     public void setQuizname(String quizname) {
         this.quizname = quizname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @XmlTransient

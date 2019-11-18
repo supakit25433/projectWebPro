@@ -12,17 +12,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Users;
 import jpaClasses.Quizes;
-import jpaClasses.Subjects;
 import java.util.ArrayList;
 import java.util.List;
-import jpaClasses.UsersSubscription;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.Subjects;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -41,7 +40,7 @@ public class SubjectsJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Subjects subjects) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Subjects subjects) throws RollbackFailureException, Exception {
         if (subjects.getQuizesList() == null) {
             subjects.setQuizesList(new ArrayList<Quizes>());
         }
@@ -98,9 +97,6 @@ public class SubjectsJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findSubjects(subjects.getSubjectid()) != null) {
-                throw new PreexistingEntityException("Subjects " + subjects + " already exists.", ex);
             }
             throw ex;
         } finally {

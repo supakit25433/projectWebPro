@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Choices;
-import jpaClasses.StudentsChoice;
 import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.StudentsChoice;
 
 /**
  *
@@ -40,7 +39,7 @@ public class StudentsChoiceJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(StudentsChoice studentsChoice) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(StudentsChoice studentsChoice) throws IllegalOrphanException, RollbackFailureException, Exception {
         List<String> illegalOrphanMessages = null;
         Choices choicesChoiceidOrphanCheck = studentsChoice.getChoicesChoiceid();
         if (choicesChoiceidOrphanCheck != null) {
@@ -84,9 +83,6 @@ public class StudentsChoiceJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findStudentsChoice(studentsChoice.getStudentchoiceid()) != null) {
-                throw new PreexistingEntityException("StudentsChoice " + studentsChoice + " already exists.", ex);
             }
             throw ex;
         } finally {

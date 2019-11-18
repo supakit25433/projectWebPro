@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author surface
+ * @author Gamer
  */
 @Entity
 @Table(name = "SUBJECTS")
@@ -34,13 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Subjects.findAll", query = "SELECT s FROM Subjects s")
     , @NamedQuery(name = "Subjects.findBySubjectid", query = "SELECT s FROM Subjects s WHERE s.subjectid = :subjectid")
     , @NamedQuery(name = "Subjects.findBySubjectname", query = "SELECT s FROM Subjects s WHERE s.subjectname = :subjectname")
-    , @NamedQuery(name = "Subjects.findByDesctiption", query = "SELECT s FROM Subjects s WHERE s.desctiption = :desctiption")})
+    , @NamedQuery(name = "Subjects.findByDescription", query = "SELECT s FROM Subjects s WHERE s.description = :description")})
 public class Subjects implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "SUBJECTID")
     private Integer subjectid;
     @Basic(optional = false)
@@ -49,8 +51,8 @@ public class Subjects implements Serializable {
     @Column(name = "SUBJECTNAME")
     private String subjectname;
     @Size(max = 255)
-    @Column(name = "DESCTIPTION")
-    private String desctiption;
+    @Column(name = "DESCRIPTION")
+    private String description;
     @JoinColumn(name = "USERS_USERID", referencedColumnName = "USERID")
     @ManyToOne(optional = false)
     private Users usersUserid;
@@ -87,12 +89,12 @@ public class Subjects implements Serializable {
         this.subjectname = subjectname;
     }
 
-    public String getDesctiption() {
-        return desctiption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesctiption(String desctiption) {
-        this.desctiption = desctiption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Users getUsersUserid() {

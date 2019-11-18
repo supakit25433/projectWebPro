@@ -35,8 +35,14 @@ public class UserController {
         this.qjc = new QuizesJpaController(utx, emf);
     }
     
-    public Users findByUserName(String username){
-        return ujc.findUserByUsername(username);
+    public Users findByUserName(String username){       
+        List<Users> userList = ujc.findUsersEntities();
+        for (int i=0;i<userList.size();i++) {
+            if(userList.get(i).getUsername().equals(username)){
+                return userList.get(i);
+            }
+        }
+        return null;
     }
     
     public List<Subjects> findUserSubjectSubscription(Users user){

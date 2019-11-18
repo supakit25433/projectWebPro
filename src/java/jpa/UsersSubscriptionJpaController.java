@@ -6,20 +6,19 @@
 package jpa;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.UserTransaction;
+import jpa.exceptions.NonexistentEntityException;
+import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Subjects;
 import jpaClasses.Users;
 import jpaClasses.UsersSubscription;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
-import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
-import jpa.exceptions.RollbackFailureException;
 
 /**
  *
@@ -38,7 +37,7 @@ public class UsersSubscriptionJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(UsersSubscription usersSubscription) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(UsersSubscription usersSubscription) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -68,9 +67,6 @@ public class UsersSubscriptionJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findUsersSubscription(usersSubscription.getSubscriptionid()) != null) {
-                throw new PreexistingEntityException("UsersSubscription " + usersSubscription + " already exists.", ex);
             }
             throw ex;
         } finally {

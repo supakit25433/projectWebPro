@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Longanswer;
-import jpaClasses.StudentsAnswer;
 import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.StudentsAnswer;
 
 /**
  *
@@ -40,7 +39,7 @@ public class StudentsAnswerJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(StudentsAnswer studentsAnswer) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(StudentsAnswer studentsAnswer) throws IllegalOrphanException, RollbackFailureException, Exception {
         List<String> illegalOrphanMessages = null;
         Longanswer longanswerAnsweridOrphanCheck = studentsAnswer.getLonganswerAnswerid();
         if (longanswerAnsweridOrphanCheck != null) {
@@ -84,9 +83,6 @@ public class StudentsAnswerJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findStudentsAnswer(studentsAnswer.getStudentanswerid()) != null) {
-                throw new PreexistingEntityException("StudentsAnswer " + studentsAnswer + " already exists.", ex);
             }
             throw ex;
         } finally {

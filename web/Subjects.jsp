@@ -36,7 +36,7 @@
                                         <div class="card-body">
                                             <h4 class="card-title">${s.subjectname}</h4>
                                             <h5 class="card-text">${s.usersUserid.fullname}</h5>
-                                            <p class="card-text">${s.desctiption}</p>
+                                            <p class="card-text">${s.description}</p>
                                             <h6 class="card-text">enroll?</h6>
                                         </div>
                                         <div class="overlay"></div>

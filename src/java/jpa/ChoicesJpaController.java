@@ -5,7 +5,6 @@
  */
 package jpa;
 
-import jpaClasses.Choices;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -20,8 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.Choices;
 
 /**
  *
@@ -40,7 +39,7 @@ public class ChoicesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Choices choices) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Choices choices) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -75,9 +74,6 @@ public class ChoicesJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findChoices(choices.getChoiceid()) != null) {
-                throw new PreexistingEntityException("Choices " + choices + " already exists.", ex);
             }
             throw ex;
         } finally {

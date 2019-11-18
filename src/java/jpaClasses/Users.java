@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author surface
+ * @author Gamer
  */
 @Entity
 @Table(name = "USERS")
@@ -39,8 +41,8 @@ public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "USERID")
     private Integer userid;
     @Basic(optional = false)
@@ -83,13 +85,6 @@ public class Users implements Serializable {
 
     public Users(Integer userid, String username, String password, String fullname, String typename) {
         this.userid = userid;
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-        this.typename = typename;
-    }
-
-    public Users(String username, String password, String fullname, String typename) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;

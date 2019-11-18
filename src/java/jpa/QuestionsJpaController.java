@@ -10,9 +10,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import jpaClasses.Quizes;
 import jpaClasses.Longanswer;
 import jpaClasses.Choices;
-import jpaClasses.Questions;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,8 +20,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.Questions;
 
 /**
  *
@@ -40,7 +40,7 @@ public class QuestionsJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Questions questions) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Questions questions) throws RollbackFailureException, Exception {
         if (questions.getChoicesList() == null) {
             questions.setChoicesList(new ArrayList<Choices>());
         }
@@ -48,6 +48,11 @@ public class QuestionsJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
+            Quizes quizesQuizid = questions.getQuizesQuizid();
+            if (quizesQuizid != null) {
+                quizesQuizid = em.getReference(quizesQuizid.getClass(), quizesQuizid.getQuizid());
+                questions.setQuizesQuizid(quizesQuizid);
+            }
             Longanswer longanswer = questions.getLonganswer();
             if (longanswer != null) {
                 longanswer = em.getReference(longanswer.getClass(), longanswer.getAnswerid());
@@ -60,6 +65,10 @@ public class QuestionsJpaController implements Serializable {
             }
             questions.setChoicesList(attachedChoicesList);
             em.persist(questions);
+            if (quizesQuizid != null) {
+                quizesQuizid.getQuestionsList().add(questions);
+                quizesQuizid = em.merge(quizesQuizid);
+            }
             if (longanswer != null) {
                 Questions oldQuestionsQuestionidOfLonganswer = longanswer.getQuestionsQuestionid();
                 if (oldQuestionsQuestionidOfLonganswer != null) {
@@ -85,9 +94,6 @@ public class QuestionsJpaController implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findQuestions(questions.getQuestionid()) != null) {
-                throw new PreexistingEntityException("Questions " + questions + " already exists.", ex);
-            }
             throw ex;
         } finally {
             if (em != null) {
@@ -102,6 +108,8 @@ public class QuestionsJpaController implements Serializable {
             utx.begin();
             em = getEntityManager();
             Questions persistentQuestions = em.find(Questions.class, questions.getQuestionid());
+            Quizes quizesQuizidOld = persistentQuestions.getQuizesQuizid();
+            Quizes quizesQuizidNew = questions.getQuizesQuizid();
             Longanswer longanswerOld = persistentQuestions.getLonganswer();
             Longanswer longanswerNew = questions.getLonganswer();
             List<Choices> choicesListOld = persistentQuestions.getChoicesList();
@@ -124,6 +132,10 @@ public class QuestionsJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            if (quizesQuizidNew != null) {
+                quizesQuizidNew = em.getReference(quizesQuizidNew.getClass(), quizesQuizidNew.getQuizid());
+                questions.setQuizesQuizid(quizesQuizidNew);
+            }
             if (longanswerNew != null) {
                 longanswerNew = em.getReference(longanswerNew.getClass(), longanswerNew.getAnswerid());
                 questions.setLonganswer(longanswerNew);
@@ -136,6 +148,14 @@ public class QuestionsJpaController implements Serializable {
             choicesListNew = attachedChoicesListNew;
             questions.setChoicesList(choicesListNew);
             questions = em.merge(questions);
+            if (quizesQuizidOld != null && !quizesQuizidOld.equals(quizesQuizidNew)) {
+                quizesQuizidOld.getQuestionsList().remove(questions);
+                quizesQuizidOld = em.merge(quizesQuizidOld);
+            }
+            if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
+                quizesQuizidNew.getQuestionsList().add(questions);
+                quizesQuizidNew = em.merge(quizesQuizidNew);
+            }
             if (longanswerNew != null && !longanswerNew.equals(longanswerOld)) {
                 Questions oldQuestionsQuestionidOfLonganswer = longanswerNew.getQuestionsQuestionid();
                 if (oldQuestionsQuestionidOfLonganswer != null) {
@@ -207,6 +227,11 @@ public class QuestionsJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Quizes quizesQuizid = questions.getQuizesQuizid();
+            if (quizesQuizid != null) {
+                quizesQuizid.getQuestionsList().remove(questions);
+                quizesQuizid = em.merge(quizesQuizid);
             }
             em.remove(questions);
             utx.commit();

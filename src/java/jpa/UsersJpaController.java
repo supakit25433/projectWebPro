@@ -13,18 +13,17 @@ import javax.persistence.criteria.Root;
 import jpaClasses.Subjects;
 import java.util.ArrayList;
 import java.util.List;
-import jpaClasses.Quizrecord;
-import jpaClasses.StudentsAnswer;
-import jpaClasses.UsersSubscription;
-import jpaClasses.StudentsChoice;
-import jpaClasses.Users;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.Quizrecord;
+import jpaClasses.StudentsAnswer;
+import jpaClasses.UsersSubscription;
+import jpaClasses.StudentsChoice;
+import jpaClasses.Users;
 
 /**
  *
@@ -43,7 +42,7 @@ public class UsersJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Users users) throws PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Users users) throws RollbackFailureException, Exception {
         if (users.getSubjectsList() == null) {
             users.setSubjectsList(new ArrayList<Subjects>());
         }
@@ -145,9 +144,6 @@ public class UsersJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findUsers(users.getUserid()) != null) {
-                throw new PreexistingEntityException("Users " + users + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -441,16 +437,6 @@ public class UsersJpaController implements Serializable {
         } finally {
             em.close();
         }
-    }
-    
-    public Users findUserByUsername(String username) {
-        List<Users> userList = this.findUsersEntities();
-        for (int i=0;i<userList.size();i++) {
-            if(userList.get(i).getUsername().equals(username)){
-                return userList.get(i);
-            }
-        }
-        return null;
     }
     
 }

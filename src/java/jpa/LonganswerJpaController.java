@@ -5,7 +5,6 @@
  */
 package jpa;
 
-import jpaClasses.Longanswer;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -20,8 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
-import jpa.exceptions.PreexistingEntityException;
 import jpa.exceptions.RollbackFailureException;
+import jpaClasses.Longanswer;
 
 /**
  *
@@ -40,7 +39,7 @@ public class LonganswerJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Longanswer longanswer) throws IllegalOrphanException, PreexistingEntityException, RollbackFailureException, Exception {
+    public void create(Longanswer longanswer) throws IllegalOrphanException, RollbackFailureException, Exception {
         List<String> illegalOrphanMessages = null;
         Questions questionsQuestionidOrphanCheck = longanswer.getQuestionsQuestionid();
         if (questionsQuestionidOrphanCheck != null) {
@@ -89,9 +88,6 @@ public class LonganswerJpaController implements Serializable {
                 utx.rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            if (findLonganswer(longanswer.getAnswerid()) != null) {
-                throw new PreexistingEntityException("Longanswer " + longanswer + " already exists.", ex);
             }
             throw ex;
         } finally {
