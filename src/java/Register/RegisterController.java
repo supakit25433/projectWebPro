@@ -20,18 +20,17 @@ import java.util.logging.Logger;
 public class RegisterController {
     
     private final static String REGISTER = 
-            "INSERT INTO WEB.USERS (USERID,USERNAME,PASSWORD,FULLNAME,TYPENAME) VALUES (?,?,?,?)";
+            "INSERT INTO WEB.USERS (USERNAME,PASSWORD,FULLNAME,TYPENAME) VALUES (?,?,?,?)";
     
-    public void register(int number, String username, String password, String fullname, String type){
+    public void register(String username, String password, String fullname, String type){
         Connection conn = BuildConnection.getConnection();
         try {
             PreparedStatement pstm = conn.prepareStatement(REGISTER);
-            pstm.setInt(1, number);
-            pstm.setString(2, username);
-            pstm.setString(3, password);
-            pstm.setString(4, fullname);
-            pstm.setString(5, type);
-            pstm.executeQuery();
+            pstm.setString(1, username);
+            pstm.setString(2, password);
+            pstm.setString(3, fullname);
+            pstm.setString(4, type);
+            pstm.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);

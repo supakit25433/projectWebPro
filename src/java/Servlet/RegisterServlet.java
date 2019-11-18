@@ -26,9 +26,10 @@ import jpaClasses.Users;
  * @author nar-u
  */
 public class RegisterServlet extends HttpServlet {
+
     @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
 
@@ -50,29 +51,32 @@ public class RegisterServlet extends HttpServlet {
         String type = request.getParameter("type");
         String message = null;
 
-        if (password.isEmpty() 
+        if (password.isEmpty()
                 || confirmpassword.isEmpty()
                 || username.isEmpty()
-                 || fullname.isEmpty()
-                 || type.isEmpty()) {
+                || fullname.isEmpty()
+                || type.isEmpty()) {
             message = "May be some input is null";
             request.setAttribute("message", message);
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
         } else {
             RegisterController rc = new RegisterController();
-            UsersJpaController ujc = new UsersJpaController(utx,emf);
-            if (password.equals(confirmpassword)) {
-//                rc.register(id,username, password, fullname, type);
-                Users user = new Users(username, password, fullname, type);
-                ujc.create(user);
-                message = "Register Successfull";
-                request.setAttribute("message", message);
-                getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-            } else {
-                message = "password not macth confirm password";
-                request.setAttribute("message", message);
-                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
-            }
+//            if (username != ) {
+                if (password.equals(confirmpassword)) {
+                    rc.register(username, password, fullname, type);
+                    message = "Register Successfull";
+                    request.setAttribute("message", message);
+                    getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+                } else {
+                    message = "password not macth confirm password";
+                    request.setAttribute("message", message);
+                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                }
+//            } else {
+//                message = "Username have same username in database";
+//                request.setAttribute("message", message);
+//                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+//            }
         }
     }
 
