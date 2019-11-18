@@ -29,7 +29,7 @@
                 <div class="row">
                     <c:forEach items="${subjects}" var="s">
                         <div class="col-3 mb-4">
-                            <div class="card-deAck">
+                            <div class="card-deck">
                                 <div class="card">
                                     <a href="Subject?id=${s.subjectid}">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">

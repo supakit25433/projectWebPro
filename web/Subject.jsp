@@ -32,9 +32,9 @@
                 <div class="row">
                     <c:forEach items="${quizzes}" var="q">
                         <div class="col-3 mb-4">
-                            <div class="card-deAck">
+                            <div class="card-deck">
                                 <div class="card">
-                                    <a href="Quiz?id=${q.quizid}">
+                                    <a href="Quiz?quizid=${q.quizid}">
                                         <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
                                         <div class="card-body">
                                             <h4 class="card-title">${q.quizname}</h4>

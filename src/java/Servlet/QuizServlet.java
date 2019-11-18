@@ -5,11 +5,13 @@
  */
 package Servlet;
 
+import Model.controller.ChoiceController;
 import Model.controller.QuestionController;
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -19,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import jpaClasses.Choices;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
@@ -34,7 +37,7 @@ public class QuizServlet extends HttpServlet {
 
     @Resource
     UserTransaction utx;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,15 +50,27 @@ public class QuizServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        int id = Integer.parseInt(request.getParameter("id"));
+
         QuizController qc = new QuizController(emf, utx);
-        Quizes q = qc.findByID(id);
+        int quizID = Integer.parseInt(request.getParameter("quizid"));
+        Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-        
+
+        for (int i = 0; i < questionsList.size(); i++) {
+            ArrayList<Choices> allChoices = new ArrayList<>();
+            QuestionController qtc = new QuestionController(emf, utx);
+            int questionID = questionsList.get(i).getQuestionid();
+            Questions qt = qtc.findByID(questionID);
+            List<Choices> choicesList = qtc.findAllChoicesInQuestion(qt);
+            for (int j = 0; j < choicesList.size(); j++) {
+                allChoices.add(choicesList.get(j));
+            }
+            request.setAttribute("choices", allChoices);
+        }
+
+//        int questionID = Integer.parseInt(request.getParameter("questionid"));
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
-//        request.setAttribute("choices", choicesList);
         getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
     }
 

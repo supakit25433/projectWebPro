@@ -37,29 +37,17 @@ public class QuizController {
         return qjc.findQuizes(id);
     }
 
-    public List<Quizes> findQuizinSubject(Subjects s) {
-        List<Quizes> quizesList = qjc.findQuizesEntities();
-        ArrayList<Quizes> quizesInSubjectList = new ArrayList<>();
-        for (int i = 0; i < quizesList.size(); i++) {
-            if (s.getSubjectid().equals(quizesList.get(i).getSubjectsSubjectid())) {
-                quizesInSubjectList.add(quizesList.get(i));
-            }
-        }
-
-        return quizesInSubjectList;
-    }
-
     public List<Questions> findAllQuestionsInQuiz(Quizes q) {
         List<Questions> questionsList = qtjc.findQuestionsEntities();
-        ArrayList<Questions> questionSubList = new ArrayList<>();
+        ArrayList<Questions> questionsSubList = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
             if (questionsList.get(i).getQuizesQuizid() != null) {
                 if (questionsList.get(i).getQuizesQuizid().toString().equals(q.toString())) {
-                    questionSubList.add(questionsList.get(i));
+                    questionsSubList.add(questionsList.get(i));
                 }
             }
         }
-        return questionSubList;
+        return questionsSubList;
     }
 
 }
