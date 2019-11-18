@@ -21,6 +21,7 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
         <br>
         <div class="container">
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>${quiz.quizname}</h5><br><h6>${quiz.description}</h6></div>
             <div class=" bg-light p-5 rounded">
                 <c:forEach items="${questions}" var="qu" varStatus="index">
                     <h5 class="font-weight-bold">${index.index+1}.${qu.getQuestion()}</h5>

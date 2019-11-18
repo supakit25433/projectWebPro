@@ -75,7 +75,7 @@ public class EnrollServlet extends HttpServlet {
             request.setAttribute("message", "user not found");
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
         } else {
-            List<Subjects> userSubList = uc.getUserSubjectSubscription(user);
+            List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
             request.setAttribute("enrolled", userSubList);
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
         }

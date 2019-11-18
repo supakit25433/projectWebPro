@@ -48,10 +48,14 @@ public class QuizServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        QuestionController qtc = new QuestionController(emf, utx);
         int id = Integer.parseInt(request.getParameter("id"));
-        List<Quizes> questionsList = (List<Quizes>) qtc.findByID(id);
+        QuizController qc = new QuizController(emf, utx);
+        Quizes q = qc.findByID(id);
+        List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
+        
+        request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
+//        request.setAttribute("choices", choicesList);
         getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
     }
 

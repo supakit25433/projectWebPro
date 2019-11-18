@@ -49,7 +49,6 @@ public class SubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        QuizController qc = new QuizController(emf, utx);
         int id = Integer.parseInt(request.getParameter("id"));
         SubjectController sc = new SubjectController(emf, utx);
         Subjects s = sc.findByID(id);

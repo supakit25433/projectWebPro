@@ -19,9 +19,11 @@ import jpaClasses.Quizes;
  */
 public class QuestionController {
     private final QuestionsJpaController qtjc;
+    private final ChoicesJpaController cjc;
 
     public QuestionController(EntityManagerFactory emf,UserTransaction utx) {
         this.qtjc = new QuestionsJpaController(utx, emf);
+        this.cjc = new ChoicesJpaController(utx, emf);
     }
     
     public List<Questions> findAllQuestions(){
@@ -33,13 +35,26 @@ public class QuestionController {
     }
     
     public List<Questions> findAllQuestionsInQuizes(Quizes q){
-        List<Questions> questionList = qtjc.findQuestionsEntities();
+        List<Questions> questionsList = qtjc.findQuestionsEntities();
         ArrayList<Questions> questionSubList = new ArrayList<>();
-        for (int i = 0; i < questionList.size(); i++) {
-            if (q.getQuizid().equals(questionList.get(i).getQuizesQuizid())) {
-                questionSubList.add(questionList.get(i));
+        for (int i = 0; i < questionsList.size(); i++) {
+            if (q.getQuizid().equals(questionsList.get(i).getQuizesQuizid())) {
+                questionSubList.add(questionsList.get(i));
             }
         }
-        return questionSubList;               
+        return questionSubList;
+    }
+    
+    public List<Questions> findAllChoicesInQuestion(Questions qu) {
+        List<Choices> choicesList = qtjc.findQuestionsEntities();
+        ArrayList<Questions> questionSubList = new ArrayList<>();
+        for (int i = 0; i < questionList.size(); i++) {
+            if (questionList.get(i).getQuizesQuizid() != null) {
+                if (questionList.get(i).getQuizesQuizid().toString().equals(q.toString())) {
+                    questionSubList.add(questionList.get(i));
+                }
+            }
+        }
+        return questionSubList;
     }
 }
