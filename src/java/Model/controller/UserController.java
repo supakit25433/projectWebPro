@@ -7,12 +7,15 @@ package Model.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.QuizesJpaController;
 import jpa.SubjectsJpaController;
 import jpa.UsersJpaController;
 import jpa.UsersSubscriptionJpaController;
+import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 import jpaClasses.Users;
@@ -67,4 +70,14 @@ public class UserController {
         return userSubscriotion;
     }
 
+    public void createUser(Users user){
+        try {
+            ujc.create(user);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (Exception ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

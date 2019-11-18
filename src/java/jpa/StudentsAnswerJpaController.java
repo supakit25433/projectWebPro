@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Longanswer;
-import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -63,19 +62,10 @@ public class StudentsAnswerJpaController implements Serializable {
                 longanswerAnswerid = em.getReference(longanswerAnswerid.getClass(), longanswerAnswerid.getAnswerid());
                 studentsAnswer.setLonganswerAnswerid(longanswerAnswerid);
             }
-            Users usersUserid = studentsAnswer.getUsersUserid();
-            if (usersUserid != null) {
-                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
-                studentsAnswer.setUsersUserid(usersUserid);
-            }
             em.persist(studentsAnswer);
             if (longanswerAnswerid != null) {
                 longanswerAnswerid.setStudentsAnswer(studentsAnswer);
                 longanswerAnswerid = em.merge(longanswerAnswerid);
-            }
-            if (usersUserid != null) {
-                usersUserid.getStudentsAnswerList().add(studentsAnswer);
-                usersUserid = em.merge(usersUserid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -100,8 +90,6 @@ public class StudentsAnswerJpaController implements Serializable {
             StudentsAnswer persistentStudentsAnswer = em.find(StudentsAnswer.class, studentsAnswer.getStudentanswerid());
             Longanswer longanswerAnsweridOld = persistentStudentsAnswer.getLonganswerAnswerid();
             Longanswer longanswerAnsweridNew = studentsAnswer.getLonganswerAnswerid();
-            Users usersUseridOld = persistentStudentsAnswer.getUsersUserid();
-            Users usersUseridNew = studentsAnswer.getUsersUserid();
             List<String> illegalOrphanMessages = null;
             if (longanswerAnsweridNew != null && !longanswerAnsweridNew.equals(longanswerAnsweridOld)) {
                 StudentsAnswer oldStudentsAnswerOfLonganswerAnswerid = longanswerAnsweridNew.getStudentsAnswer();
@@ -119,10 +107,6 @@ public class StudentsAnswerJpaController implements Serializable {
                 longanswerAnsweridNew = em.getReference(longanswerAnsweridNew.getClass(), longanswerAnsweridNew.getAnswerid());
                 studentsAnswer.setLonganswerAnswerid(longanswerAnsweridNew);
             }
-            if (usersUseridNew != null) {
-                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
-                studentsAnswer.setUsersUserid(usersUseridNew);
-            }
             studentsAnswer = em.merge(studentsAnswer);
             if (longanswerAnsweridOld != null && !longanswerAnsweridOld.equals(longanswerAnsweridNew)) {
                 longanswerAnsweridOld.setStudentsAnswer(null);
@@ -131,14 +115,6 @@ public class StudentsAnswerJpaController implements Serializable {
             if (longanswerAnsweridNew != null && !longanswerAnsweridNew.equals(longanswerAnsweridOld)) {
                 longanswerAnsweridNew.setStudentsAnswer(studentsAnswer);
                 longanswerAnsweridNew = em.merge(longanswerAnsweridNew);
-            }
-            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
-                usersUseridOld.getStudentsAnswerList().remove(studentsAnswer);
-                usersUseridOld = em.merge(usersUseridOld);
-            }
-            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
-                usersUseridNew.getStudentsAnswerList().add(studentsAnswer);
-                usersUseridNew = em.merge(usersUseridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -178,11 +154,6 @@ public class StudentsAnswerJpaController implements Serializable {
             if (longanswerAnswerid != null) {
                 longanswerAnswerid.setStudentsAnswer(null);
                 longanswerAnswerid = em.merge(longanswerAnswerid);
-            }
-            Users usersUserid = studentsAnswer.getUsersUserid();
-            if (usersUserid != null) {
-                usersUserid.getStudentsAnswerList().remove(studentsAnswer);
-                usersUserid = em.merge(usersUserid);
             }
             em.remove(studentsAnswer);
             utx.commit();

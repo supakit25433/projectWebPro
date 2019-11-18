@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Choices;
-import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -63,19 +62,10 @@ public class StudentsChoiceJpaController implements Serializable {
                 choicesChoiceid = em.getReference(choicesChoiceid.getClass(), choicesChoiceid.getChoiceid());
                 studentsChoice.setChoicesChoiceid(choicesChoiceid);
             }
-            Users usersUserid = studentsChoice.getUsersUserid();
-            if (usersUserid != null) {
-                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
-                studentsChoice.setUsersUserid(usersUserid);
-            }
             em.persist(studentsChoice);
             if (choicesChoiceid != null) {
                 choicesChoiceid.setStudentsChoice(studentsChoice);
                 choicesChoiceid = em.merge(choicesChoiceid);
-            }
-            if (usersUserid != null) {
-                usersUserid.getStudentsChoiceList().add(studentsChoice);
-                usersUserid = em.merge(usersUserid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -100,8 +90,6 @@ public class StudentsChoiceJpaController implements Serializable {
             StudentsChoice persistentStudentsChoice = em.find(StudentsChoice.class, studentsChoice.getStudentchoiceid());
             Choices choicesChoiceidOld = persistentStudentsChoice.getChoicesChoiceid();
             Choices choicesChoiceidNew = studentsChoice.getChoicesChoiceid();
-            Users usersUseridOld = persistentStudentsChoice.getUsersUserid();
-            Users usersUseridNew = studentsChoice.getUsersUserid();
             List<String> illegalOrphanMessages = null;
             if (choicesChoiceidNew != null && !choicesChoiceidNew.equals(choicesChoiceidOld)) {
                 StudentsChoice oldStudentsChoiceOfChoicesChoiceid = choicesChoiceidNew.getStudentsChoice();
@@ -119,10 +107,6 @@ public class StudentsChoiceJpaController implements Serializable {
                 choicesChoiceidNew = em.getReference(choicesChoiceidNew.getClass(), choicesChoiceidNew.getChoiceid());
                 studentsChoice.setChoicesChoiceid(choicesChoiceidNew);
             }
-            if (usersUseridNew != null) {
-                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
-                studentsChoice.setUsersUserid(usersUseridNew);
-            }
             studentsChoice = em.merge(studentsChoice);
             if (choicesChoiceidOld != null && !choicesChoiceidOld.equals(choicesChoiceidNew)) {
                 choicesChoiceidOld.setStudentsChoice(null);
@@ -131,14 +115,6 @@ public class StudentsChoiceJpaController implements Serializable {
             if (choicesChoiceidNew != null && !choicesChoiceidNew.equals(choicesChoiceidOld)) {
                 choicesChoiceidNew.setStudentsChoice(studentsChoice);
                 choicesChoiceidNew = em.merge(choicesChoiceidNew);
-            }
-            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
-                usersUseridOld.getStudentsChoiceList().remove(studentsChoice);
-                usersUseridOld = em.merge(usersUseridOld);
-            }
-            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
-                usersUseridNew.getStudentsChoiceList().add(studentsChoice);
-                usersUseridNew = em.merge(usersUseridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -178,11 +154,6 @@ public class StudentsChoiceJpaController implements Serializable {
             if (choicesChoiceid != null) {
                 choicesChoiceid.setStudentsChoice(null);
                 choicesChoiceid = em.merge(choicesChoiceid);
-            }
-            Users usersUserid = studentsChoice.getUsersUserid();
-            if (usersUserid != null) {
-                usersUserid.getStudentsChoiceList().remove(studentsChoice);
-                usersUserid = em.merge(usersUserid);
             }
             em.remove(studentsChoice);
             utx.commit();
