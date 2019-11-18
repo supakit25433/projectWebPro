@@ -29,7 +29,7 @@
                             <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
                         </div>
                         <c:if test="${qu.typename=='multiple choices'}">
-                            <c:forEach items="${choices.get(questionIndex.index)}" var="c" varStatus="choiceIndex">
+                            <c:forEach items="${choices.get(questionIndex.index)}" var="c">
                                 <div class="ml-4">
                                     <p class="font-weight-normal">${c.choice}</p>
                                 </div>                              

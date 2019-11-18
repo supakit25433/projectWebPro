@@ -57,20 +57,6 @@ public class QuizServlet extends HttpServlet {
         int quizID = Integer.parseInt(request.getParameter("quizid"));
         Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-
-        /*ArrayList<Choices> allChoices = new ArrayList<>();
-        for (int i = 0; i < questionsList.size(); i++) {
-            QuestionController qtc = new QuestionController(emf, utx);
-            int questionID = questionsList.get(i).getQuestionid();
-            Questions qt = qtc.findByID(questionID);                            //
-            List<Choices> choicesList = qtc.findAllChoicesInQuestion(qt);       //ชอยส์ทั้งหมดของคำถามนั้นๆ
-            if (questionsList.get(i).getQuizesQuizid().equals(q.getQuizid())) { //เช็คว่าคำถามนั้นๆตรงกับquizนี้ไหม
-//                allChoices.add(choicesList);
-                for (int j = 0; j < choicesList.size(); j++) {
-                    allChoices.add(choicesList.get(j));                         //addชอยส์ทั้งหมดของคำถามนี้ไปเก็บในallChoices
-                }
-            }
-        }*/
         
         ArrayList<List<Choices>> allChoices = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
@@ -79,40 +65,12 @@ public class QuizServlet extends HttpServlet {
             Questions qt = qtc.findByID(questionID);
             List<Choices> choicesList = qt.getChoicesList();                    //ชอยส์ทั้งหมดของคำถามนั้นๆ
             allChoices.add(choicesList);
-            /*for (int j = 0; j < choicesList.size(); j++) {                      
-                allChoices.add(choicesList.get(j));
-            }*/
         }
         
-
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
         request.setAttribute("choices", allChoices);
         getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
-
-        /*
-        QuizController qc = new QuizController(emf, utx);
-        int quizID = Integer.parseInt(request.getParameter("quizid"));
-        Quizes q = qc.findByID(quizID);
-        List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-        ArrayList<Choices> choiceList = new ArrayList<>();
-        ChoiceController cc = new ChoiceController(emf, utx);
-        List<Choices> allChoiceList = cc.findAllChoices();
-        for (int i = 0; i < questionsList.size(); i++) {
-            if (questionsList.get(i).getQuizesQuizid().equals(q.getQuizid())) {
-                 for (int j = 0; j < allChoiceList.size(); j++) {
-                     if (questionsList.get(i).getQuestionid().equals(allChoiceList.get(j).getQuestionsQuestionid())) {
-                         choiceList.add(allChoiceList.get(j));
-                     }
-                }
-            
-            }
-        }
-        request.setAttribute("quiz", q);
-        request.setAttribute("questions", questionsList);
-        request.setAttribute("choices", choiceList);
-        getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
-         */
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
