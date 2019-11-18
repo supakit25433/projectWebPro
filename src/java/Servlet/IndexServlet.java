@@ -53,16 +53,13 @@ public class IndexServlet extends HttpServlet {
 
         QuizController qc = new QuizController(emf, utx);
         List<Quizes> quizesList = qc.findAllQuizes();
-        request.setAttribute("quizzes", quizesList);
-
-        for (int i = 0; i < quizesList.size(); i++) {
-            QuestionController qtc = new QuestionController(emf, utx);
-            Quizes q = qc.findByID(quizesList.get(i).getQuizid());
-            List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-            int amount = questionsList.size();
-            request.setAttribute("amount", amount);
+        
+        ArrayList<Quizes> quizesListReverse = new ArrayList<>();
+        for (int i = quizesList.size()-1; i >= 0; i--) {
+            quizesListReverse.add(qc.findByID(i+1));
         }
 
+        request.setAttribute("quizzes", quizesListReverse);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
