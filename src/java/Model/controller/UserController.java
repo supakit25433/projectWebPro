@@ -45,6 +45,10 @@ public class UserController {
         return null;
     }
     
+    public List<Users> findAllUsers(){
+        return ujc.findUsersEntities();
+    }
+    
     public List<Subjects> findUserSubjectSubscription(Users user){
         //return all subject that this user enrolled
         List<Subjects> subjectList = sjc.findSubjectsEntities();
