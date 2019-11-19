@@ -35,7 +35,7 @@
                             <c:if test="${qu.typename=='multiple choices'}">
                                 <c:forEach items="${choices.get(questionIndex.index)}" var="c">
                                     <div class="ml-4">
-                                        <p class="font-weight-normal"><input type="radio" name="id" value="${c.choiceid}"> ${c.choice}</p>
+                                        <label><p class="font-weight-normal"><input type="radio" name="id" value="${c.choiceid}"> ${c.choice}</p></label>
                                     </div>                              
                                 </c:forEach>
                             </c:if>
