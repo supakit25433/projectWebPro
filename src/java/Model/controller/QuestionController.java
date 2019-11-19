@@ -7,10 +7,13 @@ package Model.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.ChoicesJpaController;
 import jpa.QuestionsJpaController;
+import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Choices;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
@@ -48,5 +51,15 @@ public class QuestionController {
         }
         return choicesSubList;
     }
+    public void createQuestion(Questions question){
+        try {
+            qtjc.create(question);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (Exception ex) {
+            Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
     
 }
