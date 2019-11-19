@@ -13,7 +13,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <title>JSP Page</title>
+        <title>Register QuizAnt</title>
 
         <style>
             #register {
@@ -42,7 +42,7 @@
             }
             label{
                 color:#999; 
-                font-size:18px;
+                font-size:14px;
                 font-weight:normal;
                 position:absolute;
                 pointer-events:none;
@@ -82,6 +82,15 @@
             input:focus ~ .bar:before, input:focus ~ .bar:after {
                 width:50%;
             }
+            #button{
+                width:148px;
+                outline: none;
+                text-decoration: none;
+            }
+            a#none{
+                text-decoration: none;
+                outline: none;
+            }
         </style>
 
     </head>
@@ -93,14 +102,14 @@
                     <form method="post" action="Register">
                         <table>
                             <tr>
-                                <td class="text-center" style="font-size: 50px; font-weight: bold; ">
+                                <td colspan="2" class="text-center" style="font-size: 50px; font-weight: bold;">
                                     <div style="margin-bottom: 20px">
                                         REGISTER
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="group">
                                         <input type="text" name="username" autocomplete="off" required>
                                         <span class="bar"></span>
@@ -109,7 +118,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="group">
                                         <input type="text" name="password" autocomplete="off" required>
                                         <span class="bar"></span>
@@ -118,7 +127,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="group">
                                         <input type="text" name="confirmpassword" autocomplete="off" required>
                                         <span class="bar"></span>
@@ -127,26 +136,26 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td colspan="2">
                                     <div class="group">
                                         <input type="text" name="fullname" autocomplete="off" required>
                                         <span class="bar"></span>
-                                        <label>FULLNAME</label>
+                                        <label>FULLNAME ( Example : Suapkrit Akkeedet )</label>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="group">
-                                        <input type="text" name="type" autocomplete="off" required>
-                                        <span class="bar"></span>
-                                        <label>TYPE</label>
+                                    <div>
+                                        <div style="text-align: center;">
+                                            <a id="none" href="/projectWebPro/Login.jsp">
+                                                <input id="button" type="button" value="Back">
+                                            </a>
+                                        </div>
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <input type="submit">
+                                    <input id="button" type="submit">
                                 </td>
                             </tr>
                         </table>
