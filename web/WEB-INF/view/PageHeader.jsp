@@ -24,10 +24,20 @@
                 </li>
             </ul>
         </div>
-        <div>
-            <span style="font-weight: bold;">Current page</span> : ${param.page} &nbsp; &nbsp; 
-            <span style="font-weight: bold;">Username</span> : ${user.username} &nbsp; &nbsp;
-            <a href="Logout" style="color:black; font-weight: bold;">Logout</a>
+        <div class="container-fluid" style="width:360px;">
+            <span style="font-weight: bold;">Current page</span>: ${param.page}
+            <!--<span style="font-weight: bold;">Name</span> : ${user.fullname} &nbsp; &nbsp;-->
+            <!--<a href="Logout" style="color:red; font-weight: bold; font-size: 20px; text-shadow:2px 2px red"><button>Logout</button></a>-->
+            <div>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        ${user.fullname}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="Logout">Logout</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 </header>
