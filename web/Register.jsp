@@ -27,7 +27,7 @@
                 font-size:18px;
                 padding:10px 10px 10px 5px;
                 display:block;
-                width:300px;
+                width:325px;
                 border:none;
                 border-bottom:1px solid #757575;
                 box-sizing: border-box;
@@ -60,7 +60,7 @@
             .bar{ 
                 position:relative; 
                 display:block; 
-                width:300px; 
+                width:325px; 
             }
             .bar:before, .bar:after  {
                 content:'';
@@ -83,7 +83,7 @@
                 width:50%;
             }
             #button{
-                width:148px;
+                width:161px;
                 outline: none;
                 text-decoration: none;
             }
@@ -122,7 +122,7 @@
                                     <div class="group">
                                         <input type="text" name="password" autocomplete="off" required>
                                         <span class="bar"></span>
-                                        <label>PASSWORD</label>
+                                        <label>PASSWORD ( password can have A-Z , a-z , 0-9 )</label>
                                     </div>
                                 </td>
                             </tr>
@@ -158,13 +158,13 @@
                                     <input id="button" type="submit">
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2" class="text-center" style="padding-top: 15px">
+                                    <span style="color:red; font-size: 16px; font-weight: bold;">${message}</span>
+                                </td>
+                            </tr>
                         </table>
                     </form>
-                    <div class="row">
-                        <div style="padding-left: 52px">
-                            <span style="color:red;">${message}</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-4 col-md-4"></div>
             </div>

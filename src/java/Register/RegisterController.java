@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class RegisterController {
     
     private final static String REGISTER = 
-            "INSERT INTO WEB.USERS (USERNAME,PASSWORD,FULLNAME,TYPENAME) VALUES (?,?,?,?)";
+            "INSERT INTO WEB.USERS (USERNAME,PASSWORD,FULLNAME) VALUES (?,?,?)";
     
     public void register(String username, String password, String fullname){
         Connection conn = BuildConnection.getConnection();
