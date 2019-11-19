@@ -15,11 +15,28 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <title>Profile</title>
+        <style>
+            td{
+                font-size: 20px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
-        Profile
-        Username : ${user.username}
-        Full Name : ${user.fullname}
+        <table border="1">
+            <tr class="text-center">
+                <th colspan="2" style="font-size: 36px">
+                    Profile
+                </th> 
+            </tr>
+            <tr class="text-center">
+                <td>
+                    Username : ${user.username}
+                </td>
+                <td>
+                    Full Name : ${user.fullname}
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
