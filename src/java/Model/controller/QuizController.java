@@ -53,7 +53,7 @@ public class QuizController {
         return questionsSubList;
     }
     
-    public void createQuiz(Quizes quiz) {
+    public void addQuiz(Quizes quiz) {
         try {
             qjc.create(quiz);
         } catch (RollbackFailureException ex) {

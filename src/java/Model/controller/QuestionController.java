@@ -51,7 +51,7 @@ public class QuestionController {
         }
         return choicesSubList;
     }
-    public void createQuestion(Questions question){
+    public void addQuestion(Questions question){
         try {
             qtjc.create(question);
         } catch (RollbackFailureException ex) {
