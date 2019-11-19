@@ -50,14 +50,13 @@ public class QuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
 
         QuizController qc = new QuizController(emf, utx);
         int quizID = Integer.parseInt(request.getParameter("quizid"));
         Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-        
+
         ArrayList<List<Choices>> allChoices = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
             QuestionController qtc = new QuestionController(emf, utx);
@@ -66,7 +65,7 @@ public class QuizServlet extends HttpServlet {
             List<Choices> choicesList = qt.getChoicesList();                    //ชอยส์ทั้งหมดของคำถามนั้นๆ
             allChoices.add(choicesList);
         }
-        
+
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
         request.setAttribute("choices", allChoices);
@@ -100,11 +99,32 @@ public class QuizServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        
-        request.setAttribute("test", id);
-        getServletContext().getRequestDispatcher("/Quiz.jsp").forward(request, response);
+
+        ArrayList<Questions> quest = new ArrayList<>();
+
+        QuizController qc = new QuizController(emf, utx);
+        int quizID = Integer.parseInt(request.getParameter("quizid"));
+        Quizes q = qc.findByID(quizID);
+        for (int i = 0; i < q.getQuestionsList().size(); i++) {
+            QuestionController quc = new QuestionController(emf, utx);
+            Questions qu = quc.findByID(i);
+            quest.add(qu);
+            /*if (qu.getTypename()=="multiple choices") {
+                for (int j = 0; j < qu.getChoicesList().size(); j++) {
+                    int choiceOfanswerOfThisQuestionID = Integer.parseInt(request.getParameter("j"));
+                    ChoiceController cc = new ChoiceController(emf, utx);
+                    Choices c = cc.findByID(choiceOfanswerOfThisQuestionID);
+                    char T = 'T';
+                    if(c.getIsCorrect()==T){
+                        count++;
+                    }
+                }
+            }*/
+        }
+
+        request.setAttribute("result", quest);
+        request.setAttribute("test", quizID);
+        getServletContext().getRequestDispatcher("/Result.jsp").forward(request, response);
     }
 
     /**

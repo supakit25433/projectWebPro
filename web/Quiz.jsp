@@ -35,7 +35,7 @@
                             <c:if test="${qu.typename=='multiple choices'}">
                                 <c:forEach items="${choices.get(questionIndex.index)}" var="c">
                                     <div class="ml-4">
-                                        <label><p class="font-weight-normal"><input type="radio" name="id" value="${c.choiceid}"> ${c.choice}</p></label>
+                                        <label><p class="font-weight-normal"><input type="radio" name="${qu.questionid}" value="${c}"required> ${c.choice}</p></label>
                                     </div>                              
                                 </c:forEach>
                             </c:if>
@@ -44,10 +44,12 @@
                                     asd
                                 </div>
                             </c:if>
+                            <a href="../src/java/jpa/QuizesJpaController.java"></a>
                         </div>
                     </div>
                 </c:forEach>
-            <input type="submit" value="Submit the answers!">
+                <input name='quizid' hidden="true" value='${quiz.quizid}' />
+                <input type="submit" value="Submit the answers!">
             </form>
         </div>
     </body>

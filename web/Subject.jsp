@@ -41,7 +41,7 @@
                                             <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>
                                             <h6 class="card-text">${q.subjectsSubjectid.usersUserid.fullname}</h6>
                                             <p class="card-text">${q.description}</p>
-                                            <h6 class="card-text">${amount}</h6>
+                                            <h6 class="card-text">Quizzes: ${q.questionsList.size()}</h6>
                                         </div>
                                         <div class="overlay"></div>
                                         <div class="text">Start Quiz</div>
