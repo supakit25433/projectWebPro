@@ -6,7 +6,6 @@
 package Servlet;
 
 import Model.controller.UserController;
-import Register.RegisterController;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
