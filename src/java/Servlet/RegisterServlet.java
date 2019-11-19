@@ -61,7 +61,7 @@ public class RegisterServlet extends HttpServlet {
                 request.setAttribute("message", "username is not available");
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             } else {
-                Users user = new Users(Integer.SIZE, username, password, fullname);
+                Users user = new Users(username, password, fullname);
                 uc.createUser(user);
                 request.setAttribute("message", "register successfully");
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
