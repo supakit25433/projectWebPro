@@ -106,12 +106,10 @@ public class QuizServlet extends HttpServlet {
         int quizID = Integer.parseInt(request.getParameter("quizid"));
         Quizes q = qc.findByID(quizID);
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
-        for (int i = 0; i < questionsList.size(); i++) {                        //loop เพื่อเอา questions ทั้งหมดจาก questionsList
-            Questions qt = questionsList.get(i);                                //loop เพื่อเอา questions ทั้งหมดจาก questionsList
-            int questionID = qt.getQuestionid();                                //แล้วเอาไอดีมันมา
-            String questionIDString = String.valueOf(questionID);
-            /*int value = Integer.parseInt(request.getParameter(questionIDString));//พัง getParameter จาก id นั้นๆ
-            count = count + value;*/                                              //แล้ว count = count + valueจากidนั้น;
+        for (int i = 0; i < questionsList.size(); i++) {;
+            String order = String.valueOf(i);
+            int value = Integer.parseInt(request.getParameter(order));
+            count = count + value;
         }
 
         request.setAttribute("test", count);
