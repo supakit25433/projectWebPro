@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import jpaClasses.Users;
 import jpaClasses.Quizes;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,11 @@ public class SubjectsJpaController implements Serializable {
         try {
             utx.begin();
             em = getEntityManager();
+            Users usersUserid = subjects.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
+                subjects.setUsersUserid(usersUserid);
+            }
             List<Quizes> attachedQuizesList = new ArrayList<Quizes>();
             for (Quizes quizesListQuizesToAttach : subjects.getQuizesList()) {
                 quizesListQuizesToAttach = em.getReference(quizesListQuizesToAttach.getClass(), quizesListQuizesToAttach.getQuizid());
@@ -63,6 +69,10 @@ public class SubjectsJpaController implements Serializable {
             }
             subjects.setUsersSubscriptionList(attachedUsersSubscriptionList);
             em.persist(subjects);
+            if (usersUserid != null) {
+                usersUserid.getSubjectsList().add(subjects);
+                usersUserid = em.merge(usersUserid);
+            }
             for (Quizes quizesListQuizes : subjects.getQuizesList()) {
                 Subjects oldSubjectsSubjectidOfQuizesListQuizes = quizesListQuizes.getSubjectsSubjectid();
                 quizesListQuizes.setSubjectsSubjectid(subjects);
@@ -102,6 +112,8 @@ public class SubjectsJpaController implements Serializable {
             utx.begin();
             em = getEntityManager();
             Subjects persistentSubjects = em.find(Subjects.class, subjects.getSubjectid());
+            Users usersUseridOld = persistentSubjects.getUsersUserid();
+            Users usersUseridNew = subjects.getUsersUserid();
             List<Quizes> quizesListOld = persistentSubjects.getQuizesList();
             List<Quizes> quizesListNew = subjects.getQuizesList();
             List<UsersSubscription> usersSubscriptionListOld = persistentSubjects.getUsersSubscriptionList();
@@ -126,6 +138,10 @@ public class SubjectsJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
+            if (usersUseridNew != null) {
+                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
+                subjects.setUsersUserid(usersUseridNew);
+            }
             List<Quizes> attachedQuizesListNew = new ArrayList<Quizes>();
             for (Quizes quizesListNewQuizesToAttach : quizesListNew) {
                 quizesListNewQuizesToAttach = em.getReference(quizesListNewQuizesToAttach.getClass(), quizesListNewQuizesToAttach.getQuizid());
@@ -141,6 +157,14 @@ public class SubjectsJpaController implements Serializable {
             usersSubscriptionListNew = attachedUsersSubscriptionListNew;
             subjects.setUsersSubscriptionList(usersSubscriptionListNew);
             subjects = em.merge(subjects);
+            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
+                usersUseridOld.getSubjectsList().remove(subjects);
+                usersUseridOld = em.merge(usersUseridOld);
+            }
+            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
+                usersUseridNew.getSubjectsList().add(subjects);
+                usersUseridNew = em.merge(usersUseridNew);
+            }
             for (Quizes quizesListNewQuizes : quizesListNew) {
                 if (!quizesListOld.contains(quizesListNewQuizes)) {
                     Subjects oldSubjectsSubjectidOfQuizesListNewQuizes = quizesListNewQuizes.getSubjectsSubjectid();
@@ -214,6 +238,11 @@ public class SubjectsJpaController implements Serializable {
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Users usersUserid = subjects.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid.getSubjectsList().remove(subjects);
+                usersUserid = em.merge(usersUserid);
             }
             em.remove(subjects);
             utx.commit();

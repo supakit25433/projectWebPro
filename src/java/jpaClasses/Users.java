@@ -6,7 +6,9 @@
 package jpaClasses;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +16,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Users.findByUserid", query = "SELECT u FROM Users u WHERE u.userid = :userid")
     , @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
     , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname")})
+    , @NamedQuery(name = "Users.findByFullname", query = "SELECT u FROM Users u WHERE u.fullname = :fullname")
+    , @NamedQuery(name = "Users.findByEmailaddress", query = "SELECT u FROM Users u WHERE u.emailaddress = :emailaddress")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,19 +47,32 @@ public class Users implements Serializable {
     private Integer userid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 64)
     @Column(name = "USERNAME")
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 64)
     @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 64)
     @Column(name = "FULLNAME")
     private String fullname;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Column(name = "EMAILADDRESS")
+    private String emailaddress;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
+    private List<Subjects> subjectsList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
+    private List<Quizrecord> quizrecordList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
+    private List<UsersSubscription> usersSubscriptionList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
+    private List<StudentsChoice> studentsChoiceList;
 
     public Users() {
     }
@@ -63,20 +81,13 @@ public class Users implements Serializable {
         this.userid = userid;
     }
 
-    public Users(Integer userid, String username, String password, String fullname) {
+    public Users(Integer userid, String username, String password, String fullname, String emailaddress) {
         this.userid = userid;
         this.username = username;
         this.password = password;
         this.fullname = fullname;
+        this.emailaddress = emailaddress;
     }
-
-    public Users(String username, String password, String fullname) {
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-    }
-    
-    
 
     public Integer getUserid() {
         return userid;
@@ -108,6 +119,50 @@ public class Users implements Serializable {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public String getEmailaddress() {
+        return emailaddress;
+    }
+
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
+    @XmlTransient
+    public List<Subjects> getSubjectsList() {
+        return subjectsList;
+    }
+
+    public void setSubjectsList(List<Subjects> subjectsList) {
+        this.subjectsList = subjectsList;
+    }
+
+    @XmlTransient
+    public List<Quizrecord> getQuizrecordList() {
+        return quizrecordList;
+    }
+
+    public void setQuizrecordList(List<Quizrecord> quizrecordList) {
+        this.quizrecordList = quizrecordList;
+    }
+
+    @XmlTransient
+    public List<UsersSubscription> getUsersSubscriptionList() {
+        return usersSubscriptionList;
+    }
+
+    public void setUsersSubscriptionList(List<UsersSubscription> usersSubscriptionList) {
+        this.usersSubscriptionList = usersSubscriptionList;
+    }
+
+    @XmlTransient
+    public List<StudentsChoice> getStudentsChoiceList() {
+        return studentsChoiceList;
+    }
+
+    public void setStudentsChoiceList(List<StudentsChoice> studentsChoiceList) {
+        this.studentsChoiceList = studentsChoiceList;
     }
 
     @Override

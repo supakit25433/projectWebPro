@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Questions;
-import jpaClasses.StudentsAnswer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -63,24 +62,10 @@ public class LonganswerJpaController implements Serializable {
                 questionsQuestionid = em.getReference(questionsQuestionid.getClass(), questionsQuestionid.getQuestionid());
                 longanswer.setQuestionsQuestionid(questionsQuestionid);
             }
-            StudentsAnswer studentsAnswer = longanswer.getStudentsAnswer();
-            if (studentsAnswer != null) {
-                studentsAnswer = em.getReference(studentsAnswer.getClass(), studentsAnswer.getStudentanswerid());
-                longanswer.setStudentsAnswer(studentsAnswer);
-            }
             em.persist(longanswer);
             if (questionsQuestionid != null) {
                 questionsQuestionid.setLonganswer(longanswer);
                 questionsQuestionid = em.merge(questionsQuestionid);
-            }
-            if (studentsAnswer != null) {
-                Longanswer oldLonganswerAnsweridOfStudentsAnswer = studentsAnswer.getLonganswerAnswerid();
-                if (oldLonganswerAnsweridOfStudentsAnswer != null) {
-                    oldLonganswerAnsweridOfStudentsAnswer.setStudentsAnswer(null);
-                    oldLonganswerAnsweridOfStudentsAnswer = em.merge(oldLonganswerAnsweridOfStudentsAnswer);
-                }
-                studentsAnswer.setLonganswerAnswerid(longanswer);
-                studentsAnswer = em.merge(studentsAnswer);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -105,8 +90,6 @@ public class LonganswerJpaController implements Serializable {
             Longanswer persistentLonganswer = em.find(Longanswer.class, longanswer.getAnswerid());
             Questions questionsQuestionidOld = persistentLonganswer.getQuestionsQuestionid();
             Questions questionsQuestionidNew = longanswer.getQuestionsQuestionid();
-            StudentsAnswer studentsAnswerOld = persistentLonganswer.getStudentsAnswer();
-            StudentsAnswer studentsAnswerNew = longanswer.getStudentsAnswer();
             List<String> illegalOrphanMessages = null;
             if (questionsQuestionidNew != null && !questionsQuestionidNew.equals(questionsQuestionidOld)) {
                 Longanswer oldLonganswerOfQuestionsQuestionid = questionsQuestionidNew.getLonganswer();
@@ -117,22 +100,12 @@ public class LonganswerJpaController implements Serializable {
                     illegalOrphanMessages.add("The Questions " + questionsQuestionidNew + " already has an item of type Longanswer whose questionsQuestionid column cannot be null. Please make another selection for the questionsQuestionid field.");
                 }
             }
-            if (studentsAnswerOld != null && !studentsAnswerOld.equals(studentsAnswerNew)) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("You must retain StudentsAnswer " + studentsAnswerOld + " since its longanswerAnswerid field is not nullable.");
-            }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (questionsQuestionidNew != null) {
                 questionsQuestionidNew = em.getReference(questionsQuestionidNew.getClass(), questionsQuestionidNew.getQuestionid());
                 longanswer.setQuestionsQuestionid(questionsQuestionidNew);
-            }
-            if (studentsAnswerNew != null) {
-                studentsAnswerNew = em.getReference(studentsAnswerNew.getClass(), studentsAnswerNew.getStudentanswerid());
-                longanswer.setStudentsAnswer(studentsAnswerNew);
             }
             longanswer = em.merge(longanswer);
             if (questionsQuestionidOld != null && !questionsQuestionidOld.equals(questionsQuestionidNew)) {
@@ -142,15 +115,6 @@ public class LonganswerJpaController implements Serializable {
             if (questionsQuestionidNew != null && !questionsQuestionidNew.equals(questionsQuestionidOld)) {
                 questionsQuestionidNew.setLonganswer(longanswer);
                 questionsQuestionidNew = em.merge(questionsQuestionidNew);
-            }
-            if (studentsAnswerNew != null && !studentsAnswerNew.equals(studentsAnswerOld)) {
-                Longanswer oldLonganswerAnsweridOfStudentsAnswer = studentsAnswerNew.getLonganswerAnswerid();
-                if (oldLonganswerAnsweridOfStudentsAnswer != null) {
-                    oldLonganswerAnsweridOfStudentsAnswer.setStudentsAnswer(null);
-                    oldLonganswerAnsweridOfStudentsAnswer = em.merge(oldLonganswerAnsweridOfStudentsAnswer);
-                }
-                studentsAnswerNew.setLonganswerAnswerid(longanswer);
-                studentsAnswerNew = em.merge(studentsAnswerNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -174,7 +138,7 @@ public class LonganswerJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(Integer id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -185,17 +149,6 @@ public class LonganswerJpaController implements Serializable {
                 longanswer.getAnswerid();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The longanswer with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            StudentsAnswer studentsAnswerOrphanCheck = longanswer.getStudentsAnswer();
-            if (studentsAnswerOrphanCheck != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Longanswer (" + longanswer + ") cannot be destroyed since the StudentsAnswer " + studentsAnswerOrphanCheck + " in its studentsAnswer field has a non-nullable longanswerAnswerid field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Questions questionsQuestionid = longanswer.getQuestionsQuestionid();
             if (questionsQuestionid != null) {

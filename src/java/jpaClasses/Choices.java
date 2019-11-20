@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Choices.findAll", query = "SELECT c FROM Choices c")
     , @NamedQuery(name = "Choices.findByChoiceid", query = "SELECT c FROM Choices c WHERE c.choiceid = :choiceid")
     , @NamedQuery(name = "Choices.findByChoice", query = "SELECT c FROM Choices c WHERE c.choice = :choice")
-    , @NamedQuery(name = "Choices.findByIsCorrect", query = "SELECT c FROM Choices c WHERE c.isCorrect = :isCorrect")})
+    , @NamedQuery(name = "Choices.findByPoint", query = "SELECT c FROM Choices c WHERE c.point = :point")})
 public class Choices implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,8 +50,8 @@ public class Choices implements Serializable {
     private String choice;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "IS_CORRECT")
-    private Character isCorrect;
+    @Column(name = "POINT")
+    private int point;
     @JoinColumn(name = "QUESTIONS_QUESTIONID", referencedColumnName = "QUESTIONID")
     @ManyToOne(optional = false)
     private Questions questionsQuestionid;
@@ -65,10 +65,10 @@ public class Choices implements Serializable {
         this.choiceid = choiceid;
     }
 
-    public Choices(Integer choiceid, String choice, Character isCorrect) {
+    public Choices(Integer choiceid, String choice, int point) {
         this.choiceid = choiceid;
         this.choice = choice;
-        this.isCorrect = isCorrect;
+        this.point = point;
     }
 
     public Integer getChoiceid() {
@@ -87,12 +87,12 @@ public class Choices implements Serializable {
         this.choice = choice;
     }
 
-    public Character getIsCorrect() {
-        return isCorrect;
+    public int getPoint() {
+        return point;
     }
 
-    public void setIsCorrect(Character isCorrect) {
-        this.isCorrect = isCorrect;
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public Questions getQuestionsQuestionid() {

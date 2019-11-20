@@ -17,6 +17,7 @@ import javax.transaction.UserTransaction;
 import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Subjects;
+import jpaClasses.Users;
 import jpaClasses.UsersSubscription;
 
 /**
@@ -46,10 +47,19 @@ public class UsersSubscriptionJpaController implements Serializable {
                 subjectsSubjectid = em.getReference(subjectsSubjectid.getClass(), subjectsSubjectid.getSubjectid());
                 usersSubscription.setSubjectsSubjectid(subjectsSubjectid);
             }
+            Users usersUserid = usersSubscription.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
+                usersSubscription.setUsersUserid(usersUserid);
+            }
             em.persist(usersSubscription);
             if (subjectsSubjectid != null) {
                 subjectsSubjectid.getUsersSubscriptionList().add(usersSubscription);
                 subjectsSubjectid = em.merge(subjectsSubjectid);
+            }
+            if (usersUserid != null) {
+                usersUserid.getUsersSubscriptionList().add(usersSubscription);
+                usersUserid = em.merge(usersUserid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -74,9 +84,15 @@ public class UsersSubscriptionJpaController implements Serializable {
             UsersSubscription persistentUsersSubscription = em.find(UsersSubscription.class, usersSubscription.getSubscriptionid());
             Subjects subjectsSubjectidOld = persistentUsersSubscription.getSubjectsSubjectid();
             Subjects subjectsSubjectidNew = usersSubscription.getSubjectsSubjectid();
+            Users usersUseridOld = persistentUsersSubscription.getUsersUserid();
+            Users usersUseridNew = usersSubscription.getUsersUserid();
             if (subjectsSubjectidNew != null) {
                 subjectsSubjectidNew = em.getReference(subjectsSubjectidNew.getClass(), subjectsSubjectidNew.getSubjectid());
                 usersSubscription.setSubjectsSubjectid(subjectsSubjectidNew);
+            }
+            if (usersUseridNew != null) {
+                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
+                usersSubscription.setUsersUserid(usersUseridNew);
             }
             usersSubscription = em.merge(usersSubscription);
             if (subjectsSubjectidOld != null && !subjectsSubjectidOld.equals(subjectsSubjectidNew)) {
@@ -86,6 +102,14 @@ public class UsersSubscriptionJpaController implements Serializable {
             if (subjectsSubjectidNew != null && !subjectsSubjectidNew.equals(subjectsSubjectidOld)) {
                 subjectsSubjectidNew.getUsersSubscriptionList().add(usersSubscription);
                 subjectsSubjectidNew = em.merge(subjectsSubjectidNew);
+            }
+            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
+                usersUseridOld.getUsersSubscriptionList().remove(usersSubscription);
+                usersUseridOld = em.merge(usersUseridOld);
+            }
+            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
+                usersUseridNew.getUsersSubscriptionList().add(usersSubscription);
+                usersUseridNew = em.merge(usersUseridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -125,6 +149,11 @@ public class UsersSubscriptionJpaController implements Serializable {
             if (subjectsSubjectid != null) {
                 subjectsSubjectid.getUsersSubscriptionList().remove(usersSubscription);
                 subjectsSubjectid = em.merge(subjectsSubjectid);
+            }
+            Users usersUserid = usersSubscription.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid.getUsersSubscriptionList().remove(usersSubscription);
+                usersUserid = em.merge(usersUserid);
             }
             em.remove(usersSubscription);
             utx.commit();

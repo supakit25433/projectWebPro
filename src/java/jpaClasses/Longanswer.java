@@ -7,7 +7,6 @@ package jpaClasses;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,8 +45,6 @@ public class Longanswer implements Serializable {
     @JoinColumn(name = "QUESTIONS_QUESTIONID", referencedColumnName = "QUESTIONID")
     @OneToOne(optional = false)
     private Questions questionsQuestionid;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "longanswerAnswerid")
-    private StudentsAnswer studentsAnswer;
 
     public Longanswer() {
     }
@@ -78,14 +75,6 @@ public class Longanswer implements Serializable {
 
     public void setQuestionsQuestionid(Questions questionsQuestionid) {
         this.questionsQuestionid = questionsQuestionid;
-    }
-
-    public StudentsAnswer getStudentsAnswer() {
-        return studentsAnswer;
-    }
-
-    public void setStudentsAnswer(StudentsAnswer studentsAnswer) {
-        this.studentsAnswer = studentsAnswer;
     }
 
     @Override

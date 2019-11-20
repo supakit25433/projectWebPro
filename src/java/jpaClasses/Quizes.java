@@ -48,7 +48,7 @@ public class Quizes implements Serializable {
     private Integer quizid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 64)
     @Column(name = "QUIZNAME")
     private String quizname;
     @Size(max = 255)

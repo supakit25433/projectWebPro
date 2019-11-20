@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Quizes;
+import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -62,10 +63,19 @@ public class QuizrecordJpaController implements Serializable {
                 quizesQuizid = em.getReference(quizesQuizid.getClass(), quizesQuizid.getQuizid());
                 quizrecord.setQuizesQuizid(quizesQuizid);
             }
+            Users usersUserid = quizrecord.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
+                quizrecord.setUsersUserid(usersUserid);
+            }
             em.persist(quizrecord);
             if (quizesQuizid != null) {
                 quizesQuizid.setQuizrecord(quizrecord);
                 quizesQuizid = em.merge(quizesQuizid);
+            }
+            if (usersUserid != null) {
+                usersUserid.getQuizrecordList().add(quizrecord);
+                usersUserid = em.merge(usersUserid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -90,6 +100,8 @@ public class QuizrecordJpaController implements Serializable {
             Quizrecord persistentQuizrecord = em.find(Quizrecord.class, quizrecord.getQuizrecordid());
             Quizes quizesQuizidOld = persistentQuizrecord.getQuizesQuizid();
             Quizes quizesQuizidNew = quizrecord.getQuizesQuizid();
+            Users usersUseridOld = persistentQuizrecord.getUsersUserid();
+            Users usersUseridNew = quizrecord.getUsersUserid();
             List<String> illegalOrphanMessages = null;
             if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
                 Quizrecord oldQuizrecordOfQuizesQuizid = quizesQuizidNew.getQuizrecord();
@@ -107,6 +119,10 @@ public class QuizrecordJpaController implements Serializable {
                 quizesQuizidNew = em.getReference(quizesQuizidNew.getClass(), quizesQuizidNew.getQuizid());
                 quizrecord.setQuizesQuizid(quizesQuizidNew);
             }
+            if (usersUseridNew != null) {
+                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
+                quizrecord.setUsersUserid(usersUseridNew);
+            }
             quizrecord = em.merge(quizrecord);
             if (quizesQuizidOld != null && !quizesQuizidOld.equals(quizesQuizidNew)) {
                 quizesQuizidOld.setQuizrecord(null);
@@ -115,6 +131,14 @@ public class QuizrecordJpaController implements Serializable {
             if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
                 quizesQuizidNew.setQuizrecord(quizrecord);
                 quizesQuizidNew = em.merge(quizesQuizidNew);
+            }
+            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
+                usersUseridOld.getQuizrecordList().remove(quizrecord);
+                usersUseridOld = em.merge(usersUseridOld);
+            }
+            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
+                usersUseridNew.getQuizrecordList().add(quizrecord);
+                usersUseridNew = em.merge(usersUseridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -154,6 +178,11 @@ public class QuizrecordJpaController implements Serializable {
             if (quizesQuizid != null) {
                 quizesQuizid.setQuizrecord(null);
                 quizesQuizid = em.merge(quizesQuizid);
+            }
+            Users usersUserid = quizrecord.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid.getQuizrecordList().remove(quizrecord);
+                usersUserid = em.merge(usersUserid);
             }
             em.remove(quizrecord);
             utx.commit();

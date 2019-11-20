@@ -47,7 +47,7 @@ public class Subjects implements Serializable {
     private Integer subjectid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 64)
     @Column(name = "SUBJECTNAME")
     private String subjectname;
     @Size(max = 255)
