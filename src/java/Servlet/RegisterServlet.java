@@ -5,12 +5,18 @@
  */
 package Servlet;
 
+import Model.controller.UserController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
+import jpaClasses.Users;
 
 /**
  *
@@ -18,6 +24,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegisterServlet extends HttpServlet {
 
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
+    EntityManagerFactory emf;
+    
+    @Resource
+    UserTransaction utx;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,18 +41,34 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RegisterServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String confirmpassword = request.getParameter("confirmpassword");
+        String fullname = request.getParameter("fullname");
+        String email = request.getParameter("email");
+        
+        if(username.trim().isEmpty() || password.trim().isEmpty()
+                || confirmpassword.trim().isEmpty() 
+                || fullname.trim().isEmpty()
+                || email.trim().isEmpty()){
+            request.setAttribute("message", "Please fill in every form");
+            getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+        } else {
+            UserController uc = new UserController(emf, utx);
+            if(!password.equals(confirmpassword)){
+                request.setAttribute("message", "Password and Confirm Password not match");
+                getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+            } else {
+                if (uc.findByUserName(username) != null) {
+                    request.setAttribute("message", "username is not available");
+                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                } else {
+                    Users user = new Users(username, password, fullname, email);
+                    uc.createUser(user);
+                    request.setAttribute("message", "register successfully");
+                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                }
+            }
         }
     }
 
