@@ -20,9 +20,6 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
         <br>
-        <c:forEach items="${test}" var="t">
-            ${t}
-        </c:forEach>
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>${quiz.quizname}</h5><br><h6>${quiz.description}</h6></div>
             <form action="Quiz" method="post">
@@ -35,7 +32,7 @@
                             <c:if test="${qu.typename=='multiple choices'}">
                                 <c:forEach items="${choices.get(questionIndex.index)}" var="c">
                                     <div class="ml-4">
-                                        <label><p class="font-weight-normal"><input type="radio" name="${qu.questionid}" value="${c}"required> ${c.choice}</p></label>
+                                        <label><p class="font-weight-normal"><input type="radio" name="${qu.questionid}" value="${c.point}"required> ${c.choice}</p></label>
                                     </div>                              
                                 </c:forEach>
                             </c:if>

@@ -99,31 +99,22 @@ public class QuizServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        ArrayList<Questions> quest = new ArrayList<>();
+        
+        int count = 0;
 
         QuizController qc = new QuizController(emf, utx);
         int quizID = Integer.parseInt(request.getParameter("quizid"));
         Quizes q = qc.findByID(quizID);
-        for (int i = 0; i < q.getQuestionsList().size(); i++) {
-            QuestionController quc = new QuestionController(emf, utx);
-            Questions qu = quc.findByID(i);
-            quest.add(qu);
-            /*if (qu.getTypename()=="multiple choices") {
-                for (int j = 0; j < qu.getChoicesList().size(); j++) {
-                    int choiceOfanswerOfThisQuestionID = Integer.parseInt(request.getParameter("j"));
-                    ChoiceController cc = new ChoiceController(emf, utx);
-                    Choices c = cc.findByID(choiceOfanswerOfThisQuestionID);
-                    char T = 'T';
-                    if(c.getIsCorrect()==T){
-                        count++;
-                    }
-                }
-            }*/
+        List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
+        for (int i = 0; i < questionsList.size(); i++) {                        //loop เพื่อเอา questions ทั้งหมดจาก questionsList
+            Questions qt = questionsList.get(i);                                //loop เพื่อเอา questions ทั้งหมดจาก questionsList
+            int questionID = qt.getQuestionid();                                //แล้วเอาไอดีมันมา
+            String questionIDString = String.valueOf(questionID);
+            /*int value = Integer.parseInt(request.getParameter(questionIDString));//พัง getParameter จาก id นั้นๆ
+            count = count + value;*/                                              //แล้ว count = count + valueจากidนั้น;
         }
 
-        request.setAttribute("result", quest);
-        request.setAttribute("test", quizID);
+        request.setAttribute("test", count);
         getServletContext().getRequestDispatcher("/Result.jsp").forward(request, response);
     }
 

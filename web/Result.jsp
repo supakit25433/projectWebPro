@@ -14,9 +14,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        ${test}<br>
-        <c:forEach items="${result}" var="r">
-            ${r.typename}
-        </c:forEach>
+        ${test}
     </body>
 </html>
