@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -45,6 +46,9 @@ public class Longanswer implements Serializable {
     @JoinColumn(name = "QUESTIONS_QUESTIONID", referencedColumnName = "QUESTIONID")
     @OneToOne(optional = false)
     private Questions questionsQuestionid;
+    @JoinColumn(name = "USERS_USERID", referencedColumnName = "USERID")
+    @ManyToOne(optional = false)
+    private Users usersUserid;
 
     public Longanswer() {
     }
@@ -75,6 +79,14 @@ public class Longanswer implements Serializable {
 
     public void setQuestionsQuestionid(Questions questionsQuestionid) {
         this.questionsQuestionid = questionsQuestionid;
+    }
+
+    public Users getUsersUserid() {
+        return usersUserid;
+    }
+
+    public void setUsersUserid(Users usersUserid) {
+        this.usersUserid = usersUserid;
     }
 
     @Override

@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Questions.findAll", query = "SELECT q FROM Questions q")
     , @NamedQuery(name = "Questions.findByQuestionid", query = "SELECT q FROM Questions q WHERE q.questionid = :questionid")
     , @NamedQuery(name = "Questions.findByQuestion", query = "SELECT q FROM Questions q WHERE q.question = :question")
+    , @NamedQuery(name = "Questions.findByTypename", query = "SELECT q FROM Questions q WHERE q.typename = :typename")
     , @NamedQuery(name = "Questions.findByDescription", query = "SELECT q FROM Questions q WHERE q.description = :description")})
 public class Questions implements Serializable {
 
@@ -51,6 +52,11 @@ public class Questions implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "QUESTION")
     private String question;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Column(name = "TYPENAME")
+    private String typename;
     @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
@@ -69,9 +75,10 @@ public class Questions implements Serializable {
         this.questionid = questionid;
     }
 
-    public Questions(Integer questionid, String question) {
+    public Questions(Integer questionid, String question, String typename) {
         this.questionid = questionid;
         this.question = question;
+        this.typename = typename;
     }
 
     public Integer getQuestionid() {
@@ -88,6 +95,14 @@ public class Questions implements Serializable {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getTypename() {
+        return typename;
+    }
+
+    public void setTypename(String typename) {
+        this.typename = typename;
     }
 
     public String getDescription() {

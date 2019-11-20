@@ -11,6 +11,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Questions;
+import jpaClasses.Users;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -62,10 +63,19 @@ public class LonganswerJpaController implements Serializable {
                 questionsQuestionid = em.getReference(questionsQuestionid.getClass(), questionsQuestionid.getQuestionid());
                 longanswer.setQuestionsQuestionid(questionsQuestionid);
             }
+            Users usersUserid = longanswer.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid = em.getReference(usersUserid.getClass(), usersUserid.getUserid());
+                longanswer.setUsersUserid(usersUserid);
+            }
             em.persist(longanswer);
             if (questionsQuestionid != null) {
                 questionsQuestionid.setLonganswer(longanswer);
                 questionsQuestionid = em.merge(questionsQuestionid);
+            }
+            if (usersUserid != null) {
+                usersUserid.getLonganswerList().add(longanswer);
+                usersUserid = em.merge(usersUserid);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -90,6 +100,8 @@ public class LonganswerJpaController implements Serializable {
             Longanswer persistentLonganswer = em.find(Longanswer.class, longanswer.getAnswerid());
             Questions questionsQuestionidOld = persistentLonganswer.getQuestionsQuestionid();
             Questions questionsQuestionidNew = longanswer.getQuestionsQuestionid();
+            Users usersUseridOld = persistentLonganswer.getUsersUserid();
+            Users usersUseridNew = longanswer.getUsersUserid();
             List<String> illegalOrphanMessages = null;
             if (questionsQuestionidNew != null && !questionsQuestionidNew.equals(questionsQuestionidOld)) {
                 Longanswer oldLonganswerOfQuestionsQuestionid = questionsQuestionidNew.getLonganswer();
@@ -107,6 +119,10 @@ public class LonganswerJpaController implements Serializable {
                 questionsQuestionidNew = em.getReference(questionsQuestionidNew.getClass(), questionsQuestionidNew.getQuestionid());
                 longanswer.setQuestionsQuestionid(questionsQuestionidNew);
             }
+            if (usersUseridNew != null) {
+                usersUseridNew = em.getReference(usersUseridNew.getClass(), usersUseridNew.getUserid());
+                longanswer.setUsersUserid(usersUseridNew);
+            }
             longanswer = em.merge(longanswer);
             if (questionsQuestionidOld != null && !questionsQuestionidOld.equals(questionsQuestionidNew)) {
                 questionsQuestionidOld.setLonganswer(null);
@@ -115,6 +131,14 @@ public class LonganswerJpaController implements Serializable {
             if (questionsQuestionidNew != null && !questionsQuestionidNew.equals(questionsQuestionidOld)) {
                 questionsQuestionidNew.setLonganswer(longanswer);
                 questionsQuestionidNew = em.merge(questionsQuestionidNew);
+            }
+            if (usersUseridOld != null && !usersUseridOld.equals(usersUseridNew)) {
+                usersUseridOld.getLonganswerList().remove(longanswer);
+                usersUseridOld = em.merge(usersUseridOld);
+            }
+            if (usersUseridNew != null && !usersUseridNew.equals(usersUseridOld)) {
+                usersUseridNew.getLonganswerList().add(longanswer);
+                usersUseridNew = em.merge(usersUseridNew);
             }
             utx.commit();
         } catch (Exception ex) {
@@ -154,6 +178,11 @@ public class LonganswerJpaController implements Serializable {
             if (questionsQuestionid != null) {
                 questionsQuestionid.setLonganswer(null);
                 questionsQuestionid = em.merge(questionsQuestionid);
+            }
+            Users usersUserid = longanswer.getUsersUserid();
+            if (usersUserid != null) {
+                usersUserid.getLonganswerList().remove(longanswer);
+                usersUserid = em.merge(usersUserid);
             }
             em.remove(longanswer);
             utx.commit();
