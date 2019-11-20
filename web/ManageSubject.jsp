@@ -16,10 +16,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Enrolled"/>
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Manage Subject"/>
         <div>
             <a href="CreateSubject.jsp">
-                <button>
+                <button class="btn btn-primary">
                     Create Subject
                 </button>
             </a>
