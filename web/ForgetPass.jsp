@@ -19,7 +19,6 @@
     <body>
         <form method="post" action="ForgetPass">
             USERNAME : <input type="text" name="username" required><br>
-            E-MAIL : <input type="text" name="email" required>
             <input type="submit">
             <a href="/projectWebPro/Login.jsp">
                 <input type="button" value="back">

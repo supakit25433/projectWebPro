@@ -44,9 +44,8 @@ public class ForgetPassServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String username = request.getParameter("username");
-        String email = request.getParameter("email");
 
-        if (username.isEmpty() || email.isEmpty()) {
+        if (username.isEmpty() ) {
             request.setAttribute("message", "Some input is null");
             getServletContext().getRequestDispatcher("/ForgetPass.jsp").forward(request, response);
         } else {
@@ -54,7 +53,7 @@ public class ForgetPassServlet extends HttpServlet {
             Users user = uc.findByUserName(username);
             if (user != null) {
                 ForgetController fg = new ForgetController();
-                fg.sendEmail(email, user.getUsername(), user.getPassword());
+                fg.sendEmail(user.getEmailaddress(), user.getUsername(), user.getPassword());
                 request.setAttribute("message", "Send password to your email");
                 getServletContext().getRequestDispatcher("/ForgetPass.jsp").forward(request, response);
             } else {
