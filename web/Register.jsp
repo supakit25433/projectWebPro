@@ -145,6 +145,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="2">
+                                    <div class="group">
+                                        <input type="text" name="email" autocomplete="off" required>
+                                        <span class="bar"></span>
+                                        <label>E-MAIL</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>
                                     <div>
                                         <div style="text-align: center;">
