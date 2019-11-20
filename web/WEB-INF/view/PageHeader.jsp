@@ -35,6 +35,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="Profile">Profile</a>
+                        <a class="dropdown-item" href="ManageSubjects">Manage Subject</a>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
                 </div>
