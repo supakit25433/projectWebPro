@@ -78,6 +78,10 @@
         <servlet-name>ManageSubjectsServlet</servlet-name>
         <servlet-class>Servlet.ManageSubjectsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateSubjectServlet</servlet-name>
+        <servlet-class>Servlet.CreateSubjectServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -121,6 +125,10 @@
     <servlet-mapping>
         <servlet-name>ManageSubjectsServlet</servlet-name>
         <url-pattern>/ManageSubjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSubjectServlet</servlet-name>
+        <url-pattern>/CreateSubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
