@@ -26,10 +26,10 @@ public class RegisterServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,27 +46,32 @@ public class RegisterServlet extends HttpServlet {
         String confirmpassword = request.getParameter("confirmpassword");
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
-        
-        if(username.trim().isEmpty() || password.trim().isEmpty()
-                || confirmpassword.trim().isEmpty() 
+
+        if (username.trim().isEmpty() || password.trim().isEmpty()
+                || confirmpassword.trim().isEmpty()
                 || fullname.trim().isEmpty()
-                || email.trim().isEmpty()){
-            request.setAttribute("message", "Please fill in every form");
+                || email.trim().isEmpty()) {
+            request.setAttribute("message", "Please fill in every box");
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
         } else {
-            UserController uc = new UserController(emf, utx);
-            if(!password.equals(confirmpassword)){
-                request.setAttribute("message", "Password and Confirm Password not match");
+            if (password.trim().length() <= 6) {
+                request.setAttribute("message", "Password should have more than 6 character");
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             } else {
-                if (uc.findByUserName(username) != null) {
-                    request.setAttribute("message", "username is not available");
+                if (!password.equals(confirmpassword)) {
+                    request.setAttribute("message", "Password and Confirm Password not match");
                     getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
                 } else {
-                    Users user = new Users(username, password, fullname, email);
-                    uc.createUser(user);
-                    request.setAttribute("message", "register successfully");
-                    getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                    UserController uc = new UserController(emf, utx);
+                    if (uc.findByUserName(username) != null) {
+                        request.setAttribute("message", "username is not available");
+                        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                    } else {
+                        Users user = new Users(username, password, fullname, email);
+                        uc.createUser(user);
+                        request.setAttribute("message", "register successfully");
+                        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
+                    }
                 }
             }
         }
