@@ -15,5 +15,8 @@
     <body>
         <h1>Hello World!</h1>
         ${test}
+        <c:forEach items="${text}" var="t">
+            <br>${t}
+        </c:forEach>
     </body>
 </html>

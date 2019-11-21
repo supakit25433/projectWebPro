@@ -99,8 +99,9 @@ public class QuizServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         int count = 0;
+        ArrayList<String> answers = new ArrayList<>();
 
         QuizController qc = new QuizController(emf, utx);
         int quizID = Integer.parseInt(request.getParameter("quizid"));
@@ -108,11 +109,17 @@ public class QuizServlet extends HttpServlet {
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
         for (int i = 0; i < questionsList.size(); i++) {;
             String order = String.valueOf(i);
+            if(){
+                
+            }
             int value = Integer.parseInt(request.getParameter(order));
+            String textAreaValue = request.getParameter("TEXT" + order);
+            answers.add(textAreaValue);
             count = count + value;
         }
 
         request.setAttribute("test", count);
+        request.setAttribute("text", answers);
         getServletContext().getRequestDispatcher("/Result.jsp").forward(request, response);
     }
 
