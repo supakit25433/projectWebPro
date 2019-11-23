@@ -11,7 +11,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import jpaClasses.Quizes;
-import jpaClasses.Longanswer;
 import jpaClasses.Choices;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +52,6 @@ public class QuestionsJpaController implements Serializable {
                 quizesQuizid = em.getReference(quizesQuizid.getClass(), quizesQuizid.getQuizid());
                 questions.setQuizesQuizid(quizesQuizid);
             }
-            Longanswer longanswer = questions.getLonganswer();
-            if (longanswer != null) {
-                longanswer = em.getReference(longanswer.getClass(), longanswer.getAnswerid());
-                questions.setLonganswer(longanswer);
-            }
             List<Choices> attachedChoicesList = new ArrayList<Choices>();
             for (Choices choicesListChoicesToAttach : questions.getChoicesList()) {
                 choicesListChoicesToAttach = em.getReference(choicesListChoicesToAttach.getClass(), choicesListChoicesToAttach.getChoiceid());
@@ -68,15 +62,6 @@ public class QuestionsJpaController implements Serializable {
             if (quizesQuizid != null) {
                 quizesQuizid.getQuestionsList().add(questions);
                 quizesQuizid = em.merge(quizesQuizid);
-            }
-            if (longanswer != null) {
-                Questions oldQuestionsQuestionidOfLonganswer = longanswer.getQuestionsQuestionid();
-                if (oldQuestionsQuestionidOfLonganswer != null) {
-                    oldQuestionsQuestionidOfLonganswer.setLonganswer(null);
-                    oldQuestionsQuestionidOfLonganswer = em.merge(oldQuestionsQuestionidOfLonganswer);
-                }
-                longanswer.setQuestionsQuestionid(questions);
-                longanswer = em.merge(longanswer);
             }
             for (Choices choicesListChoices : questions.getChoicesList()) {
                 Questions oldQuestionsQuestionidOfChoicesListChoices = choicesListChoices.getQuestionsQuestionid();
@@ -110,17 +95,9 @@ public class QuestionsJpaController implements Serializable {
             Questions persistentQuestions = em.find(Questions.class, questions.getQuestionid());
             Quizes quizesQuizidOld = persistentQuestions.getQuizesQuizid();
             Quizes quizesQuizidNew = questions.getQuizesQuizid();
-            Longanswer longanswerOld = persistentQuestions.getLonganswer();
-            Longanswer longanswerNew = questions.getLonganswer();
             List<Choices> choicesListOld = persistentQuestions.getChoicesList();
             List<Choices> choicesListNew = questions.getChoicesList();
             List<String> illegalOrphanMessages = null;
-            if (longanswerOld != null && !longanswerOld.equals(longanswerNew)) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("You must retain Longanswer " + longanswerOld + " since its questionsQuestionid field is not nullable.");
-            }
             for (Choices choicesListOldChoices : choicesListOld) {
                 if (!choicesListNew.contains(choicesListOldChoices)) {
                     if (illegalOrphanMessages == null) {
@@ -135,10 +112,6 @@ public class QuestionsJpaController implements Serializable {
             if (quizesQuizidNew != null) {
                 quizesQuizidNew = em.getReference(quizesQuizidNew.getClass(), quizesQuizidNew.getQuizid());
                 questions.setQuizesQuizid(quizesQuizidNew);
-            }
-            if (longanswerNew != null) {
-                longanswerNew = em.getReference(longanswerNew.getClass(), longanswerNew.getAnswerid());
-                questions.setLonganswer(longanswerNew);
             }
             List<Choices> attachedChoicesListNew = new ArrayList<Choices>();
             for (Choices choicesListNewChoicesToAttach : choicesListNew) {
@@ -155,15 +128,6 @@ public class QuestionsJpaController implements Serializable {
             if (quizesQuizidNew != null && !quizesQuizidNew.equals(quizesQuizidOld)) {
                 quizesQuizidNew.getQuestionsList().add(questions);
                 quizesQuizidNew = em.merge(quizesQuizidNew);
-            }
-            if (longanswerNew != null && !longanswerNew.equals(longanswerOld)) {
-                Questions oldQuestionsQuestionidOfLonganswer = longanswerNew.getQuestionsQuestionid();
-                if (oldQuestionsQuestionidOfLonganswer != null) {
-                    oldQuestionsQuestionidOfLonganswer.setLonganswer(null);
-                    oldQuestionsQuestionidOfLonganswer = em.merge(oldQuestionsQuestionidOfLonganswer);
-                }
-                longanswerNew.setQuestionsQuestionid(questions);
-                longanswerNew = em.merge(longanswerNew);
             }
             for (Choices choicesListNewChoices : choicesListNew) {
                 if (!choicesListOld.contains(choicesListNewChoices)) {
@@ -211,13 +175,6 @@ public class QuestionsJpaController implements Serializable {
                 throw new NonexistentEntityException("The questions with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Longanswer longanswerOrphanCheck = questions.getLonganswer();
-            if (longanswerOrphanCheck != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Questions (" + questions + ") cannot be destroyed since the Longanswer " + longanswerOrphanCheck + " in its longanswer field has a non-nullable questionsQuestionid field.");
-            }
             List<Choices> choicesListOrphanCheck = questions.getChoicesList();
             for (Choices choicesListOrphanCheckChoices : choicesListOrphanCheck) {
                 if (illegalOrphanMessages == null) {

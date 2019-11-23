@@ -69,9 +69,7 @@ public class Users implements Serializable {
     private List<Subjects> subjectsList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
     private List<Quizrecord> quizrecordList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
-    private List<Longanswer> longanswerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")        
     private List<UsersSubscription> usersSubscriptionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserid")
     private List<StudentsChoice> studentsChoiceList;
@@ -156,15 +154,6 @@ public class Users implements Serializable {
 
     public void setQuizrecordList(List<Quizrecord> quizrecordList) {
         this.quizrecordList = quizrecordList;
-    }
-
-    @XmlTransient
-    public List<Longanswer> getLonganswerList() {
-        return longanswerList;
-    }
-
-    public void setLonganswerList(List<Longanswer> longanswerList) {
-        this.longanswerList = longanswerList;
     }
 
     @XmlTransient

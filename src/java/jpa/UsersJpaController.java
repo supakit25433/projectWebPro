@@ -20,7 +20,6 @@ import jpa.exceptions.IllegalOrphanException;
 import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Quizrecord;
-import jpaClasses.Longanswer;
 import jpaClasses.UsersSubscription;
 import jpaClasses.StudentsChoice;
 import jpaClasses.Users;
@@ -49,9 +48,6 @@ public class UsersJpaController implements Serializable {
         if (users.getQuizrecordList() == null) {
             users.setQuizrecordList(new ArrayList<Quizrecord>());
         }
-        if (users.getLonganswerList() == null) {
-            users.setLonganswerList(new ArrayList<Longanswer>());
-        }
         if (users.getUsersSubscriptionList() == null) {
             users.setUsersSubscriptionList(new ArrayList<UsersSubscription>());
         }
@@ -74,12 +70,6 @@ public class UsersJpaController implements Serializable {
                 attachedQuizrecordList.add(quizrecordListQuizrecordToAttach);
             }
             users.setQuizrecordList(attachedQuizrecordList);
-            List<Longanswer> attachedLonganswerList = new ArrayList<Longanswer>();
-            for (Longanswer longanswerListLonganswerToAttach : users.getLonganswerList()) {
-                longanswerListLonganswerToAttach = em.getReference(longanswerListLonganswerToAttach.getClass(), longanswerListLonganswerToAttach.getAnswerid());
-                attachedLonganswerList.add(longanswerListLonganswerToAttach);
-            }
-            users.setLonganswerList(attachedLonganswerList);
             List<UsersSubscription> attachedUsersSubscriptionList = new ArrayList<UsersSubscription>();
             for (UsersSubscription usersSubscriptionListUsersSubscriptionToAttach : users.getUsersSubscriptionList()) {
                 usersSubscriptionListUsersSubscriptionToAttach = em.getReference(usersSubscriptionListUsersSubscriptionToAttach.getClass(), usersSubscriptionListUsersSubscriptionToAttach.getSubscriptionid());
@@ -109,15 +99,6 @@ public class UsersJpaController implements Serializable {
                 if (oldUsersUseridOfQuizrecordListQuizrecord != null) {
                     oldUsersUseridOfQuizrecordListQuizrecord.getQuizrecordList().remove(quizrecordListQuizrecord);
                     oldUsersUseridOfQuizrecordListQuizrecord = em.merge(oldUsersUseridOfQuizrecordListQuizrecord);
-                }
-            }
-            for (Longanswer longanswerListLonganswer : users.getLonganswerList()) {
-                Users oldUsersUseridOfLonganswerListLonganswer = longanswerListLonganswer.getUsersUserid();
-                longanswerListLonganswer.setUsersUserid(users);
-                longanswerListLonganswer = em.merge(longanswerListLonganswer);
-                if (oldUsersUseridOfLonganswerListLonganswer != null) {
-                    oldUsersUseridOfLonganswerListLonganswer.getLonganswerList().remove(longanswerListLonganswer);
-                    oldUsersUseridOfLonganswerListLonganswer = em.merge(oldUsersUseridOfLonganswerListLonganswer);
                 }
             }
             for (UsersSubscription usersSubscriptionListUsersSubscription : users.getUsersSubscriptionList()) {
@@ -163,8 +144,6 @@ public class UsersJpaController implements Serializable {
             List<Subjects> subjectsListNew = users.getSubjectsList();
             List<Quizrecord> quizrecordListOld = persistentUsers.getQuizrecordList();
             List<Quizrecord> quizrecordListNew = users.getQuizrecordList();
-            List<Longanswer> longanswerListOld = persistentUsers.getLonganswerList();
-            List<Longanswer> longanswerListNew = users.getLonganswerList();
             List<UsersSubscription> usersSubscriptionListOld = persistentUsers.getUsersSubscriptionList();
             List<UsersSubscription> usersSubscriptionListNew = users.getUsersSubscriptionList();
             List<StudentsChoice> studentsChoiceListOld = persistentUsers.getStudentsChoiceList();
@@ -184,14 +163,6 @@ public class UsersJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Quizrecord " + quizrecordListOldQuizrecord + " since its usersUserid field is not nullable.");
-                }
-            }
-            for (Longanswer longanswerListOldLonganswer : longanswerListOld) {
-                if (!longanswerListNew.contains(longanswerListOldLonganswer)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Longanswer " + longanswerListOldLonganswer + " since its usersUserid field is not nullable.");
                 }
             }
             for (UsersSubscription usersSubscriptionListOldUsersSubscription : usersSubscriptionListOld) {
@@ -227,13 +198,6 @@ public class UsersJpaController implements Serializable {
             }
             quizrecordListNew = attachedQuizrecordListNew;
             users.setQuizrecordList(quizrecordListNew);
-            List<Longanswer> attachedLonganswerListNew = new ArrayList<Longanswer>();
-            for (Longanswer longanswerListNewLonganswerToAttach : longanswerListNew) {
-                longanswerListNewLonganswerToAttach = em.getReference(longanswerListNewLonganswerToAttach.getClass(), longanswerListNewLonganswerToAttach.getAnswerid());
-                attachedLonganswerListNew.add(longanswerListNewLonganswerToAttach);
-            }
-            longanswerListNew = attachedLonganswerListNew;
-            users.setLonganswerList(longanswerListNew);
             List<UsersSubscription> attachedUsersSubscriptionListNew = new ArrayList<UsersSubscription>();
             for (UsersSubscription usersSubscriptionListNewUsersSubscriptionToAttach : usersSubscriptionListNew) {
                 usersSubscriptionListNewUsersSubscriptionToAttach = em.getReference(usersSubscriptionListNewUsersSubscriptionToAttach.getClass(), usersSubscriptionListNewUsersSubscriptionToAttach.getSubscriptionid());
@@ -268,17 +232,6 @@ public class UsersJpaController implements Serializable {
                     if (oldUsersUseridOfQuizrecordListNewQuizrecord != null && !oldUsersUseridOfQuizrecordListNewQuizrecord.equals(users)) {
                         oldUsersUseridOfQuizrecordListNewQuizrecord.getQuizrecordList().remove(quizrecordListNewQuizrecord);
                         oldUsersUseridOfQuizrecordListNewQuizrecord = em.merge(oldUsersUseridOfQuizrecordListNewQuizrecord);
-                    }
-                }
-            }
-            for (Longanswer longanswerListNewLonganswer : longanswerListNew) {
-                if (!longanswerListOld.contains(longanswerListNewLonganswer)) {
-                    Users oldUsersUseridOfLonganswerListNewLonganswer = longanswerListNewLonganswer.getUsersUserid();
-                    longanswerListNewLonganswer.setUsersUserid(users);
-                    longanswerListNewLonganswer = em.merge(longanswerListNewLonganswer);
-                    if (oldUsersUseridOfLonganswerListNewLonganswer != null && !oldUsersUseridOfLonganswerListNewLonganswer.equals(users)) {
-                        oldUsersUseridOfLonganswerListNewLonganswer.getLonganswerList().remove(longanswerListNewLonganswer);
-                        oldUsersUseridOfLonganswerListNewLonganswer = em.merge(oldUsersUseridOfLonganswerListNewLonganswer);
                     }
                 }
             }
@@ -352,13 +305,6 @@ public class UsersJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This Users (" + users + ") cannot be destroyed since the Quizrecord " + quizrecordListOrphanCheckQuizrecord + " in its quizrecordList field has a non-nullable usersUserid field.");
-            }
-            List<Longanswer> longanswerListOrphanCheck = users.getLonganswerList();
-            for (Longanswer longanswerListOrphanCheckLonganswer : longanswerListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Users (" + users + ") cannot be destroyed since the Longanswer " + longanswerListOrphanCheckLonganswer + " in its longanswerList field has a non-nullable usersUserid field.");
             }
             List<UsersSubscription> usersSubscriptionListOrphanCheck = users.getUsersSubscriptionList();
             for (UsersSubscription usersSubscriptionListOrphanCheckUsersSubscription : usersSubscriptionListOrphanCheck) {

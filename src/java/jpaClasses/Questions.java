@@ -63,8 +63,6 @@ public class Questions implements Serializable {
     @JoinColumn(name = "QUIZES_QUIZID", referencedColumnName = "QUIZID")
     @ManyToOne(optional = false)
     private Quizes quizesQuizid;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "questionsQuestionid")
-    private Longanswer longanswer;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "questionsQuestionid")
     private List<Choices> choicesList;
 
@@ -119,14 +117,6 @@ public class Questions implements Serializable {
 
     public void setQuizesQuizid(Quizes quizesQuizid) {
         this.quizesQuizid = quizesQuizid;
-    }
-
-    public Longanswer getLonganswer() {
-        return longanswer;
-    }
-
-    public void setLonganswer(Longanswer longanswer) {
-        this.longanswer = longanswer;
     }
 
     @XmlTransient
