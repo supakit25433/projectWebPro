@@ -109,9 +109,6 @@ public class QuizServlet extends HttpServlet {
         List<Questions> questionsList = qc.findAllQuestionsInQuiz(q);
         for (int i = 0; i < questionsList.size(); i++) {;
             String order = String.valueOf(i);
-            if(){
-                
-            }
             int value = Integer.parseInt(request.getParameter(order));
             String textAreaValue = request.getParameter("TEXT" + order);
             answers.add(textAreaValue);
