@@ -15,6 +15,7 @@ import jpa.QuizesJpaController;
 import jpa.SubjectsJpaController;
 import jpa.UsersJpaController;
 import jpa.UsersSubscriptionJpaController;
+import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
@@ -76,6 +77,18 @@ public class UserController {
         } catch (RollbackFailureException ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }catch (Exception ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void editUser(Users user) {
+        try {
+            ujc.edit(user);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
