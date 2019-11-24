@@ -38,8 +38,8 @@
                             </c:if>
                             <c:if test="${qu.typename=='answer'}">
                                 <div class="ml-4">
-                                    <%--<input name="${questionIndex.index}" hidden="true" value="0"/>--%>
-                                    <textarea name="${questionIndex.index}" rows="5" cols="120" placeholder="Insert answer here." required></textarea>
+                                    <input name="${questionIndex.index}" hidden="true" value="0"/>
+                                    <!--<textarea name="${questionIndex.index}" rows="5" cols="120" placeholder="Insert answer here." required></textarea>-->
                                 </div>
                             </c:if>
                             <a href="../src/java/jpa/QuizesJpaController.java"></a>
