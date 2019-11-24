@@ -58,7 +58,7 @@
                 <div class="col-sm-4 col-md-4">
                     <table class="table table-borderless" style="width: 500px">
                         <tr>
-                            <td colspan="6" style="font-size: 30px">
+                            <td colspan="6" style="font-size: 30px; font-weight: bold;">
                                 your profile
                             </td>
                             <td colspan="2" style="padding-top:22px">
@@ -78,6 +78,14 @@
                             <td colspan="4">: ${user.fullname}</td>
                         </tr>
                     </table>
+                </div>
+                <div class="col-sm-4 col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-4 col-md-4">
+                    <a href="Enroll"><button class="btn btn-primary">Subscribe</button></a> &nbsp;
+                    <a><button class="btn btn-primary">Own Subject</button></a>
                 </div>
                 <div class="col-sm-4 col-md-4"></div>
             </div>
