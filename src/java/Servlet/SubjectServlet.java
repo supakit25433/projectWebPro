@@ -23,6 +23,7 @@ import jpa.QuizesJpaController;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
+import jpaClasses.Users;
 
 /**
  *
@@ -54,7 +55,10 @@ public class SubjectServlet extends HttpServlet {
         Subjects s = sc.findByID(id);
         List<Quizes> quizesList = sc.findAllQuizesInSubject(s);
         
-        request.setAttribute("subject", s.getSubjectname());
+        Users subid = (Users)s.getUsersUserid();
+        
+        request.setAttribute("subjectname", s.getSubjectname());
+        request.setAttribute("userid", subid.getUserid());
         request.setAttribute("quizzes", quizesList);
         getServletContext().getRequestDispatcher("/Subject.jsp").forward(request, response);
     }

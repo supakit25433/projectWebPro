@@ -18,7 +18,7 @@
 
         <link rel="stylesheet" href="./css/style.css">
 
-        <title>${subject}</title>
+        <title>${subjectname}</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
@@ -29,9 +29,18 @@
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
                 <h5>
-                    ${subject}
+                    ${subjectname}
                 </h5>
             </div>
+            <c:choose>
+                <c:when test="${userid == user.userid}">
+                    <a href="CreateQuiz">
+                        <button class="btn btn-primary">Add Quiz</button>
+                    </a>
+                </c:when>
+            </c:choose>
+            <br>
+            <br>
             <div class=" bg-light p-5 rounded">
                 <div class="row">
                     <c:forEach items="${quizzes}" var="q">
