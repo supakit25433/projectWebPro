@@ -40,6 +40,16 @@ public class QuizController {
         return qjc.findQuizes(id);
     }
 
+    public Quizes findByQuizName(String quizname){
+        List<Quizes> quizList = qjc.findQuizesEntities();
+        for (int i = 0; i < quizList.size() ; i++) {
+            if(quizList.get(i).getQuizname().equals(quizname)){
+                return quizList.get(i);
+            }
+        }
+        return null;
+    }
+    
     public List<Questions> findAllQuestionsInQuiz(Quizes q) {
         List<Questions> questionsList = qtjc.findQuestionsEntities();
         ArrayList<Questions> questionsSubList = new ArrayList<>();
