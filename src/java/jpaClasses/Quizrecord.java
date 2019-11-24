@@ -55,6 +55,12 @@ public class Quizrecord implements Serializable {
         this.quizrecordid = quizrecordid;
     }
 
+    public Quizrecord(Integer totalscore, Quizes quizesQuizid, Users usersUserid) {
+        this.totalscore = totalscore;
+        this.quizesQuizid = quizesQuizid;
+        this.usersUserid = usersUserid;
+    }
+    
     public Integer getQuizrecordid() {
         return quizrecordid;
     }
