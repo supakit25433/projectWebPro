@@ -48,7 +48,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/projectWebPro/Profile.jsp"><span class="btn btn-secondary" >Back</span></a>
+                                    <a href="Profile"><span class="btn btn-secondary" >Back</span></a>
                                     <input type="submit" class="btn btn-primary">
                                 </td>
                             </tr>

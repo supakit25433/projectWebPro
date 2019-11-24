@@ -67,15 +67,15 @@
                         </tr>
                         <tr>
                             <td colspan="2">USERNAME</td>
-                            <td colspan="4">: ${user.username}</td>
+                            <td colspan="4">: ${username}</td>
                         </tr>
                         <tr>
                             <td colspan="2">E-MAIL</td>
-                            <td colspan="4">: ${user.emailaddress}</td>
+                            <td colspan="4">: ${email}</td>
                         </tr>
                         <tr>
                             <td colspan="2">FULLNAME</td>
-                            <td colspan="4">: ${user.fullname}</td>
+                            <td colspan="4">: ${fullname}</td>
                         </tr>
                     </table>
                 </div>

@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import jpaClasses.Users;
 
 /**
  *
@@ -29,6 +31,11 @@ public class ProfileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        request.setAttribute("username", user.getUsername());
+        request.setAttribute("email", user.getEmailaddress());
+        request.setAttribute("fullname", user.getFullname());
         getServletContext().getRequestDispatcher("/Profile.jsp").forward(request, response);
     }
 
