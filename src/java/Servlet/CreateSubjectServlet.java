@@ -7,16 +7,32 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
+import jpa.SubjectsJpaController;
+import jpaClasses.Subjects;
+import jpaClasses.Users;
 
 /**
  *
  * @author nar-u
  */
 public class CreateSubjectServlet extends HttpServlet {
+
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,19 +44,26 @@ public class CreateSubjectServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CreateSubjectServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CreateSubjectServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            throws ServletException, IOException, Exception {
+        String subjectname = request.getParameter("subjectname");
+        String description = request.getParameter("description");
+
+        if (subjectname.trim().isEmpty() || description.trim().isEmpty()) {
+            request.setAttribute("message", "Please enter every box!!!");
+            getServletContext().getRequestDispatcher("/CreateSubject.jsp").forward(request, response);
+        } else {
+            HttpSession session = request.getSession(false);
+            Users user = (Users) session.getAttribute("user");
+            if (user == null) {
+                request.setAttribute("message", "Please log-in agian.");
+                getServletContext().getRequestDispatcher("/CreateSubject.jsp").forward(request, response);
+            } else {
+                Subjects subject = new Subjects(subjectname, description, user);
+                SubjectsJpaController sjc = new SubjectsJpaController(utx, emf);
+                sjc.create(subject);
+                request.setAttribute("message", "Subject create completed");
+                getServletContext().getRequestDispatcher("/CreateSubject.jsp").forward(request, response);
+            }
         }
     }
 
@@ -56,7 +79,11 @@ public class CreateSubjectServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CreateSubjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +97,11 @@ public class CreateSubjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(CreateSubjectServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -73,6 +73,12 @@ public class Subjects implements Serializable {
         this.subjectname = subjectname;
     }
 
+    public Subjects(String subjectname, String description, Users usersUserid) {
+        this.subjectname = subjectname;
+        this.description = description;
+        this.usersUserid = usersUserid;
+    }
+
     public Integer getSubjectid() {
         return subjectid;
     }

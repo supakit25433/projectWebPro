@@ -17,8 +17,11 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Create Subject"/>
-        <form>
-            
+        <form method="post" action="CreateSubject">
+            Subject Name : <input type="text" name="subjectname" required><br>
+            Description : <input type="text" name="description" required><br>
+            <input type="submit">
         </form>
+        ${message}
     </body>
 </html>
