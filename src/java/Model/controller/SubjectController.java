@@ -17,6 +17,7 @@ import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Subjects;
 import jpaClasses.Quizes;
+import jpaClasses.Users;
 
 /**
  *
@@ -51,6 +52,19 @@ public class SubjectController {
             }
         }
         return quizSubList;
+    }
+    
+    public List<Subjects> findAllSubjectByUserID(Users user){
+        List<Subjects> subjectList = sjc.findSubjectsEntities();
+        ArrayList<Subjects> subList = new ArrayList<>();
+        for (int i = 0; i < subjectList.size(); i++) {
+            if(subjectList.get(i).getUsersUserid() != null){
+                if(subjectList.get(i).getUsersUserid().toString().equals(user.toString())){
+                    subList.add(subjectList.get(i));
+                }
+            }
+        }
+        return subList;
     }
 
     public void editSubject(Subjects subject) {
