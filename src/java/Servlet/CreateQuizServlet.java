@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,13 +68,19 @@ public class CreateQuizServlet extends HttpServlet {
                     request.setAttribute("message", "Please log-in again!!");
                     getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
                 } else {
-                    QuizesJpaController qjc = new QuizesJpaController(utx, emf);
-                    int subjectid = Integer.valueOf(request.getParameter("subjectid"));
-                    Subjects subject = sc.findByID(subjectid);
-                    Quizes quiz = new Quizes(quizname, description, subject);
-                    qjc.create(quiz);
-                    request.setAttribute("message", "Add Quiz Completed.");
-                    getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
+                    QuizController qc = new QuizController(emf, utx);
+                    if (qc.findByQuizName(quizname) == null) {
+                        QuizesJpaController qjc = new QuizesJpaController(utx, emf);
+                        int subjectid = Integer.valueOf(request.getParameter("subjectid"));
+                        Subjects subject = sc.findByID(subjectid);
+                        Quizes quiz = new Quizes(quizname, description, subject);
+                        qjc.create(quiz);
+                        request.setAttribute("message", "Add Quiz Completed.");
+                        getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
+                    } else {
+                        request.setAttribute("message", "Quiz name is not avaliable");
+                        getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
+                    }
                 }
             }
         }
@@ -110,11 +117,6 @@ public class CreateQuizServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            SubjectController sc = new SubjectController(emf, utx);
-            HttpSession session = request.getSession(false);
-            Users user = (Users) session.getAttribute("user");
-            List<Subjects> subjects = sc.findAllSubjectByUserID(user);
-            request.setAttribute("subjects", subjects);
             processRequest(request, response);
         } catch (Exception ex) {
             Logger.getLogger(CreateQuizServlet.class.getName()).log(Level.SEVERE, null, ex);
