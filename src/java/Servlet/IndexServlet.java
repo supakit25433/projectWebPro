@@ -8,6 +8,7 @@ package Servlet;
 import Model.controller.QuestionController;
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
+import Model.controller.UserController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import jpa.QuestionsJpaController;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
+import jpaClasses.Users;
 
 /**
  *
@@ -49,8 +51,7 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+        /*
         QuizController qc = new QuizController(emf, utx);
         List<Quizes> quizesList = qc.findAllQuizes();
         
@@ -61,6 +62,26 @@ public class IndexServlet extends HttpServlet {
 
         request.setAttribute("quizzes", quizesListReverse);
         getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+         */
+        UserController uc = new UserController(emf, utx);
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
+        ArrayList<Quizes> quizesListReverse = new ArrayList<>();
+        for (int i = 0; i < userSubList.size(); i++) {
+            if (userSubList.get(i) == null) {
+                request.setAttribute("message", "You doesn't have any quiz from subscribed subject");
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            } else {
+                Subjects s = userSubList.get(i);
+                SubjectController sc = new SubjectController(emf, utx);
+                List<Quizes> quizesListFromSubject = sc.findAllQuizesInSubject(s);
+                for (int j = quizesListFromSubject.size(); j >= 0; j--) {
+                    quizesListReverse.add(quizesListFromSubject.get(j));
+                }
+            }
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
