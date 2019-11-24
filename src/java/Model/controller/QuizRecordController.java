@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import jpa.QuizesJpaController;
 import jpa.QuizrecordJpaController;
-import jpa.UsersJpaController;
+import jpaClasses.Quizes;
 import jpaClasses.Quizrecord;
 import jpaClasses.Users;
 
@@ -19,32 +20,32 @@ import jpaClasses.Users;
  * @author Gamer
  */
 public class QuizRecordController {
+
     private final QuizrecordJpaController qrjc;
-    
-    public QuizRecordController(EntityManagerFactory emf,UserTransaction utx) {
+    private final QuizesJpaController qjc;
+
+    public QuizRecordController(EntityManagerFactory emf, UserTransaction utx) {
         this.qrjc = new QuizrecordJpaController(utx, emf);
+        this.qjc = new QuizesJpaController(utx, emf);
     }
-    
-    public List<Quizrecord> findAllRecord(){
+
+    public List<Quizrecord> findAllRecord() {
         return qrjc.findQuizrecordEntities();
     }
-    
-    public Quizrecord findByID(int id){
+
+    public Quizrecord findByID(int id) {
         return qrjc.findQuizrecord(id);
     }
-    
-    public List<Quizrecord> findAllRecorddOfUser(Users user) {        
-        List<Quizrecord> recordList =  qrjc.findQuizrecordEntities();
+
+    public List<Quizrecord> findAllRecordOfUser(Users user) {
+        List<Quizrecord> recordList = qrjc.findQuizrecordEntities();
         ArrayList<Quizrecord> userRecordList = new ArrayList<>();
         for (int i = 0; i < recordList.size(); i++) {
             if (recordList.get(i).getUsersUserid().equals(user)) {
-               userRecordList.add(recordList.get(i));
-            }     
+                userRecordList.add(recordList.get(i));
+            }
         }
         return userRecordList;
     }
-            
-            
-    
-    
+
 }
