@@ -22,17 +22,17 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=History"/>
         <br>
         <div class="container">
-            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>History</h5></div>
             <c:forEach items="${quizzes}" var="q" varStatus="index">
                 <c:choose>
                     <c:when test="${index.index%2==0}">
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action">${q.quizesQuizid.quizname}<span class="badge badge-success float-right">${q.totalscore}</span></a>
+                            <a href="Quiz?quizid=${q.quizesQuizid.quizid}" class="list-group-item list-group-item-action">${q.quizesQuizid.quizname}<span class="badge badge-success float-right">${q.totalscore}</span></a>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">${q.quizesQuizid.quizname}<span class="badge badge-success float-right">${q.totalscore}</span></a>
+                            <a href="Quiz?quizid=${q.quizesQuizid.quizid}" class="list-group-item list-group-item-action list-group-item-secondary">${q.quizesQuizid.quizname}<span class="badge badge-success float-right">${q.totalscore}</span></a>
                         </div>
                     </c:otherwise>
                 </c:choose>
