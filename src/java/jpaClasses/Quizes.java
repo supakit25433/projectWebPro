@@ -74,6 +74,14 @@ public class Quizes implements Serializable {
         this.quizname = quizname;
     }
 
+    public Quizes(String quizname, String description, Subjects subjectsSubjectid) {
+        this.quizname = quizname;
+        this.description = description;
+        this.subjectsSubjectid = subjectsSubjectid;
+    }
+
+    
+
     public Integer getQuizid() {
         return quizid;
     }
