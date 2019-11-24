@@ -8,6 +8,8 @@ package Servlet;
 import Model.controller.UserController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import jpa.UsersJpaController;
+import jpa.exceptions.NonexistentEntityException;
+import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Users;
 
 /**
@@ -42,14 +46,24 @@ public class EditProfileServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NonexistentEntityException, RollbackFailureException, Exception {
         String email = request.getParameter("email");
         String fullname = request.getParameter("fullname");
         
-        System.out.println(email);
-        System.out.println(fullname);
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
         
-        getServletContext().getRequestDispatcher("/EditProfile.jsp").forward(request, response);
+        if(user.getEmailaddress().equals(email) || user.getFullname().equals(fullname)){
+            getServletContext().getRequestDispatcher("/EditProfile.jsp").forward(request, response);
+        } else {
+            UsersJpaController ujc = new UsersJpaController(utx, emf);
+            Users newuser = user;
+            newuser.setEmailaddress(email);
+            newuser.setFullname(fullname);
+            ujc.edit(newuser);
+            session.setAttribute("user", user);
+            getServletContext().getRequestDispatcher("/EditProfile.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +78,7 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        getServletContext().getRequestDispatcher("/EditProfile.jsp").forward(request, response);
     }
 
     /**
@@ -78,7 +92,13 @@ public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (RollbackFailureException ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(EditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
