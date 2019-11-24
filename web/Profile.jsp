@@ -18,7 +18,7 @@
         <style>
             #profile{
                 position:relative;
-                top:10em
+                top:15em
             }
         </style>
     </head>
@@ -54,7 +54,7 @@
                 </div>-->
         <div class="container-fluid" id="profile">
             <div class="row">
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-5 col-md-5"></div>
                 <div class="col-sm-4 col-md-4">
                     <table class="table table-borderless" style="width: 500px">
                         <tr>
@@ -79,15 +79,15 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-3 col-md-3"></div>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-5 col-md-5"></div>
                 <div class="col-sm-4 col-md-4">
                     <a href="Enroll"><button class="btn btn-primary">Subscribe</button></a> &nbsp;
                     <a><button class="btn btn-primary">Own Subject</button></a>
                 </div>
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-3 col-md-3"></div>
             </div>
         </div>
     </body>

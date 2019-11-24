@@ -17,7 +17,7 @@
         <style>
             #profile{
                 position:relative;
-                top:10em;
+                top:15em;
             }
         </style>
     </head>
@@ -25,13 +25,13 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Edit Profile"/>
         <div class="container-fluid" id="profile">
             <div class="row">
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-5 col-md-5"></div>
                 <div class="col-sm-4 col-md-4">
                     <form method="post" action="EditProfile">
                         <table class="table table-borderless" style="width: 500px">
                             <tr>
-                                <td colspan="6" style="font-size: 30px">
-                                    your profile
+                                <td colspan="6" style="font-size: 30px; font-weight: bold;">
+                                    Edit your profile
                                 </td>
                             </tr>
                             <tr>
@@ -48,13 +48,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="submit">
+                                    <a href="/projectWebPro/Profile.jsp"><span class="btn btn-secondary" >Back</span></a>
+                                    <input type="submit" class="btn btn-primary">
                                 </td>
                             </tr>
                         </table>
                     </form>
                 </div>
-                <div class="col-sm-4 col-md-4"></div>
+                <div class="col-sm-3 col-md-3"></div>
             </div>
         </div>
     </body>
