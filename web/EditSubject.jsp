@@ -26,7 +26,7 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Edit Subject"/>
         <div class="container" id="editsubject">
-            <form method="post" action="EqditSubject">
+            <form method="post" action="EditSubject">
                 <table class="table table-borderless" style="width:450px">
                     <tbody>
                         <tr>
@@ -66,11 +66,11 @@
                         <tr>
                             <td>
                                 <a href="ManageSubjects">
-                                    <button>Back</button>
+                                    <span class="btn btn-secondary">Back</span>
                                 </a>
                             </td>
                             <td>
-                                <input type="submit">
+                                <input class="btn btn-primary" type="submit">
                             </td>
                         </tr>
                         <tr>

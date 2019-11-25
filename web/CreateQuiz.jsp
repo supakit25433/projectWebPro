@@ -14,22 +14,72 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>JSP Page</title>
+        <title>Create Quiz</title>
+        <style>
+            #createquiz{
+                position : relative;
+                left:45em;
+                top:5em;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
-        <form method="post" action="CreateQuiz">
-            Quiz Name : <input type="text" name="quizname" required>
-            Description : <input type="text" name="description" required>
-            Subject ID : 
-            <select name="subjectid">
-                <c:forEach items="${subjects}" var="s">
-                    <option value="${s.subjectid}">${s.subjectname}</option>
-                </c:forEach>
-            </select>
-            <input type="submit">
-        </form>
-        <a href="Subjects"><button>Back to Subjects</button></a>
-        ${message}
+        <div class="contaier" id="createquiz">
+            <form method="post" action="CreateQuiz">
+                <table class="table table-borderless" style="width: 500px">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="font-size: 40px; font-weight: bold;">
+                                Add Quiz
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Quiz Name
+                            </td>
+                            <td>
+                                : <input type="text" name="quizname" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Description
+                            </td>
+                            <td>
+                                : <input type="text" name="description" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Subject ID
+                            </td>
+                            <td>
+                                : <select name="subjectid">
+                                    <c:forEach items="${subjects}" var="s">
+                                        <option value="${s.subjectid}">${s.subjectname}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="Subjects">
+                                    <span class="btn btn-secondary">Back to Subjects</span>
+                                </a>
+                            </td>
+                            <td>
+                                <input class="btn btn-primary" type="submit">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                ${message}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </body>
 </html>
