@@ -1,6 +1,6 @@
 <%-- 
-    Document   : CreateQuiz
-    Created on : Nov 24, 2019, 11:47:55 PM
+    Document   : EditSubject
+    Created on : Nov 25, 2019, 7:34:06 PM
     Author     : nar-u
 --%>
 
@@ -14,37 +14,50 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>Create Quiz</title>
+        <title>Edit Subject</title>
         <style>
-            #createquiz{
+            #editsubject{
                 position : relative;
-                left:45em;
-                top:5em;
+                left: 20em;
+                top:13em;
             }
         </style>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
-        <div class="contaier" id="createquiz">
-            <form method="post" action="CreateQuiz">
-                <table class="table table-borderless" style="width: 500px">
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Edit Subject"/>
+        <div class="container" id="editsubject">
+            <form method="post" action="EditSubject">
+                <table class="table table-borderless" style="width:450px">
                     <tbody>
                         <tr>
-                            <td colspan="2" style="font-size: 40px; font-weight: bold;">
-                                Add Quiz
+                            <td class="text-center" colspan="2" style="font-size: 40px; font-weight: bold;">
+                                EDIT SUBJECT
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Quiz Name
+                                SUBJECTS
                             </td>
                             <td>
-                                : <input type="text" name="quizname" autocomplete="off">
+                                : 
+                                <select name="subjectid">
+                                    <c:forEach items="${subjects}" var="s">
+                                        <option value="${s.subjectid}">${s.subjectname}</option>    
+                                    </c:forEach>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Description
+                                SUBJECT NAME
+                            </td>
+                            <td>
+                                : <input type="text" name="subjectname" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DESCRIPTION
                             </td>
                             <td>
                                 : <input type="text" name="description" autocomplete="off">
@@ -52,20 +65,8 @@
                         </tr>
                         <tr>
                             <td>
-                                Subject ID
-                            </td>
-                            <td>
-                                : <select name="subjectid">
-                                    <c:forEach items="${subjects}" var="s">
-                                        <option value="${s.subjectid}">${s.subjectname}</option>
-                                    </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="Subjects">
-                                    <span class="btn btn-secondary">Back to Subjects</span>
+                                <a href="ManageSubjects">
+                                    <span class="btn btn-secondary">Back</span>
                                 </a>
                             </td>
                             <td>

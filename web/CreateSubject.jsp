@@ -13,15 +13,59 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>JSP Page</title>
+        <title>Create Subject</title>
+        <style>
+            #createsubject{
+                position: relative;
+                left:20em;
+                top:13em;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Create Subject"/>
-        <form method="post" action="CreateSubject">
-            Subject Name : <input type="text" name="subjectname" required><br>
-            Description : <input type="text" name="description" required><br>
-            <input type="submit">
-        </form>
-        ${message}
+        <div class="container" id="createsubject">
+            <form method="post" action="CreateSubject">
+                <table class="table table-borderless" style="width: 500px;">
+                    <tbody>
+                        <tr>
+                            <td class="text-center" colspan="2" style="font-size:40px; font-weight: bold;">
+                                Create Subject
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Subject Name
+                            </td>
+                            <td>
+                                : <input type="text" name="subjectname" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Description
+                            </td>
+                            <td>
+                                : <input type="text" name="description" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="Index">
+                                    <span class="btn btn-secondary">Back to index</span>
+                                </a>
+                            </td>
+                            <td>
+                                <input class="btn btn-primary" type="submit">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                ${message}
+                            </td>
+                        </tr>
+                </table>           
+            </form>
+        </div>
     </body>
 </html>
