@@ -40,7 +40,7 @@
                             <h5 class="text-uppercase">${subject.usersUserid.fullname}</h5>
                             <p>${subject.description}</p>
                             <c:choose>
-                                <c:when test="${user.userid} == ">
+                                <c:when test="${user.userid == null}">
                                     <a href="#">
                                         <button class="btn btn-primary">Subscribe</button>
                                     </a>

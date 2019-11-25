@@ -7,6 +7,7 @@ package Servlet;
 
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
+import Model.controller.UserController;
 import Model.controller.UsersSubscriptionController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import jpa.QuizesJpaController;
 import jpaClasses.Questions;
@@ -65,6 +67,16 @@ public class SubjectServlet extends HttpServlet {
         }
         
         int subscriber = sc.countSubjectSubscriber(s);
+        
+        /*HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
+        List<UsersSubscription> us = usc.findAllUsersSubscriptions();
+        for (int i = 0; i < us.size(); i++) {
+            if (us.get(i).getUsersUserid().getUserid()) {
+                
+            }
+        }*/
         
         request.setAttribute("subscriber", subscriber);
         request.setAttribute("subject", s);
