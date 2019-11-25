@@ -51,6 +51,11 @@ public class UsersSubscription implements Serializable {
         this.subscriptionid = subscriptionid;
     }
 
+    public UsersSubscription(Subjects subjectsSubjectid, Users usersUserid) {
+        this.subjectsSubjectid = subjectsSubjectid;
+        this.usersUserid = usersUserid;
+    }
+
     public Integer getSubscriptionid() {
         return subscriptionid;
     }
