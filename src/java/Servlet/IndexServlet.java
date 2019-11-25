@@ -51,18 +51,30 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        QuizController qc = new QuizController(emf, utx);
-        List<Quizes> quizesList = qc.findAllQuizes();
-        
-        ArrayList<Quizes> quizesListReverse = new ArrayList<>();
-        for (int i = quizesList.size()-1; i >= 0; i--) {
-            quizesListReverse.add(qc.findByID(i+1));
+
+        UserController uc = new UserController(emf, utx);
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            request.setAttribute("message", "user not found");
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        } else {
+            ArrayList<Quizes> quizesListReverse = new ArrayList<>();
+            
+            List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
+            for (int i = userSubList.size() - 1; i >= 0 ; i--) {
+                SubjectController sc = new SubjectController(emf, utx);
+                Subjects s = sc.findByID(userSubList.get(i).getSubjectid());
+                List<Quizes> quizesList = sc.findAllQuizesInSubject(s);
+
+                for (int j = quizesList.size() - 1; j >= 0; j--) {
+                    quizesListReverse.add(quizesList.get(j));
+                }
+            }
+            request.setAttribute("quizzes", quizesListReverse);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
-        request.setAttribute("quizzes", quizesListReverse);
-        getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-         
 //        UserController uc = new UserController(emf, utx);
 //        HttpSession session = request.getSession(false);
 //        Users user = (Users) session.getAttribute("user");
