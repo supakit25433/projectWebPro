@@ -7,6 +7,7 @@ package Servlet;
 
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
+import Model.controller.UsersSubscriptionController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 import jpaClasses.Users;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -62,6 +64,9 @@ public class SubjectServlet extends HttpServlet {
             quizzesListReverse.add(quizzesList.get(i));
         }
         
+        int subscriber = sc.countSubjectSubscriber(s);
+        
+        request.setAttribute("subscriber", subscriber);
         request.setAttribute("subject", s);
         request.setAttribute("userid", subid.getUserid());
         request.setAttribute("quizzes", quizzesListReverse);

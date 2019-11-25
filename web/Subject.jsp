@@ -39,9 +39,19 @@
                             <h1 class="text-uppercase font-weight-bold">${subject.subjectname}</h1>
                             <h5 class="text-uppercase">${subject.usersUserid.fullname}</h5>
                             <p>${subject.description}</p>
-                            <a href="#">
-                                <button class="btn btn-primary">Subscribe</button>
-                            </a>
+                            <c:choose>
+                                <c:when test="${user.userid} == ">
+                                    <a href="#">
+                                        <button class="btn btn-primary">Subscribe</button>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="#">
+                                        <button class="btn btn-light">Subscribed</button>
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                     </div>
                 </div>
@@ -61,7 +71,7 @@
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <div class="bg-light p-2 pb-3 pt-4 rounded text-center">
-                            <h3>12k+</h3>
+                            <h3>${subscriber}</h3>
                             <p class="font-weight-light">Subscribers</p>
                         </div>
                     </div>
