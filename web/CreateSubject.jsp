@@ -22,6 +22,9 @@
             Description : <input type="text" name="description" required><br>
             <input type="submit">
         </form>
+        <a href="Index">
+            <button>Back to index</button>
+        </a>
         ${message}
     </body>
 </html>
