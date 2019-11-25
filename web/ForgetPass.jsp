@@ -91,7 +91,7 @@
             }
         </style>
 
-        <title>JSP Page</title>
+        <title>Forget Password</title>
     </head>
     <body>
         <div class="container-fluid" id="forget">
