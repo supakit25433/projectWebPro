@@ -53,13 +53,18 @@ public class SubjectServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         SubjectController sc = new SubjectController(emf, utx);
         Subjects s = sc.findByID(id);
-        List<Quizes> quizesList = sc.findAllQuizesInSubject(s);
+        List<Quizes> quizzesList = sc.findAllQuizesInSubject(s);
         
         Users subid = (Users)s.getUsersUserid();
         
-        request.setAttribute("subjectname", s.getSubjectname());
+        ArrayList<Quizes> quizzesListReverse = new ArrayList<>();
+        for (int i = quizzesList.size() - 1; i >= 0 ; i--) {
+            quizzesListReverse.add(quizzesList.get(i));
+        }
+        
+        request.setAttribute("subject", s);
         request.setAttribute("userid", subid.getUserid());
-        request.setAttribute("quizzes", quizesList);
+        request.setAttribute("quizzes", quizzesListReverse);
         getServletContext().getRequestDispatcher("/Subject.jsp").forward(request, response);
     }
 

@@ -24,6 +24,7 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Home Page"/>
         <br />
 
+        <!--================ Start Slide Show Area =================-->
         <div class="container">
             <div id="demo" class="carousel slide" data-ride="carousel">
 
@@ -56,6 +57,7 @@
                 </a>
             </div>
         </div>
+        <!--================ End Slide Show Area =================-->
 
         <br>
 

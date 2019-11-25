@@ -24,14 +24,60 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
         <br>
 
-        <br>
+        <!--================ Start About Us Area =================-->
+        <section class="about_area section_gap">
+            <div class="container">
+                <div class="row justify-content-start align-items-center">
+                    <div class="col-lg-5">
+                        <div class="about_img">
+                            <img class="img-fluid" src="./images/picture.jpg" alt="pic">
+                        </div>
+                    </div>
 
-        <div class="container">
-            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
-                <h5>
-                    ${subjectname}
-                </h5>
+                    <div class="offset-lg-1 col-lg-5">
+                        <div class="main_title text-left">
+                            <h1 class="text-uppercase font-weight-bold">${subject.subjectname}</h1>
+                            <h5 class="text-uppercase">${subject.usersUserid.fullname}</h5>
+                            <p>${subject.description}</p>
+                            <a href="#">
+                                <button class="btn btn-primary">Subscribe</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+        <!--================ End About Us Area =================-->
+        <br>
+        <!--================ Start Statistics Area =================-->
+        <section class="statistics_area">
+            <div class="container">
+                <div class="row justify-content-lg-start justify-content-center">
+                    <div class="col-lg-2 col-md-3">
+                        <div class="bg-light p-2 pb-3 pt-4 rounded text-center">
+                            <h3>${subject.quizesList.size()}</h3>
+                            <p class="font-weight-light">Quizzes</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                        <div class="bg-light p-2 pb-3 pt-4 rounded text-center">
+                            <h3>12k+</h3>
+                            <p class="font-weight-light">Subscribers</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                        <div class="bg-light p-2 pb-3 pt-4 rounded text-center">
+                            <h3>9/10</h3>
+                            <p class="font-weight-light">Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================ End Statistics Area =================-->
+        <br>
+        <div class="container">
+            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Lasted Quiz!</h5></div>
             <c:choose>
                 <c:when test="${userid == user.userid}">
                     <a href="CreateQuiz">
@@ -40,8 +86,7 @@
                 </c:when>
             </c:choose>
             <br>
-            <br>
-            <div class=" bg-light p-5 rounded">
+            <div class="bg-light p-5 rounded">
                 <div class="row">
                     <c:forEach items="${quizzes}" var="q">
                         <div class="col-3 mb-4">

@@ -8,6 +8,7 @@ package Servlet;
 import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
@@ -44,7 +45,11 @@ public class SubjectsServlet extends HttpServlet {
             throws ServletException, IOException {
         SubjectController sc = new SubjectController(emf, utx);
         List<Subjects> subjectsList = sc.findAllSubjects();
-        request.setAttribute("subjects", subjectsList);
+        ArrayList<Subjects> subjectsListReverse = new ArrayList<>();
+        for (int i = subjectsList.size() - 1; i >= 0 ; i--) {
+            subjectsListReverse.add(subjectsList.get(i));
+        }
+        request.setAttribute("subjects", subjectsListReverse);
         getServletContext().getRequestDispatcher("/Subjects.jsp").forward(request, response);
     }
 
