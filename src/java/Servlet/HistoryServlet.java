@@ -50,6 +50,10 @@ public class HistoryServlet extends HttpServlet {
         QuizRecordController qrc = new QuizRecordController(emf, utx);
         List<Quizrecord> recordList = qrc.findAllRecordOfUser(user);
         request.setAttribute("quizzes", recordList);
+        
+        if (recordList.isEmpty()) {
+                request.setAttribute("message", "You doesn't have any history record");
+            }
         getServletContext().getRequestDispatcher("/History.jsp").forward(request, response);
     }
 

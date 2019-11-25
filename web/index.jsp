@@ -17,7 +17,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="./css/style.css">
-        
+
         <title>Welcome ${user.username} to Quiz Ant</title>
     </head>
     <body>
@@ -65,7 +65,9 @@
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
             <div class=" bg-light p-5 rounded">
                 <div class="row">
-                    ${message}
+                    <div class="col-sm-12 my-auto">
+                        <span style="font-size: 30px;"><p class="text-center">${message}</p></span>
+                    </div>
                     <c:forEach items="${quizzes}" var="q">
                         <div class="col-3 mb-4">
                             <div class="card-deck">

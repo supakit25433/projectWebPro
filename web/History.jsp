@@ -23,6 +23,9 @@
         <br>
         <div class="container">
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>History</h5></div>
+            <div class="col-sm-12 my-auto">
+                <span style="font-size: 30px;"><p class="text-center">${message}</p></span>
+            </div>
             <c:forEach items="${quizzes}" var="q" varStatus="index">
                 <c:choose>
                     <c:when test="${index.index%2==0}">

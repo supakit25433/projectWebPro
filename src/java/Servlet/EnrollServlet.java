@@ -77,6 +77,10 @@ public class EnrollServlet extends HttpServlet {
         } else {
             List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
             request.setAttribute("enrolled", userSubList);
+            
+            if (userSubList.isEmpty()) {
+                request.setAttribute("message", "You doesn't have any subscribed subject");
+            }
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
         }
         
