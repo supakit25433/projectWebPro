@@ -14,7 +14,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <title>Profile</title>
+        <title>${user.username}'s Profile</title>
         <style>
             #profile{
                 position:relative;
@@ -59,7 +59,7 @@
                     <table class="table table-borderless" style="width: 500px">
                         <tr>
                             <td colspan="6" style="font-size: 30px; font-weight: bold;">
-                                your profile
+                                Your profile
                             </td>
                             <td colspan="2" style="padding-top:22px">
                                 <a href="/projectWebPro/EditProfile.jsp">edit profile</a>
