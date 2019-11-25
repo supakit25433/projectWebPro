@@ -26,7 +26,7 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Edit Subject"/>
         <div class="container" id="editsubject">
-            <form>
+            <form method="post" action="EqditSubject">
                 <table class="table table-borderless" style="width:450px">
                     <tbody>
                         <tr>
@@ -52,7 +52,7 @@
                                 SUBJECT NAME
                             </td>
                             <td>
-                                : <input type="text" name="subjectname" required autocomplete="off">
+                                : <input type="text" name="subjectname" autocomplete="off">
                             </td>
                         </tr>
                         <tr>
@@ -60,7 +60,7 @@
                                 DESCRIPTION
                             </td>
                             <td>
-                                : <input type="text" name="description" required autocomplete="off">
+                                : <input type="text" name="description" autocomplete="off">
                             </td>
                         </tr>
                         <tr>
