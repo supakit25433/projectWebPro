@@ -43,4 +43,9 @@ public class UsersSubscriptionController {
         return null;
     }
     
+    public List<UsersSubscription> findAllUsersSubscribetions() {
+        return usjc.findUsersSubscriptionEntities();
+    }
+    
+    
 }
