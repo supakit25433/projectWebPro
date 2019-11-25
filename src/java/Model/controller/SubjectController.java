@@ -13,11 +13,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
 import jpa.QuizesJpaController;
 import jpa.SubjectsJpaController;
+import jpa.UsersSubscriptionJpaController;
 import jpa.exceptions.NonexistentEntityException;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Subjects;
 import jpaClasses.Quizes;
 import jpaClasses.Users;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -27,10 +29,12 @@ public class SubjectController {
 
     private final SubjectsJpaController sjc;
     private final QuizesJpaController qjc;
+    private final UsersSubscriptionJpaController usjc;
 
     public SubjectController(EntityManagerFactory emf, UserTransaction utx) {
         this.sjc = new SubjectsJpaController(utx, emf);
         this.qjc = new QuizesJpaController(utx, emf);
+        this.usjc = new UsersSubscriptionJpaController(utx, emf);
     }
 
     public List<Subjects> findAllSubjects() {
@@ -46,7 +50,7 @@ public class SubjectController {
         ArrayList<Quizes> quizSubList = new ArrayList<>();
         for (int i = 0; i < quizList.size(); i++) {
             if (quizList.get(i).getSubjectsSubjectid() != null) {
-                if (quizList.get(i).getSubjectsSubjectid().toString().equals(s.toString())) {
+                if (quizList.get(i).getSubjectsSubjectid().equals(s)) {
                     quizSubList.add(quizList.get(i));
                 }
             }
@@ -78,5 +82,17 @@ public class SubjectController {
             Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public int countSubjectSubscriber(Subjects subject){      
+        List<UsersSubscription> allSubList = usjc.findUsersSubscriptionEntities();
+        int count = 0;
+        for (int i = 0; i < allSubList.size(); i++) {
+            if (allSubList.get(i).getSubjectsSubjectid().equals(subject)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
     
 }
