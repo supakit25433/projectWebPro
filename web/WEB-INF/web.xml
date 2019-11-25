@@ -98,6 +98,10 @@
         <servlet-name>EditSubjectServlet</servlet-name>
         <servlet-class>Servlet.EditSubjectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SubscribeServlet</servlet-name>
+        <servlet-class>Servlet.SubscribeServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -161,6 +165,10 @@
     <servlet-mapping>
         <servlet-name>EditSubjectServlet</servlet-name>
         <url-pattern>/EditSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubscribeServlet</servlet-name>
+        <url-pattern>/Subscribe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
