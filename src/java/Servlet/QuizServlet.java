@@ -8,6 +8,7 @@ package Servlet;
 import Model.controller.ChoiceController;
 import Model.controller.QuestionController;
 import Model.controller.QuizController;
+import Model.controller.QuizRecordController;
 import Model.controller.SubjectController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -123,14 +124,30 @@ public class QuizServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         Users user = (Users) session.getAttribute("user");
-        Quizrecord qr = new Quizrecord(count, q, user);
-        QuizrecordJpaController qjc = new QuizrecordJpaController(utx, emf);
-        try {
-            qjc.create(qr);
-        } catch (RollbackFailureException ex) {
-            Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
+        QuizRecordController qrc = new QuizRecordController(emf, utx);
+        Quizrecord old = qrc.findByUserID(user,q);
+        if (old == null) {
+            Quizrecord qr = new Quizrecord(count, q, user);
+            QuizrecordJpaController qjc = new QuizrecordJpaController(utx, emf);
+            try {
+                qjc.create(qr);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            old.setQuizesQuizid(q);
+            old.setTotalscore(count);
+            old.setUsersUserid(user);
+            QuizrecordJpaController qjc = new QuizrecordJpaController(utx, emf);
+            try {
+                qjc.edit(old);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(QuizServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         request.setAttribute("test", count);
         request.setAttribute("text", answers);
