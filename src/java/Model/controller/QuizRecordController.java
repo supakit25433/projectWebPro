@@ -48,4 +48,19 @@ public class QuizRecordController {
         return userRecordList;
     }
 
+    public Quizrecord findByUserID(Users user, Quizes quiz) {
+        List<Quizrecord> recordList = qrjc.findQuizrecordEntities();
+        Quizrecord record = new Quizrecord();
+        for (int i = 0; i < recordList.size(); i++) {
+            if (recordList.get(i).getUsersUserid() != null) {
+                if (recordList.get(i).getUsersUserid().toString().equals(user.toString())) {
+                    if (recordList.get(i).getQuizesQuizid().toString().equals(quiz.toString())) {
+                        record = recordList.get(i);
+                        return record;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
