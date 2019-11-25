@@ -24,7 +24,7 @@
                 </li>
             </ul>
         </div>
-        <div class="container-fluid" style="width:400px;">
+        <div class="container-fluid" style="width:450px;">
             <span style="font-weight: bold;">Current page</span>: ${param.page}
             <!--<span style="font-weight: bold;">Name</span> : ${user.fullname} &nbsp; &nbsp;-->
             <!--<a href="Logout" style="color:red; font-weight: bold; font-size: 20px; text-shadow:2px 2px red"><button>Logout</button></a>-->

@@ -4,6 +4,7 @@
     Author     : nar-u
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,8 +26,39 @@
             </a>
         </div>
         <div>
-            <table>
-                
+            <table class="table">
+                <tr>
+                    <th>
+                        SUBJECT_ID
+                    </th>
+                    <th>
+                        SUBJECT_NAME
+                    </th>
+                    <th>
+                        DESCRIPTION
+                    </th>
+                    <th>
+                        Edit Subject
+                    </th>
+                </tr>
+                <c:forEach items="${subjects}" var="s">
+                    <tr>
+                        <td>
+                            ${s.subjectid}
+                        </td>
+                        <td>
+                            ${s.subjectname}
+                        </td>
+                        <td>
+                            ${s.description}
+                        </td>
+                        <td>
+                            <a href="EditSubject">
+                                <button>Edit Subjects</button>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </body>
