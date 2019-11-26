@@ -98,10 +98,10 @@
                     <a href="CreateQuiz">
                         <button class="btn btn-primary">Add Quiz</button>
                     </a>
-                    <a href="CreateQuestion">
+                    <a href="CreateQuestion?subjectid=${subject.subjectid}">
                         <button class="btn btn-primary">Add Question</button>
                     </a>
-                    <a href="CreateChoice">
+                    <a href="CreateChoice?subjectid=${subject.subjectid}">
                         <button class="btn btn-primary">Add Choice</button>
                     </a><br>
                 </c:when>
