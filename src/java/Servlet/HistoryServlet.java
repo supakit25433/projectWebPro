@@ -52,7 +52,7 @@ public class HistoryServlet extends HttpServlet {
         request.setAttribute("quizzes", recordList);
         
         if (recordList.isEmpty()) {
-                request.setAttribute("message", "You doesn't have any history record");
+                request.setAttribute("message", "You doesn't have any history record yet.");
             }
         getServletContext().getRequestDispatcher("/History.jsp").forward(request, response);
     }

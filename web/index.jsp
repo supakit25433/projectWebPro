@@ -62,7 +62,13 @@
         <br>
 
         <div class="container">
-            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>New Quiz!</h5></div>
+            <!--<div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
+                <h5>-->
+                    <span style="font-size:40px; font-weight: bold;">New Quiz!</span>
+                    <br>
+                    <br>
+                <!--</h5>
+            </div>-->
             <div class=" bg-light p-5 rounded">
                 <div class="row">
                     <div class="col-sm-12 my-auto">

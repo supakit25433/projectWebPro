@@ -24,7 +24,13 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subscribe"/>
         <br>
         <div class="container">
-            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Subscribed</h5></div>
+            <!--<div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
+                <h5>-->
+                    <span style="font-size:40px; font-weight: bold;">Subscribed</span>
+                    <br>
+                    <br>
+                <!--</h5>
+            </div>-->
             <div class=" bg-light p-5 rounded">
                 <div class="row">
                     <div class="col-sm-12 my-auto">

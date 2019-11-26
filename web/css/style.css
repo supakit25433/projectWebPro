@@ -122,5 +122,8 @@ a:active {
 
 .sameLine h5, .sameLine p {
     display: inline;
+}
 
+tr:nth-child(even) {
+    background-color: ghostwhite;
 }

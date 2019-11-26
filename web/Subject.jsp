@@ -87,7 +87,12 @@
         <!--================ End Statistics Area =================-->
         <br>
         <div class="container">
-            <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Lasted Quiz!</h5></div>
+            <!--<div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
+                <h5>-->
+                    <span style="font-size:40px; font-weight: bold;">Lasted Quiz!</span>
+                    <br>
+                <!--</h5>>
+            </div>-->
             <c:choose>
                 <c:when test="${userid == user.userid}">
                     <a href="CreateQuiz">

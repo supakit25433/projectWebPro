@@ -14,9 +14,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="./css/style.css">
-        
+
         <title>Manage Subject</title>
         <style>
             #managesubject{
@@ -29,9 +29,11 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Manage Subject"/>
         <br>
         <div class="container" id="managesubject">
-            <span style="font-size:40px; font-weight: bold;">Manage Subject</span><br><br>
+            <span style="font-size:40px; font-weight: bold;">Manage Subject</span>
+            <br>
+            <br>
             <a href="CreateSubject.jsp">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary a-btn-slide-text">
                     Create Subject
                 </button>
             </a>
@@ -39,18 +41,18 @@
             <br>
             <table class="table table-hover">
                 <thead>
-                    <tr>
+                    <tr style="background-color: whitesmoke;">
                         <th>
-                            SUBJECT_ID
+                            SUBJECT ID
                         </th>
                         <th>
-                            SUBJECT_NAME
+                            SUBJECT NAME
                         </th>
                         <th>
                             DESCRIPTION
                         </th>
                         <th>
-                            Edit Subject
+                            EDIT SUBJECT
                         </th>
                     </tr>
                 </thead>
@@ -68,7 +70,7 @@
                             </td>
                             <td>
                                 <a href="EditSubject">
-                                    <button>Edit Subjects</button>
+                                    <button>EDIT SUBJECT</button>
                                 </a>
                             </td>
                         </tr>

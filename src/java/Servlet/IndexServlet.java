@@ -74,7 +74,7 @@ public class IndexServlet extends HttpServlet {
             request.setAttribute("quizzes", quizesListReverse);
             
             if (quizesListReverse.isEmpty()) {
-                request.setAttribute("message", "You doesn't have any quiz from subscribed subject");
+                request.setAttribute("message", "You doesn't have any quiz from subscribed subject.");
             }
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
