@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.transaction.UserTransaction;
 import jpa.QuizesJpaController;
 import jpa.SubjectsJpaController;
@@ -26,6 +28,12 @@ import jpaClasses.UsersSubscription;
  * @author Gamer
  */
 public class SubjectController {
+
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
+    EntityManagerFactory emf;
+
+    @Resource
+    UserTransaction utx;
 
     private final SubjectsJpaController sjc;
     private final QuizesJpaController qjc;
@@ -57,13 +65,13 @@ public class SubjectController {
         }
         return quizSubList;
     }
-    
-    public List<Subjects> findAllSubjectByUserID(Users user){
+
+    public List<Subjects> findAllSubjectByUserID(Users user) {
         List<Subjects> subjectList = sjc.findSubjectsEntities();
         ArrayList<Subjects> subList = new ArrayList<>();
         for (int i = 0; i < subjectList.size(); i++) {
-            if(subjectList.get(i).getUsersUserid() != null){
-                if(subjectList.get(i).getUsersUserid().toString().equals(user.toString())){
+            if (subjectList.get(i).getUsersUserid() != null) {
+                if (subjectList.get(i).getUsersUserid().toString().equals(user.toString())) {
                     subList.add(subjectList.get(i));
                 }
             }
@@ -82,8 +90,8 @@ public class SubjectController {
             Logger.getLogger(SubjectController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public int countSubjectSubscriber(Subjects subject){      
+
+    public int countSubjectSubscriber(Subjects subject) {
         List<UsersSubscription> allSubList = usjc.findUsersSubscriptionEntities();
         int count = 0;
         for (int i = 0; i < allSubList.size(); i++) {
@@ -93,6 +101,15 @@ public class SubjectController {
         }
         return count;
     }
-    
-    
+
+    public int getTotalScore(Subjects subject) {
+        List<Quizes> quizzesList = this.findAllQuizesInSubject(subject);
+        int total = 0;
+        for (int i = 0; i < quizzesList.size(); i++) {
+            QuizController qc = new QuizController(emf, utx);
+            int score = qc.getTotalScore(quizzesList.get(i));
+            total = total + score;
+        }
+        return total;
+    }
 }

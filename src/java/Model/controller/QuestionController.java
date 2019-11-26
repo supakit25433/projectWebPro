@@ -23,22 +23,23 @@ import jpaClasses.Quizes;
  * @author surface
  */
 public class QuestionController {
+
     private final QuestionsJpaController qtjc;
     private final ChoicesJpaController cjc;
 
-    public QuestionController(EntityManagerFactory emf,UserTransaction utx) {
+    public QuestionController(EntityManagerFactory emf, UserTransaction utx) {
         this.qtjc = new QuestionsJpaController(utx, emf);
         this.cjc = new ChoicesJpaController(utx, emf);
     }
-    
-    public List<Questions> findAllQuestions(){
+
+    public List<Questions> findAllQuestions() {
         return qtjc.findQuestionsEntities();
     }
-    
-    public Questions findByID(int id){
+
+    public Questions findByID(int id) {
         return qtjc.findQuestions(id);
     }
-    
+
     public List<Choices> findAllChoicesInQuestion(Questions qt) {
         List<Choices> choicesList = cjc.findChoicesEntities();
         ArrayList<Choices> choicesSubList = new ArrayList<>();
@@ -51,15 +52,26 @@ public class QuestionController {
         }
         return choicesSubList;
     }
-    public void addQuestion(Questions question){
+
+    public int findMostScoreChoiceInEachQuestion(Questions qt) {
+        List<Choices> choicesList = this.findAllChoicesInQuestion(qt);
+        int max = 0;
+        for (int i = 0; i < choicesList.size(); i++) {
+            if (choicesList.get(i).getPoint() > max) {
+                max = choicesList.get(i).getPoint();
+            }
+        }
+        return max;
+    }
+
+    public void addQuestion(Questions question) {
         try {
             qtjc.create(question);
         } catch (RollbackFailureException ex) {
             Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(QuestionController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
-    
+
 }

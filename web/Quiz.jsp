@@ -30,7 +30,7 @@
                     <div class="container-fluid">
                         <div class=" bg-light p-5 mb-4 rounded">
                             <div class="mb-4">
-                                <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5>
+                                <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question} ${score.get(questionIndex.index)} Points</h5>
                             </div>
                             <c:if test="${qu.typename=='multiple choices'}">
                                 <c:forEach items="${choices.get(questionIndex.index)}" var="c">

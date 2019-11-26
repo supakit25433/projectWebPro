@@ -73,6 +73,14 @@ public class QuizServlet extends HttpServlet {
             allChoices.add(choicesList);
         }
 
+        ArrayList<String> allScore = new ArrayList<>();
+        for (int i = 0; i < questionsList.size(); i++) {
+            QuestionController qtc = new QuestionController(emf, utx);
+            int score = qtc.findMostScoreChoiceInEachQuestion(questionsList.get(i));
+            allScore.add(String.valueOf(score));
+        }
+
+        request.setAttribute("score", allScore);
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
         request.setAttribute("choices", allChoices);
@@ -125,7 +133,7 @@ public class QuizServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Users user = (Users) session.getAttribute("user");
         QuizRecordController qrc = new QuizRecordController(emf, utx);
-        Quizrecord old = qrc.findByUserID(user,q);
+        Quizrecord old = qrc.findByUserID(user, q);
         if (old == null) {
             Quizrecord qr = new Quizrecord(count, q, user);
             QuizrecordJpaController qjc = new QuizrecordJpaController(utx, emf);
