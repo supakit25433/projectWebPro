@@ -14,11 +14,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            #createchoice{
+                position:relative;
+                top:13em;
+                left:15em;
+            }
+        </style>
         <title>Create Choice</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Choice"/>
-        <div>
+        <div class="container" id="createchoice">
             <form method="post" action="">
                 <table class="table table-borderless">
                     <tbody>
@@ -32,7 +39,7 @@
                                 Choice
                             </td>
                             <td>
-                                : <input type="text" name="choicename" autocomplete="off">
+                                : <input type="text" name="choicename" autocomplete="off" required style="width:30em;">
                             </td>
                         </tr>
                         <tr>
