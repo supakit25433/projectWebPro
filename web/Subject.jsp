@@ -93,6 +93,12 @@
                     <a href="CreateQuiz">
                         <button class="btn btn-primary">Add Quiz</button>
                     </a>
+                    <a href="CreateQuestion">
+                        <button class="btn btn-primary">Add Question</button>
+                    </a>
+                    <a href="CreateChoice">
+                        <button class="btn btn-primary">Add Choice</button>
+                    </a><br>
                 </c:when>
             </c:choose>
             <br>
