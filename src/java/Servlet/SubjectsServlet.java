@@ -35,7 +35,7 @@ public class SubjectsServlet extends HttpServlet {
 
     @Resource
     UserTransaction utx;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,13 +54,16 @@ public class SubjectsServlet extends HttpServlet {
         List<Subjects> subjectsList = sc.findAllSubjects();
         ArrayList<Subjects> subjectsListReverse = new ArrayList<>();
         ArrayList<UsersSubscription> sub = new ArrayList<>();
-        for (int i = subjectsList.size() - 1; i >= 0 ; i--) {
+        for (int i = subjectsList.size() - 1; i >= 0; i--) {
             subjectsListReverse.add(subjectsList.get(i));
-            if(usc.findBySubjectIDandUser(subjectsList.get(i), user) == null){
+            if (usc.findBySubjectIDandUser(subjectsList.get(i), user) == null) {
                 sub.add(usc.findBySubjectIDandUser(subjectsList.get(i), user));
             } else {
                 sub.add(usc.findBySubjectIDandUser(subjectsList.get(i), user));
             }
+        }
+        if (subjectsListReverse.isEmpty()) {
+            request.setAttribute("message", "There're no subjects.");
         }
         request.setAttribute("subjects", subjectsListReverse);
         request.setAttribute("sub", sub);
