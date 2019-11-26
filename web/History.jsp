@@ -74,7 +74,7 @@
                             </td>
                             <td>
                                 <a href="Quiz?quizid=${q.quizesQuizid.quizid}">
-                                    <button class="btn btn-primary">DO AGAIN</button>
+                                    <button class="btn btn-primary">Do Again</button>
                                 </a>
                             </td>
                         </tr>
