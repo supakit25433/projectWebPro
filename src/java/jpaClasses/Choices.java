@@ -71,6 +71,12 @@ public class Choices implements Serializable {
         this.point = point;
     }
 
+    public Choices(String choice, int point, Questions questionsQuestionid) {
+        this.choice = choice;
+        this.point = point;
+        this.questionsQuestionid = questionsQuestionid;
+    }
+
     public Integer getChoiceid() {
         return choiceid;
     }
