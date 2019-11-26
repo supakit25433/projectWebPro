@@ -93,7 +93,7 @@
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'></div>
                 <div class='col-sm-4 col-md-4 col-lg-4 col-xl-4'>
                     <div class='container-fluid'>
-                        <div style='text-align:center'><img src='images/amazon.jpg' style='height:5cm; width:6cm;'></div>
+                        <div style='text-align:center'><img src='images/Logo.png' style='height:5cm; width:5cm;'></div>
                     </div>
                     <div class='container-fluid text-center'>
                         <form method='post' action='Login' >

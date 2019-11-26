@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${subjects}" var="s">
-                        <tr>
+                        <tr class="even-odd">
                             <td>
                                 ${s.subjectid}
                             </td>

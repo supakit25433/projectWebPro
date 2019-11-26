@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${quizzes}" var="q" varStatus="index">
-                        <tr>
+                        <tr class="even-odd">
                             <td>
                                 <!--DATE-->
                             </td>
