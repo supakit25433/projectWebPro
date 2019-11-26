@@ -38,13 +38,13 @@
                 <!-- The slideshow -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="./images/picture.jpg" alt="pic" width="1500px" height="200px">
+                        <img src="./images/Slide_1_1500x300px.png" alt="Slide_1" width="1500px" height="300px">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/amazon.jpg" alt="amazon" width="1500px" height="200px">
+                        <img src="./images/Slide_2_1500x300px.png" alt="Slide_2" width="1500px" height="300px">
                     </div>
                     <div class="carousel-item">
-                        <img src="./images/universe.jpg" alt="universe" width="1500px" height="200px">
+                        <img src="./images/Slide_3_1500x300px.png" alt="Slide_3" width="1500px" height="300px">
                     </div>
                 </div>
 
