@@ -54,6 +54,9 @@ public class SubjectServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
+        
         int id = Integer.parseInt(request.getParameter("id"));
         SubjectController sc = new SubjectController(emf, utx);
         Subjects s = sc.findByID(id);
@@ -78,6 +81,10 @@ public class SubjectServlet extends HttpServlet {
             }
         }*/
         
+        UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
+        UsersSubscription sub = usc.findBySubjectIDandUser(s, user);
+        
+        request.setAttribute("sub", sub);
         request.setAttribute("subscriber", subscriber);
         request.setAttribute("subject", s);
         request.setAttribute("userid", subid.getUserid());

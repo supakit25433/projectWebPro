@@ -18,7 +18,7 @@
 
         <link rel="stylesheet" href="./css/style.css">
 
-        <title>${subjectname}</title>
+        <title>${subject.subjectname}</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Subjects"/>
@@ -40,7 +40,7 @@
                             <h5 class="text-uppercase">${subject.usersUserid.fullname}</h5>
                             <p>${subject.description}</p>
                             <c:choose>
-                                <c:when test="${user.userid == null}">
+                                <c:when test="${sub == null}">
                                     <a href="Subscribe?subjectid=${subject.subjectid}">
                                         <button class="btn btn-primary">Subscribe</button>
                                     </a>
