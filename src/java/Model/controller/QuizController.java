@@ -18,7 +18,7 @@ import jpa.QuizesJpaController;
 import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
-import jpaClasses.Subjects;
+import Model.controller.QuestionController;
 
 /**
  *
@@ -72,12 +72,12 @@ public class QuizController {
     }
 
     public int getTotalScore(Quizes q) {
-        List<Questions> questionsList = this.findAllQuestionsInQuiz(q);
         int total = 0;
+        List<Questions> questionsList = this.findAllQuestionsInQuiz(q);
         for (int i = 0; i < questionsList.size(); i++) {
             QuestionController qtc = new QuestionController(emf, utx);
-            int score = qtc.findMostScoreChoiceInEachQuestion(questionsList.get(i));
-            total = total + score;
+            int point = qtc.findMostScoreChoiceInEachQuestion(questionsList.get(i));
+            total = total + point;
         }
         return total;
     }

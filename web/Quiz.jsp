@@ -18,7 +18,7 @@
 
         <link rel="stylesheet" href="./css/style.css">
 
-        <title>Quiz of ${user.username}</title>
+        <title>${quiz.quizname}</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Quiz"/>
@@ -35,7 +35,7 @@
                     <div class="container-fluid">
                         <div class=" bg-light p-5 mb-4 rounded">
                             <div class="mb-4 sameLine">
-                                <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5> <p class="font-weight-light float-right">${score.get(questionIndex.index)} Points</p>
+                                <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5> <p class="font-weight-light float-right">${points.get(questionIndex.index)} Points</p>
                                 <br>
                                 <p class="font-weight-light">${qu.description}</p>
                             </div>

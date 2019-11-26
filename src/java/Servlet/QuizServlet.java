@@ -73,14 +73,14 @@ public class QuizServlet extends HttpServlet {
             allChoices.add(choicesList);
         }
 
-        ArrayList<String> allScore = new ArrayList<>();
+        ArrayList<String> allPoints = new ArrayList<>();
         for (int i = 0; i < questionsList.size(); i++) {
             QuestionController qtc = new QuestionController(emf, utx);
-            int score = qtc.findMostScoreChoiceInEachQuestion(questionsList.get(i));
-            allScore.add(String.valueOf(score));
+            int point = qtc.findMostScoreChoiceInEachQuestion(questionsList.get(i));
+            allPoints.add(String.valueOf(point));
         }
 
-        request.setAttribute("score", allScore);
+        request.setAttribute("points", allPoints);
         request.setAttribute("quiz", q);
         request.setAttribute("questions", questionsList);
         request.setAttribute("choices", allChoices);
