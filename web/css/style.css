@@ -96,7 +96,7 @@ a:active {
     background-color: DeepSkyBlue;
     border-color: DeepSkyBlue; /*set the color you want here*/
 }
-.btn-primary:hover, .btn-primary:focus {
+.btn-primary.subscribe:hover, .btn-primary.subscribe:focus {
     color: White;
     background-color: LimeGreen;
     border-color: LimeGreen; /*set the color you want here*/
@@ -108,8 +108,14 @@ a:active {
     background-color: GhostWhite;
     border-color: GhostWhite; /*set the color you want here*/
 }
-.btn-light:hover, .btn-primary:focus {
+.btn-light.unsubscribe:hover, .btn-primary.unsubscribe:focus {
     color: White;
     background-color: Crimson;
     border-color: Crimson; /*set the color you want here*/
+}
+
+.btn-success {
+    color: White;
+    background-color: LimeGreen;
+    border-color: LimeGreen; /*set the color you want here*/
 }

@@ -42,12 +42,12 @@
                             <c:choose>
                                 <c:when test="${subscription == null}">
                                     <a href="Subscribe?subjectid=${subject.subjectid}">
-                                        <button class="btn btn-primary">Subscribe</button>
+                                        <button class="btn btn-primary subscribe">Subscribe</button>
                                     </a>
                                 </c:when>
                                 <c:otherwise>
                                     <a href="Subscribe?subjectid=${subject.subjectid}">
-                                        <button class="btn btn-light">Subscribed</button>
+                                        <button class="btn btn-light unsubscribe">Subscribed</button>
                                     </a>
                                 </c:otherwise>
                             </c:choose>

@@ -49,6 +49,10 @@ public class ManageSubjectsServlet extends HttpServlet {
         SubjectController sc = new SubjectController(emf, utx);
         List<Subjects> subjects = sc.findAllSubjectByUserID(user);
         request.setAttribute("subjects", subjects);
+        
+        if (subjects.isEmpty()) {
+                request.setAttribute("message", "You doesn't have your own subject");
+            }
         getServletContext().getRequestDispatcher("/ManageSubject.jsp").forward(request, response);
     }
 

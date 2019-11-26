@@ -15,6 +15,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="./css/style.css">
+        
         <title>Quiz of ${user.username}</title>
     </head>
     <body>
@@ -47,7 +50,7 @@
                     </div>
                 </c:forEach>
                 <input name="quizid" hidden="true" value="${quiz.quizid}"/>
-                <input type="submit" value="Submit the answers!">
+                <input type="submit" value="Submit the answers!" class="btn btn-primary">
             </form>
         </div>
     </body>

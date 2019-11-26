@@ -27,9 +27,10 @@
             <div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded"><h5>Subjects</h5></div>
             <div class="container" style="margin-bottom: 20px">
                 <a href="CreateSubject.jsp">
-                    <button class="btn btn-primary">
-                        Create Subject
-                    </button>
+                    <button class="btn btn-success">Create Subject</button>
+                </a>
+                <a href="Enroll">
+                    <button class="btn btn-primary">Subscribed Subjects</button>
                 </a>
             </div>
             <div class=" bg-light p-5 rounded">
