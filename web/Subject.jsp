@@ -40,18 +40,26 @@
                             <h5 class="text-uppercase">${subject.usersUserid.fullname}</h5>
                             <p>${subject.description}</p>
                             <c:choose>
-                                <c:when test="${subscription == null}">
-                                    <a href="Subscribe?subjectid=${subject.subjectid}">
-                                        <button class="btn btn-primary subscribe">Subscribe</button>
+                                <c:when test="${userid == user.userid}">
+                                    <a href="EditSubject">
+                                        <button class="btn btn-primary">Edit Subject</button>
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="Subscribe?subjectid=${subject.subjectid}">
-                                        <button class="btn btn-light unsubscribe">Subscribed</button>
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${subscription == null}">
+                                            <a href="Subscribe?subjectid=${subject.subjectid}">
+                                                <button class="btn btn-primary subscribe">Subscribe</button>
+                                            </a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="Subscribe?subjectid=${subject.subjectid}">
+                                                <button class="btn btn-light unsubscribe">Subscribed</button>
+                                            </a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:otherwise>
                             </c:choose>
-
                         </div>
                     </div>
                 </div>
@@ -89,10 +97,10 @@
         <div class="container">
             <!--<div class="bg-info text-white font-weight-bold pl-3 pt-2 pb-1 mb-4 rounded">
                 <h5>-->
-                    <span style="font-size:40px; font-weight: bold;">Lasted Quiz!</span>
-                    <br>
-                <!--</h5>>
-            </div>-->
+            <span style="font-size:40px; font-weight: bold;">Lasted Quiz!</span>
+            <br>
+            <!--</h5>>
+        </div>-->
             <c:choose>
                 <c:when test="${userid == user.userid}">
                     <a href="CreateQuiz">

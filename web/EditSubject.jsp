@@ -34,7 +34,7 @@
                     <tbody>
                         <tr>
                             <td class="text-center" colspan="2" style="font-size: 40px; font-weight: bold;">
-                                EDIT SUBJECT
+                                Edit Subject
                             </td>
                         </tr>
                         <tr>
