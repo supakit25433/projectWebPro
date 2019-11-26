@@ -14,11 +14,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style>
+            #createquestion{
+                position:relative;
+                left:12em;
+                top:10em;
+            }
+        </style>
         <title>Create Question</title>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Question"/>
-        <div>
+        <div class="container" id="createquestion">
             <form method="post" action="">
                 <table class="table table-borderless">
                     <tbody>
@@ -32,7 +39,7 @@
                                 Question
                             </td>
                             <td>
-                                : <input type="text" name="questionname" autocomplete="off">
+                                : <input type="text" name="questionname" autocomplete="off" required style="width:30em;">
                             </td>
                         </tr>
                         <tr>
@@ -51,7 +58,7 @@
                                 Description
                             </td>
                             <td>
-                                : <input type="text" name="description" autocomplete="off">
+                                : <input type="text" name="description" autocomplete="off" style="width:30em;">
                             </td>
                         </tr>
                         <tr>

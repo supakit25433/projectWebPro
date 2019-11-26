@@ -78,6 +78,20 @@ public class Questions implements Serializable {
         this.question = question;
         this.typename = typename;
     }
+    
+    public Questions(String question, String typename,Quizes quizesQuizid) {
+        this.question = question;
+        this.typename = typename;
+        this.quizesQuizid = quizesQuizid;
+    }
+    
+        public Questions(String question, String typename, String description,Quizes quizesQuizid) {
+        this.question = question;
+        this.typename = typename;
+        this.quizesQuizid = quizesQuizid;
+        this.description = description;
+        
+    }
 
     public Integer getQuestionid() {
         return questionid;
