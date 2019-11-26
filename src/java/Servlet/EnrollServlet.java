@@ -8,6 +8,7 @@ package Servlet;
 import Model.controller.QuizController;
 import Model.controller.SubjectController;
 import Model.controller.UserController;
+import Model.controller.UsersSubscriptionController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import jpa.UsersSubscriptionJpaController;
 import jpaClasses.Quizes;
 import jpaClasses.Subjects;
 import jpaClasses.Users;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -75,16 +77,23 @@ public class EnrollServlet extends HttpServlet {
             request.setAttribute("message", "user not found");
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
         } else {
+            UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
             List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
+            ArrayList<UsersSubscription> sub = new ArrayList<>();
+            for (int i = 0; i < userSubList.size(); i++) {
+                if (usc.findBySubjectIDandUser(userSubList.get(i), user)!= null) {
+                    sub.add(usc.findBySubjectIDandUser(userSubList.get(i), user));
+                }
+            }
+            request.setAttribute("sub", sub);
             request.setAttribute("enrolled", userSubList);
-            
+
             if (userSubList.isEmpty()) {
                 request.setAttribute("message", "You doesn't have any subscribed subject");
             }
             getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
         }
-        
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

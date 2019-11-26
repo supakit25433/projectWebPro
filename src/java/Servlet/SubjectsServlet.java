@@ -6,6 +6,7 @@
 package Servlet;
 
 import Model.controller.SubjectController;
+import Model.controller.UsersSubscriptionController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,8 +18,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import jpaClasses.Subjects;
+import jpaClasses.Users;
+import jpaClasses.UsersSubscription;
 
 /**
  *
@@ -44,12 +48,22 @@ public class SubjectsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SubjectController sc = new SubjectController(emf, utx);
+        UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
+        HttpSession session = request.getSession(false);
+        Users user = (Users) session.getAttribute("user");
         List<Subjects> subjectsList = sc.findAllSubjects();
         ArrayList<Subjects> subjectsListReverse = new ArrayList<>();
+        ArrayList<UsersSubscription> sub = new ArrayList<>();
         for (int i = subjectsList.size() - 1; i >= 0 ; i--) {
             subjectsListReverse.add(subjectsList.get(i));
+            if(usc.findBySubjectIDandUser(subjectsList.get(i), user) == null){
+                sub.add(usc.findBySubjectIDandUser(subjectsList.get(i), user));
+            } else {
+                sub.add(usc.findBySubjectIDandUser(subjectsList.get(i), user));
+            }
         }
         request.setAttribute("subjects", subjectsListReverse);
+        request.setAttribute("sub", sub);
         getServletContext().getRequestDispatcher("/Subjects.jsp").forward(request, response);
     }
 

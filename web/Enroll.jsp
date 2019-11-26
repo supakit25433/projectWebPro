@@ -15,9 +15,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="./css/style.css">
-        
+
         <title>Subscribe of ${user.username}</title>
     </head>
     <body>
@@ -40,7 +40,15 @@
                                             <h4 class="card-title">${e.subjectname}</h4>
                                             <h5 class="card-text">${e.usersUserid.fullname}</h5>
                                             <p class="card-text">${e.description}</p>
-                                            <h6 class="card-text">enroll?</h6>
+                                            <c:forEach items="${sub}" var="su">
+                                                <c:if test="${su.usersUserid == user}">
+                                                    <c:choose>
+                                                        <c:when test="${su.subjectsSubjectid == e}">
+                                                            <h6 class="card-text" style="color: green;">Subscribed</h6>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
                                         <div class="overlay"></div>
                                         <div class="text">${e.subjectname}</div>
@@ -49,7 +57,7 @@
                             </div>
                         </div>
                     </c:forEach>
-                    
+
                 </div>
             </div>
         </div>

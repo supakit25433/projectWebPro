@@ -45,7 +45,16 @@
                                             <h4 class="card-title">${s.subjectname}</h4>
                                             <h5 class="card-text">${s.usersUserid.fullname}</h5>
                                             <p class="card-text">${s.description}</p>
-                                            <h6 class="card-text">enroll?</h6>
+                                            <c:forEach items="${sub}" var="su">
+                                                <c:if test="${su.usersUserid == user}">
+                                                    <c:choose>
+                                                        <c:when test="${su.subjectsSubjectid == s}">
+                                                            <h6 class="card-text" style="color: green;">Subscribed</h6>
+                                                        </c:when>
+                                                    </c:choose>
+                                                </c:if>
+                                            </c:forEach>
+                                            <!--<h6 class="card-text">enroll?</h6>-->
                                         </div>
                                         <div class="overlay"></div>
                                         <div class="text">${s.subjectname}</div>
