@@ -102,7 +102,8 @@ public class CreateChoiceServlet extends HttpServlet {
                     Choices choices = new Choices(choice, point, qu);
                     cjc.create(choices);
                     request.setAttribute("questions", questionlist);
-                    response.sendRedirect("/projectWebPro/CreateChoice");
+                    request.setAttribute("message", "Add choice completeds");
+                    getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
                 }
             }
         }
