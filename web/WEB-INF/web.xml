@@ -102,6 +102,14 @@
         <servlet-name>SubscribeServlet</servlet-name>
         <servlet-class>Servlet.SubscribeServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateChoiceServlet</servlet-name>
+        <servlet-class>Servlet.CreateChoiceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateQuestionServlet</servlet-name>
+        <servlet-class>Servlet.CreateQuestionServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -169,6 +177,14 @@
     <servlet-mapping>
         <servlet-name>SubscribeServlet</servlet-name>
         <url-pattern>/Subscribe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateChoiceServlet</servlet-name>
+        <url-pattern>/CreateChoice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateQuestionServlet</servlet-name>
+        <url-pattern>/CreateQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

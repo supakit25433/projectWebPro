@@ -1,6 +1,6 @@
 <%-- 
-    Document   : CreateQuiz
-    Created on : Nov 24, 2019, 11:47:55 PM
+    Document   : CreateChoice
+    Created on : Nov 26, 2019, 10:27:45 PM
     Author     : nar-u
 --%>
 
@@ -14,53 +14,48 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
-        <link rel="stylesheet" href="./css/style.css">
-        
-        <title>Create Quiz</title>
-        <style>
-            #createquiz{
-                position : relative;
-                left:45em;
-                top:5em;
-            }
-        </style>
+        <title>Create Choice</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Quiz"/>
-        <div class="contaier" id="createquiz">
-            <form method="post" action="CreateQuiz">
-                <table class="table table-borderless" style="width: 500px">
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Choice"/>
+        <div>
+            <form method="post" action="">
+                <table class="table table-borderless">
                     <tbody>
                         <tr>
                             <td colspan="2" style="font-size: 40px; font-weight: bold;">
-                                Add Quiz
+                                Add Choice
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Quiz Name
+                                Choice
                             </td>
                             <td>
-                                : <input type="text" name="quizname" autocomplete="off">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Description
-                            </td>
-                            <td>
-                                : <input type="text" name="description" autocomplete="off">
+                                : <input type="text" name="choicename" autocomplete="off">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Subject ID
+                                Point
                             </td>
                             <td>
-                                : <select name="subjectid">
-                                    <c:forEach items="${subjects}" var="s">
-                                        <option value="${s.subjectid}">${s.subjectname}</option>
+                                : 
+                                <select name="point">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Question Name
+                            </td>
+                            <td>
+                                : 
+                                <select name="questionid">
+                                    <c:forEach items="${questions}" var="q">
+                                        <option value="${q.questionid}">${q.question}</option>
                                     </c:forEach>
                                 </select>
                             </td>

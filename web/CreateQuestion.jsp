@@ -1,6 +1,6 @@
 <%-- 
-    Document   : CreateQuiz
-    Created on : Nov 24, 2019, 11:47:55 PM
+    Document   : CreateQuestion
+    Created on : Nov 26, 2019, 10:09:16 PM
     Author     : nar-u
 --%>
 
@@ -14,35 +14,36 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        
-        <link rel="stylesheet" href="./css/style.css">
-        
-        <title>Create Quiz</title>
-        <style>
-            #createquiz{
-                position : relative;
-                left:45em;
-                top:5em;
-            }
-        </style>
+        <title>Create Question</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Quiz"/>
-        <div class="contaier" id="createquiz">
-            <form method="post" action="CreateQuiz">
-                <table class="table table-borderless" style="width: 500px">
+        <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Question"/>
+        <div>
+            <form method="post" action="">
+                <table class="table table-borderless">
                     <tbody>
                         <tr>
-                            <td colspan="2" style="font-size: 40px; font-weight: bold;">
-                                Add Quiz
+                            <td colspan="2" style="font-size:40px; font-weight: bold;">
+                                Add Question
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Quiz Name
+                                Question
                             </td>
                             <td>
-                                : <input type="text" name="quizname" autocomplete="off">
+                                : <input type="text" name="questionname" autocomplete="off">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Type
+                            </td>
+                            <td>
+                                :
+                                <select name="type">
+                                    <option value="multiple choices">Multiple Choices</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -55,12 +56,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Subject ID
+                                Quiz Name    
                             </td>
                             <td>
-                                : <select name="subjectid">
-                                    <c:forEach items="${subjects}" var="s">
-                                        <option value="${s.subjectid}">${s.subjectname}</option>
+                                : 
+                                <select name="quizid">
+                                    <c:forEach items="${quiz}" var="q"> 
+                                        <option value="${q.quizid}">${q.quizname}</option>
                                     </c:forEach>
                                 </select>
                             </td>
