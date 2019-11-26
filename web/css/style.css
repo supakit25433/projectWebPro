@@ -119,3 +119,8 @@ a:active {
     background-color: LimeGreen;
     border-color: LimeGreen; /*set the color you want here*/
 }
+
+.sameLine h5, .sameLine p {
+    display: inline;
+
+}
