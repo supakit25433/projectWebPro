@@ -33,7 +33,7 @@
             <br>
             <br>
             <a href="CreateSubject.jsp">
-                <button class="btn btn-primary a-btn-slide-text">
+                <button class="btn btn-success">
                     Create Subject
                 </button>
             </a>
