@@ -53,8 +53,18 @@ public class CreateChoiceServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
+        String choice = request.getParameter("choicename");
+        
+        HttpSession session = request.getSession(false);
+
         SubjectController sc = new SubjectController(emf, utx);
-        int subjectid = Integer.valueOf(request.getParameter("subjectid"));
+        int subjectid = 0;
+        if (request.getParameter("subjectid")==null) {
+            subjectid = (int) session.getAttribute("subjectid");
+        } else {
+            subjectid = Integer.valueOf(request.getParameter("subjectid"));
+            session.setAttribute("subjectid", subjectid);
+        }
         Subjects subject = sc.findByID(subjectid);
         ArrayList<Questions> questionlist = new ArrayList<>();
         List<Quizes> quizlist = sc.findAllQuizesInSubject(subject);
@@ -65,32 +75,34 @@ public class CreateChoiceServlet extends HttpServlet {
                 questionlist.add(ques.get(j));
             }
         }
-        
-        String choice = request.getParameter("choicename");
-        if (request.getParameter("point")==null || request.getParameter("questionid")==null) {
+
+//        if (request.getParameter("subjectid") == null) {
+//            request.setAttribute("questions", questionlist);
+//            getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
+//        }
+
+        if (request.getParameter("point") == null || request.getParameter("questionid") == null) {
             request.setAttribute("questions", questionlist);
             getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
         } else {
             int questionid = Integer.valueOf(request.getParameter("questionid"));
             int point = Integer.valueOf(request.getParameter("point"));
-            if (choice.trim().isEmpty() || point < 0 ) {
+            if (choice.trim().isEmpty() || point < 0) {
                 request.setAttribute("message", "Please enter every box!!!");
                 request.setAttribute("questions", questionlist);
                 getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
             } else {
-                HttpSession session = request.getSession(false);
                 Users user = (Users) session.getAttribute("user");
-                if(user==null){
+                if (user == null) {
                     request.setAttribute("message", "Please log-in again!!!");
-                    getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+                    getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
                 } else {
                     Questions qu = qc.findByID(questionid);
                     ChoicesJpaController cjc = new ChoicesJpaController(utx, emf);
                     Choices choices = new Choices(choice, point, qu);
                     cjc.create(choices);
                     request.setAttribute("questions", questionlist);
-                    request.setAttribute("message", "Add Choice complete");
-                    getServletContext().getRequestDispatcher("/CreateChoice.jsp").forward(request, response);
+                    response.sendRedirect("/projectWebPro/CreateChoice");
                 }
             }
         }
