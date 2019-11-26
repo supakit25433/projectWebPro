@@ -74,9 +74,9 @@ public class SubjectServlet extends HttpServlet {
         UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
         UsersSubscription subscription = usc.findBySubjectIDandUser(s, user);
         
-        int total = sc.getTotalScore(s);
+        /*int total = sc.getTotalScore(s);
         
-        request.setAttribute("total", total);
+        request.setAttribute("total", total);*/
         request.setAttribute("subscription", subscription);
         request.setAttribute("subscriber", subscriber);
         request.setAttribute("subject", s);
