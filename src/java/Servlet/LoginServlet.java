@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             UserController uc = new UserController(emf, utx);
             Users user = uc.findByUserName(request.getParameter("username"));
             if (user == null) {
-                request.setAttribute("massage", "user not found");
+                request.setAttribute("message", "user not found");
                 request.getRequestDispatcher("/Login.jsp").forward(request, response);
             } else {
                 if (user.getUsername().equals(request.getParameter("username"))
