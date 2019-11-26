@@ -17,6 +17,8 @@ import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Choices;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
+import jpaClasses.Subjects;
+import jpaClasses.Users;
 
 /**
  *
@@ -51,6 +53,19 @@ public class QuestionController {
             }
         }
         return choicesSubList;
+    }
+    
+    public List<Questions> findAllQuestionByQuiz(Quizes quiz){
+        List<Questions> questionList = qtjc.findQuestionsEntities();
+        ArrayList<Questions> List = new ArrayList<>();
+        for (int i = 0; i < questionList.size(); i++) {
+            if(questionList.get(i)!=null){
+                if(questionList.get(i).getQuizesQuizid().toString().equals(quiz.toString())){
+                    List.add(questionList.get(i));
+                }
+            }
+        }
+        return List;
     }
 
     public int findMostScoreChoiceInEachQuestion(Questions qt) {

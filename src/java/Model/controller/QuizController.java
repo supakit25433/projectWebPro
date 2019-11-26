@@ -25,10 +25,10 @@ import jpaClasses.Subjects;
  * @author Gamer
  */
 public class QuizController {
-    
-    @PersistenceUnit(unitName="WebProjectInt303PU")
+
+    @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
-    
+
     @Resource
     UserTransaction utx;
 
