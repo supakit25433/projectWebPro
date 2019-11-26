@@ -64,8 +64,10 @@
                             <td colspan="6" style="font-size: 30px; font-weight: bold;">
                                 Your profile
                             </td>
-                            <td colspan="2" style="padding-top:22px">
-                                <a href="/projectWebPro/EditProfile.jsp">edit profile</a>
+                            <td colspan="2" style="padding-top:22px;">
+                                <a href="/projectWebPro/EditProfile.jsp">
+                                    <span class="btn btn-primary">edit profile</span>
+                                </a>
                             </td>
                         </tr>
                         <tr>
