@@ -56,12 +56,14 @@ public class SubscribeServlet extends HttpServlet {
         Subjects subject = sc.findByID(subjectid);
         UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
         UsersSubscriptionJpaController usjc = new UsersSubscriptionJpaController(utx, emf);
-        if (usc.findBySubjectIDandUser(subject,user).equals(subject)) {
-            usjc.destroy(usc.findBySubjectIDandUser(subject,user).getSubscriptionid());
+        UsersSubscription userSub = new UsersSubscription(subject, user);
+        if (usc.findBySubjectIDandUser(subject,user) == null){
+//            usjc.destroy(usc.findBySubjectIDandUser(subject,user).getSubscriptionid());
+            usjc.create(userSub);
             response.sendRedirect("/projectWebPro/Subject?id=" + subjectid);
         } else {
-            UsersSubscription userSub = new UsersSubscription(subject, user);
-            usjc.create(userSub);
+//            usjc.create(userSub);
+            usjc.destroy(usc.findBySubjectIDandUser(subject,user).getSubscriptionid());
             response.sendRedirect("/projectWebPro/Subject?id=" + subjectid);
         }
     }
