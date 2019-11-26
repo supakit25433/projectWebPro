@@ -19,9 +19,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="History">History</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Feedback">Feedback/Report</a>
-                </li>
             </ul>
         </div>
         <div class="container-fluid" style="width:450px;">
