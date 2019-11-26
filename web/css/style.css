@@ -85,3 +85,31 @@ a:active {
     opacity: 0;
     text-shadow: 2px 2px 4px #000000;
 }
+
+.bg-light {
+    background-color: GhostWhite;
+}
+
+/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
+.btn-primary {
+    color: White;
+    background-color: DeepSkyBlue;
+    border-color: DeepSkyBlue; /*set the color you want here*/
+}
+.btn-primary:hover, .btn-primary:focus {
+    color: White;
+    background-color: LimeGreen;
+    border-color: LimeGreen; /*set the color you want here*/
+}
+
+/*This is modifying the btn-primary colors but you could create your own .btn-something class as well*/
+.btn-light {
+    color: Black;
+    background-color: GhostWhite;
+    border-color: GhostWhite; /*set the color you want here*/
+}
+.btn-light:hover {
+    color: White;
+    background-color: Crimson;
+    border-color: Crimson; /*set the color you want here*/
+}

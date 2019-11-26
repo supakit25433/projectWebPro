@@ -71,20 +71,10 @@ public class SubjectServlet extends HttpServlet {
         
         int subscriber = sc.countSubjectSubscriber(s);
         
-        /*HttpSession session = request.getSession(false);
-        Users user = (Users) session.getAttribute("user");
         UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
-        List<UsersSubscription> us = usc.findAllUsersSubscriptions();
-        for (int i = 0; i < us.size(); i++) {
-            if (us.get(i).getUsersUserid().getUserid()) {
-                
-            }
-        }*/
+        UsersSubscription subscription = usc.findBySubjectIDandUser(s, user);
         
-        UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
-        UsersSubscription sub = usc.findBySubjectIDandUser(s, user);
-        
-        request.setAttribute("sub", sub);
+        request.setAttribute("subscription", subscription);
         request.setAttribute("subscriber", subscriber);
         request.setAttribute("subject", s);
         request.setAttribute("userid", subid.getUserid());
