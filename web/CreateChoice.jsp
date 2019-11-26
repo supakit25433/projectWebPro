@@ -21,6 +21,9 @@
                 left:15em;
             }
         </style>
+        
+        <link rel="stylesheet" href="./css/style.css">
+        
         <title>Create Choice</title>
     </head>
     <body>

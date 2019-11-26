@@ -33,7 +33,7 @@
                 <table class="table table-borderless" style="width:450px">
                     <tbody>
                         <tr>
-                            <td class="text-center" colspan="2" style="font-size: 40px; font-weight: bold;">
+                            <td colspan="2" style="font-size: 40px; font-weight: bold;">
                                 Edit Subject
                             </td>
                         </tr>
