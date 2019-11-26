@@ -21,14 +21,14 @@
         <style>
             #createquiz{
                 position : relative;
-                left:10em;
+                left:12em;
                 top:5em;
             }
         </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Quiz"/>
-        <div class="contaier" id="createquiz">
+        <div class="container" id="createquiz">
             <form method="post" action="CreateQuiz">
                 <table class="table table-borderless">
                     <tbody>
