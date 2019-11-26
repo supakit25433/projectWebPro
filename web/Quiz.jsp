@@ -36,6 +36,8 @@
                         <div class=" bg-light p-5 mb-4 rounded">
                             <div class="mb-4 sameLine">
                                 <h5 class="font-weight-bold">${questionIndex.index+1}. ${qu.question}</h5> <p class="font-weight-light float-right">${score.get(questionIndex.index)} Points</p>
+                                <br>
+                                <p class="font-weight-light">${qu.description}</p>
                             </div>
                             <c:if test="${qu.typename=='multiple choices'}">
                                 <c:forEach items="${choices.get(questionIndex.index)}" var="c">
