@@ -46,13 +46,22 @@ public class CreateQuestionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {     
+         HttpSession session = request.getSession(false);
         SubjectController sc = new SubjectController(emf, utx);
-        int subjectid = Integer.valueOf(request.getParameter("subjectid"));
+        int subjectid = 0;
+        if (request.getParameter("subjectid")==null) {
+            subjectid = (int) session.getAttribute("subjectid");
+        } else {
+            subjectid = Integer.valueOf(request.getParameter("subjectid"));
+            session.setAttribute("subjectid", subjectid);
+        }
+        
         Subjects subject = sc.findByID(subjectid);
         List<Quizes> quizlist = sc.findAllQuizesInSubject(subject);
         request.setAttribute("quiz", quizlist);
-        if (request.getParameter("questionname").trim()==null
-                ||request.getParameter("questionname").trim().isEmpty()) {
+        if (request.getParameter("questionname")==null
+                ||request.getParameter("questionname").isEmpty()) {
+            request.setAttribute("quiz", quizlist);
             request.setAttribute("message", "Please fill in the Question");
             getServletContext().getRequestDispatcher("/CreateQuestion.jsp").forward(request, response);   
         } else {
@@ -67,16 +76,17 @@ public class CreateQuestionServlet extends HttpServlet {
                     request.getParameter("description").trim().isEmpty()) {
                 Questions question = new Questions(questionName, type, quiz);
                 qtc.addQuestion(question);
+                request.setAttribute("quiz", quizlist);
                 request.setAttribute("message", "Question has been added");
                 getServletContext().getRequestDispatcher("/CreateQuestion.jsp").forward(request, response);
             } else {
                 Questions question = new Questions(questionName, type, description, quiz);
                 qtc.addQuestion(question);
+                request.setAttribute("quiz", quizlist);
                 request.setAttribute("message", "Question has been added");
                 getServletContext().getRequestDispatcher("/CreateQuestion.jsp").forward(request, response);
             }
-        }       
-        getServletContext().getRequestDispatcher("/CreateQuestion.jsp").forward(request, response);    
+        }   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
