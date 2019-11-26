@@ -63,7 +63,7 @@ public class SubjectsServlet extends HttpServlet {
             }
         }
         if (subjectsListReverse.isEmpty()) {
-            request.setAttribute("message", "There're no subjects.");
+            request.setAttribute("message", "There's no subject.");
         }
         request.setAttribute("subjects", subjectsListReverse);
         request.setAttribute("sub", sub);

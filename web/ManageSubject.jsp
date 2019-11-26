@@ -70,7 +70,7 @@
                             </td>
                             <td>
                                 <a href="EditSubject">
-                                    <button>EDIT SUBJECT</button>
+                                    <button class="btn btn-primary">EDIT SUBJECT</button>
                                 </a>
                             </td>
                         </tr>
