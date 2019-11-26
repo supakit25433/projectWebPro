@@ -66,7 +66,7 @@
                             </td>
                             <td colspan="2" style="padding-top:22px;">
                                 <a href="/projectWebPro/EditProfile.jsp">
-                                    <span class="btn btn-primary">edit profile</span>
+                                    <span style="color: DeepSkyBlue;">edit profile</span>
                                 </a>
                             </td>
                         </tr>
