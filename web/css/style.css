@@ -108,7 +108,7 @@ a:active {
     background-color: GhostWhite;
     border-color: GhostWhite; /*set the color you want here*/
 }
-.btn-light:hover {
+.btn-light:hover, .btn-primary:focus {
     color: White;
     background-color: Crimson;
     border-color: Crimson; /*set the color you want here*/

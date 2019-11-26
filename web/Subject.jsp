@@ -47,7 +47,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <a href="Subscribe?subjectid=${subject.subjectid}">
-                                        <button class="btn btn-light" data-hover="CLICK ME">Subscribed</button>
+                                        <button class="btn btn-light">Subscribed</button>
                                     </a>
                                 </c:otherwise>
                             </c:choose>
