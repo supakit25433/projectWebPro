@@ -84,7 +84,7 @@
             <div class="row">
                 <div class="col-sm-5 col-md-5"></div>
                 <div class="col-sm-4 col-md-4">
-                    <a href="Enroll"><button class="btn btn-primary">Subscribe</button></a> &nbsp;
+                    <a href="Enroll"><button class="btn btn-primary">Subscribed Subjects</button></a> &nbsp;
                     <a><button class="btn btn-primary">Own Subject</button></a>
                 </div>
                 <div class="col-sm-3 col-md-3"></div>
