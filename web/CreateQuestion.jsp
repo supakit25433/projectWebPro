@@ -26,7 +26,7 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Question"/>
         <div class="container" id="createquestion">
-            <form method="post" action="">
+            <form method="post" action="CreateQuestion">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>

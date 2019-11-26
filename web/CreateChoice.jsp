@@ -26,7 +26,7 @@
     <body>
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Choice"/>
         <div class="container" id="createchoice">
-            <form method="post" action="">
+            <form method="post" action="CreateChoice">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
@@ -47,11 +47,7 @@
                                 Point
                             </td>
                             <td>
-                                : 
-                                <select name="point">
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                </select>
+                                : <input type="text" name="point" autocomplete="off" required>
                             </td>
                         </tr>
                         <tr>

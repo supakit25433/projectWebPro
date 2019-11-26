@@ -97,7 +97,6 @@
                     </div>
                     <div class='container-fluid text-center'>
                         <form method='post' action='Login' >
-                            <hr width='50%'>
                             <div style='position:relative; left:140px'>
                                 <div>
                                     <div class='group'>

@@ -21,7 +21,7 @@
         <style>
             #createquiz{
                 position : relative;
-                left:45em;
+                left:10em;
                 top:5em;
             }
         </style>
@@ -30,7 +30,7 @@
         <jsp:include page="/WEB-INF/view/PageHeader.jsp?page=Add Quiz"/>
         <div class="contaier" id="createquiz">
             <form method="post" action="CreateQuiz">
-                <table class="table table-borderless" style="width: 500px">
+                <table class="table table-borderless">
                     <tbody>
                         <tr>
                             <td colspan="2" style="font-size: 40px; font-weight: bold;">
