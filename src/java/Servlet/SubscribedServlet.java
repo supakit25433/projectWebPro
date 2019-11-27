@@ -89,7 +89,7 @@ public class SubscribedServlet extends HttpServlet {
             request.setAttribute("enrolled", userSubList);
 
             if (userSubList.isEmpty()) {
-                request.setAttribute("message", "You doesn't have any subscribed subject.");
+                request.setAttribute("message", "You don't have any subscribed subject.");
             }
             getServletContext().getRequestDispatcher("/Subscribe.jsp").forward(request, response);
         }
