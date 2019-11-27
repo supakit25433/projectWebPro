@@ -23,7 +23,6 @@ public class ForgetController {
 
     private static final String SENDER = "quizantonline@gmail.com";
     private static final String PASSWORD = "S2u5P4a3.kit";
-    private static final String SENDERNAME = "QuizAnt forget password";
     private static final String SUBJECT = "Your password in QuizAnt!!!";
 
     public ForgetController() {
