@@ -120,6 +120,9 @@
             <br>
             <div class="bg-light p-5 rounded">
                 <div class="row">
+                    <div class="col-sm-12 my-auto">
+                        <span style="font-size: 30px;"><p class="text-center">${message}</p></span>
+                    </div>
                     <c:forEach items="${quizzes}" var="q">
                         <div class="col-3 mb-4">
                             <div class="card-deck">

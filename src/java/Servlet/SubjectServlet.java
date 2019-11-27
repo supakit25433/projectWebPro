@@ -74,6 +74,10 @@ public class SubjectServlet extends HttpServlet {
         UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
         UsersSubscription subscription = usc.findBySubjectIDandUser(s, user);
         
+        if (quizzesListReverse.isEmpty()) {
+            request.setAttribute("message", "There's no quiz in this subject.");
+        }
+        
         /*int total = sc.getTotalScore(s);
         
         request.setAttribute("total", total);*/
