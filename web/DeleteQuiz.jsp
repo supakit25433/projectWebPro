@@ -14,6 +14,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="./css/style.css">
+        
         <title>Delete Quiz</title>
     </head>
     <body>
@@ -29,7 +32,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Quiz ID
+                                Quiz Name
                             </td>
                             <td>
                                 : <select name="quizid">
@@ -41,7 +44,7 @@
                         </tr>
                         <tr>
                             <td>
-                                Subject ID
+                                Subject Name
                             </td>
                             <td>
                                 : <select name="subjectid">
@@ -58,7 +61,7 @@
                                 </a>
                             </td>
                             <td>
-                                <input class="btn btn-primary" type="submit">
+                                <input class="btn btn-danger" type="submit" value="Delete!">
                             </td>
                         </tr>
                         <tr>

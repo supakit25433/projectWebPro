@@ -34,7 +34,7 @@
                         <table class="table table-borderless" style="width: 500px">
                             <tr>
                                 <td colspan="6" style="font-size: 30px; font-weight: bold;">
-                                    Edit your profile
+                                    Edit Your Profile
                                 </td>
                             </tr>
                             <tr>

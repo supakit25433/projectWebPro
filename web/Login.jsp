@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class='container' style='position:relative; left:138px'>
-                                <input type='submit' style='width: 50%;'>
+                                <input type='submit' style='width: 50%;' value="Login">
                             </div>
                             <div class='text-center'>
                                 <br><h6 style='color:red;'>${message}</h6>

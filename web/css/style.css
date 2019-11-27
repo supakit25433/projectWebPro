@@ -127,3 +127,9 @@ a:active {
 tr.even-odd:nth-child(even) {
     background-color: ghostwhite;
 }
+
+.btn-danger {
+    color: White;
+    background-color: Crimson;
+    border-color: Crimson; /*set the color you want here*/
+}

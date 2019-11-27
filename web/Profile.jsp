@@ -62,7 +62,7 @@
                     <table class="table table-borderless" style="width: 650px">
                         <tr>
                             <td colspan="6" style="font-size: 30px; font-weight: bold;">
-                                Your profile
+                                Your Profile
                             </td>
                             <td style="padding-top:22px;">
                                 <a href="/projectWebPro/EditProfile.jsp">
