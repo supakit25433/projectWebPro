@@ -54,8 +54,8 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="Index">
-                                    <span class="btn btn-secondary">Back to index</span>
+                                <a href="Home">
+                                    <span class="btn btn-secondary">Back to Home</span>
                                 </a>
                             </td>
                             <td>
