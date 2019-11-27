@@ -55,18 +55,23 @@
                         <div class="col-sm-4 col-md-4"></div>
                     </div>
                 </div>-->
-        <div class="container-fluid" id="profile">
+        <div class="container" id="profile">
             <div class="row">
-                <div class="col-sm-5 col-md-5"></div>
+                <div class="col-sm-3 col-md-3"></div>
                 <div class="col-sm-4 col-md-4">
-                    <table class="table table-borderless" style="width: 500px">
+                    <table class="table table-borderless" style="width: 650px">
                         <tr>
                             <td colspan="6" style="font-size: 30px; font-weight: bold;">
                                 Your profile
                             </td>
-                            <td colspan="2" style="padding-top:22px;">
+                            <td style="padding-top:22px;">
                                 <a href="/projectWebPro/EditProfile.jsp">
-                                    <span style="color: DeepSkyBlue;">edit profile</span>
+                                    <span class="btn btn-secondary" style="color: DeepSkyBlue;">edit profile</span>
+                                </a>
+                            </td>
+                            <td style="padding-top:22px;">
+                                <a href="/projectWebPro/ChangePassword.jsp">
+                                    <span class="btn btn-secondary" style="color: DeepSkyBlue;">change password</span>
                                 </a>
                             </td>
                         </tr>
@@ -84,15 +89,14 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-sm-3 col-md-3"></div>
             </div>
             <div class="row">
-                <div class="col-sm-5 col-md-5"></div>
+                <div class="col-sm-3 col-md-3"></div>
                 <div class="col-sm-4 col-md-4">
                     <a href="Enroll"><button class="btn btn-primary">Subscribed Subjects</button></a> &nbsp;
                     <a href="ManageSubjects"><button class="btn btn-primary">Manage Subject</button></a>
                 </div>
-                <div class="col-sm-3 col-md-3"></div>
+                <div class="col-sm-4 col-md-4"></div>
             </div>
         </div>
     </body>
