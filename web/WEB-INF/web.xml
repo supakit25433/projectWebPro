@@ -126,7 +126,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>Authentication</filter-name>
-        <servlet-name>EnrollServlet</servlet-name>
+        <servlet-name>SubscribedlServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -219,8 +219,8 @@
         <servlet-class>Servlet.SubjectsServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EnrollServlet</servlet-name>
-        <servlet-class>Servlet.EnrollServlet</servlet-class>
+        <servlet-name>SubscribedlServlet</servlet-name>
+        <servlet-class>Servlet.SubscribedServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SubjectServlet</servlet-name>
@@ -295,10 +295,6 @@
         <url-pattern>/Index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EnrollServlet</servlet-name>
-        <url-pattern>/Enroll</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SubjectsServlet</servlet-name>
         <url-pattern>/Subjects</url-pattern>
     </servlet-mapping>
@@ -361,6 +357,10 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordServlet</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubscribedlServlet</servlet-name>
+        <url-pattern>/Subscribed</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

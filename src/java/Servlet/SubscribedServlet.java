@@ -33,7 +33,7 @@ import jpaClasses.UsersSubscription;
  *
  * @author nar-u
  */
-public class EnrollServlet extends HttpServlet {
+public class SubscribedServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
@@ -75,7 +75,7 @@ public class EnrollServlet extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             request.setAttribute("message", "user not found");
-            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Subscribe.jsp").forward(request, response);
         } else {
             UsersSubscriptionController usc = new UsersSubscriptionController(emf, utx);
             List<Subjects> userSubList = uc.findUserSubjectSubscription(user);
@@ -91,7 +91,7 @@ public class EnrollServlet extends HttpServlet {
             if (userSubList.isEmpty()) {
                 request.setAttribute("message", "You doesn't have any subscribed subject.");
             }
-            getServletContext().getRequestDispatcher("/Enroll.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Subscribe.jsp").forward(request, response);
         }
 
     }
