@@ -57,7 +57,7 @@ public class IndexServlet extends HttpServlet {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             request.setAttribute("message", "user not found");
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Home.jsp").forward(request, response);
         } else {
             ArrayList<Quizes> quizesListReverse = new ArrayList<>();
             
@@ -76,7 +76,7 @@ public class IndexServlet extends HttpServlet {
             if (quizesListReverse.isEmpty()) {
                 request.setAttribute("message", "You doesn't have any quiz from subscribed subject.");
             }
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Home.jsp").forward(request, response);
         }
 
     }
