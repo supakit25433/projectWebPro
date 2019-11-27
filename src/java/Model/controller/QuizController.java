@@ -19,6 +19,7 @@ import jpa.exceptions.RollbackFailureException;
 import jpaClasses.Questions;
 import jpaClasses.Quizes;
 import Model.controller.QuestionController;
+import jpaClasses.Subjects;
 
 /**
  *
@@ -58,6 +59,18 @@ public class QuizController {
         return null;
     }
 
+    public Quizes findByQuizIDAndSubject(int quizid , Subjects subject){
+        List<Quizes> quizList = qjc.findQuizesEntities();
+        for (int i = 0; i < quizList.size(); i++) {
+            if(quizList.get(i).getSubjectsSubjectid().equals(subject)){
+                if(quizList.get(i).getQuizid().equals(quizid)){
+                    return quizList.get(i);
+                }
+            }
+        }
+        return null;
+    }
+    
     public List<Questions> findAllQuestionsInQuiz(Quizes q) {
         List<Questions> questionsList = qtjc.findQuestionsEntities();
         ArrayList<Questions> questionsSubList = new ArrayList<>();
