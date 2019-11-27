@@ -30,7 +30,7 @@
                 <div class="row justify-content-start align-items-center">
                     <div class="col-lg-5">
                         <div class="about_img">
-                            <img class="img-fluid" src="./images/picture.jpg" alt="pic">
+                            <img class="img-fluid" src="./images/Classroom.png" alt="pic">
                         </div>
                     </div>
 
@@ -125,7 +125,7 @@
                             <div class="card-deck">
                                 <div class="card">
                                     <a href="Quiz?quizid=${q.quizid}">
-                                        <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                        <img class="card-img-top" src="./images/Studying.png" alt="Card image" style="width:100%">
                                         <div class="card-body">
                                             <h4 class="card-title">${q.quizname}</h4>
                                             <h5 class="card-text">${q.subjectsSubjectid.subjectname}</h5>

@@ -41,7 +41,7 @@
                             <div class="card-deck">
                                 <div class="card">
                                     <a href="Subject?id=${e.subjectid}">
-                                        <img class="card-img-top" src="./images/picture.jpg" alt="Card image" style="width:100%">
+                                        <img class="card-img-top" src="./images/Classroom.png" alt="Card image" style="width:100%">
                                         <div class="card-body">
                                             <h4 class="card-title">${e.subjectname}</h4>
                                             <h5 class="card-text">${e.usersUserid.fullname}</h5>
