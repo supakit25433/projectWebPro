@@ -111,6 +111,9 @@
                     </a>
                     <a href="CreateChoice?subjectid=${subject.subjectid}">
                         <button class="btn btn-primary">Add Choice</button>
+                    </a>
+                    <a href="DeleteQuiz">
+                        <button class="btn btn-danger">Delete Quiz</button>
                     </a><br>
                 </c:when>
             </c:choose>
