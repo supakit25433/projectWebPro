@@ -14,7 +14,7 @@
                     <a class="nav-link" href="Subjects">Subjects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Enroll">Subscribed</a>
+                    <a class="nav-link" href="Subscribed">Subscribed</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="History">History</a>
