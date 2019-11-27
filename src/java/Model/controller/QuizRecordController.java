@@ -13,6 +13,7 @@ import jpa.QuizesJpaController;
 import jpa.QuizrecordJpaController;
 import jpaClasses.Quizes;
 import jpaClasses.Quizrecord;
+import jpaClasses.Subjects;
 import jpaClasses.Users;
 
 /**
@@ -42,6 +43,17 @@ public class QuizRecordController {
         ArrayList<Quizrecord> userRecordList = new ArrayList<>();
         for (int i = 0; i < recordList.size(); i++) {
             if (recordList.get(i).getUsersUserid().equals(user)) {
+                userRecordList.add(recordList.get(i));
+            }
+        }
+        return userRecordList;
+    }
+    
+    public List<Quizrecord> findAllRecordByQuiz(Quizes quiz){
+        List<Quizrecord> recordList = qrjc.findQuizrecordEntities();
+        ArrayList<Quizrecord> userRecordList = new ArrayList<>();
+        for (int i = 0; i < recordList.size(); i++) {
+            if(recordList.get(i).getQuizesQuizid().equals(quiz)){
                 userRecordList.add(recordList.get(i));
             }
         }
