@@ -62,9 +62,11 @@ public class CreateQuizServlet extends HttpServlet {
         } else {
             if (quizname.trim().isEmpty() || description.trim().isEmpty()) {
                 request.setAttribute("message", "Please enter every box");
+                request.setAttribute("subjects", subjects);
                 getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
             } else {
                 if (user == null) {
+                    request.setAttribute("subjects", subjects);
                     request.setAttribute("message", "Please log-in again!!");
                     getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
                 } else {
@@ -76,8 +78,10 @@ public class CreateQuizServlet extends HttpServlet {
                         Quizes quiz = new Quizes(quizname, description, subject);
                         qjc.create(quiz);
                         request.setAttribute("message", "Add Quiz Completed.");
+                        request.setAttribute("subjects", subjects);
                         getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
                     } else {
+                        request.setAttribute("subjects", subjects);
                         request.setAttribute("message", "Quiz name is not avaliable");
                         getServletContext().getRequestDispatcher("/CreateQuiz.jsp").forward(request, response);
                     }
