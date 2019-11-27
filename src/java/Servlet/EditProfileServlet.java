@@ -53,7 +53,7 @@ public class EditProfileServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Users user = (Users) session.getAttribute("user");
         
-        if(user.getEmailaddress().equals(email) || user.getFullname().equals(fullname)){
+        if(user.getEmailaddress().equals(email) && user.getFullname().equals(fullname)){
             getServletContext().getRequestDispatcher("/EditProfile.jsp").forward(request, response);
         } else {
             UsersJpaController ujc = new UsersJpaController(utx, emf);
