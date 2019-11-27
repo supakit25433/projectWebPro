@@ -93,12 +93,20 @@ public class DeleteQuizServlet extends HttpServlet {
                     request.setAttribute("message", "can not this quiz. Please select other.");
                     request.setAttribute("subjects", subjects);
                     getServletContext().getRequestDispatcher("/DeleteQuiz.jsp").forward(request, response);
+                } else {
+                    if (!qjc.findQuizes(quizid).getSubjectsSubjectid().equals(subject)) {
+                        request.setAttribute("message", "Please match quiz and subject correctly");
+                        request.setAttribute("subjects", subjects);
+                        request.setAttribute("quizes", quizes);
+                        getServletContext().getRequestDispatcher("/DeleteQuiz.jsp").forward(request, response);
+                    } else {
+                        qjc.destroy(quizid);
+                        request.setAttribute("subjects", subjects);
+                        request.setAttribute("quizes", quizes);
+                        request.setAttribute("message", "Delete Quiz Complete");
+                        getServletContext().getRequestDispatcher("/DeleteQuiz.jsp").forward(request, response);
+                    }
                 }
-                qjc.destroy(quizid);
-                request.setAttribute("subjects", subjects);
-                request.setAttribute("quizes", quizes);
-                request.setAttribute("message", "Delete Quiz Complete");
-                getServletContext().getRequestDispatcher("/DeleteQuiz.jsp").forward(request, response);
             } else {
                 QuestionController quc = new QuestionController(emf, utx);
                 QuizRecordController qr = new QuizRecordController(emf, utx);
