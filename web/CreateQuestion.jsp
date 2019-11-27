@@ -21,6 +21,9 @@
                 top:10em;
             }
         </style>
+        
+        <link rel="stylesheet" href="./css/style.css">
+        
         <title>Create Question</title>
     </head>
     <body>

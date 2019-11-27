@@ -66,12 +66,12 @@
                             </td>
                             <td style="padding-top:22px;">
                                 <a href="/projectWebPro/EditProfile.jsp">
-                                    <span class="btn btn-secondary" style="color: DeepSkyBlue;">edit profile</span>
+                                    <span style="color: DeepSkyBlue;">Edit Profile</span>
                                 </a>
                             </td>
                             <td style="padding-top:22px;">
                                 <a href="/projectWebPro/ChangePassword.jsp">
-                                    <span class="btn btn-secondary" style="color: DeepSkyBlue;">change password</span>
+                                    <span style="color: DeepSkyBlue;">Change Password</span>
                                 </a>
                             </td>
                         </tr>
