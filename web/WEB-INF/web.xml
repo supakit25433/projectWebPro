@@ -114,7 +114,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>Authentication</filter-name>
-        <servlet-name>IndexServlet</servlet-name>
+        <servlet-name>HomeServlet</servlet-name>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
@@ -211,8 +211,8 @@
         <servlet-class>Servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>IndexServlet</servlet-name>
-        <servlet-class>Servlet.IndexServlet</servlet-class>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>Servlet.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SubjectsServlet</servlet-name>
@@ -283,16 +283,8 @@
         <servlet-class>Servlet.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/Index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SubjectsServlet</servlet-name>
@@ -361,6 +353,14 @@
     <servlet-mapping>
         <servlet-name>SubscribedlServlet</servlet-name>
         <url-pattern>/Subscribed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -32,7 +32,7 @@ import jpaClasses.Users;
  *
  * @author surface
  */
-public class IndexServlet extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     @PersistenceUnit(unitName = "WebProjectInt303PU")
     EntityManagerFactory emf;
