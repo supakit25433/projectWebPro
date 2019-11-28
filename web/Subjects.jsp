@@ -35,7 +35,7 @@
                 <a href="CreateSubject.jsp">
                     <button class="btn btn-success">Create Subject</button>
                 </a>
-                <a href="Enroll">
+                <a href="Subscribed">
                     <button class="btn btn-primary">Subscribed Subjects</button>
                 </a>
             </div>
